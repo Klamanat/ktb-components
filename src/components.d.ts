@@ -6,7 +6,9 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { AlertPosition, AlertType } from "./components/ktb-alert/ktb-alert";
+import { ButtonColor, ButtonRounded, ButtonSize, ButtonType } from "./components/ktb-button/ktb-button";
 export { AlertPosition, AlertType } from "./components/ktb-alert/ktb-alert";
+export { ButtonColor, ButtonRounded, ButtonSize, ButtonType } from "./components/ktb-button/ktb-button";
 export namespace Components {
     interface KtbAlert {
         /**
@@ -26,20 +28,52 @@ export namespace Components {
          */
         "setPosition": (pos: AlertPosition) => Promise<void>;
     }
-    interface MyComponent {
+    interface KtbButton {
         /**
-          * The first name
+          * สีปุ่ม
+          * @default ''
          */
-        "first": string;
+        "color": ButtonColor;
         /**
-          * The last name
+          * ปิดการใช้งาน
+          * @default false
          */
-        "last": string;
+        "disabled": boolean;
         /**
-          * The middle name
+          * ขยายเต็มความกว้าง
+          * @default false
          */
-        "middle": string;
+        "fullWidth": boolean;
+        /**
+          * แสดง spinner และล็อกการคลิก
+          * @default false
+         */
+        "loading": boolean;
+        /**
+          * แสดงแบบ outline
+          * @default false
+         */
+        "outline": boolean;
+        /**
+          * ความโค้งมุม
+          * @default 'md'
+         */
+        "rounded": ButtonRounded;
+        /**
+          * ขนาดปุ่ม
+          * @default 'md'
+         */
+        "size": ButtonSize;
+        /**
+          * ประเภทของ button element
+          * @default 'button'
+         */
+        "type": ButtonType;
     }
+}
+export interface KtbButtonCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLKtbButtonElement;
 }
 declare global {
     interface HTMLKtbAlertElement extends Omit<Components.KtbAlert, "remove">, HTMLStencilElement {
@@ -52,15 +86,26 @@ declare global {
         prototype: HTMLKtbAlertElement;
         new (): HTMLKtbAlertElement;
     };
-    interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {
+    interface HTMLKtbButtonElementEventMap {
+        "ktbClick": MouseEvent;
     }
-    var HTMLMyComponentElement: {
-        prototype: HTMLMyComponentElement;
-        new (): HTMLMyComponentElement;
+    interface HTMLKtbButtonElement extends Components.KtbButton, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLKtbButtonElementEventMap>(type: K, listener: (this: HTMLKtbButtonElement, ev: KtbButtonCustomEvent<HTMLKtbButtonElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLKtbButtonElementEventMap>(type: K, listener: (this: HTMLKtbButtonElement, ev: KtbButtonCustomEvent<HTMLKtbButtonElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLKtbButtonElement: {
+        prototype: HTMLKtbButtonElement;
+        new (): HTMLKtbButtonElement;
     };
     interface HTMLElementTagNameMap {
         "ktb-alert": HTMLKtbAlertElement;
-        "my-component": HTMLMyComponentElement;
+        "ktb-button": HTMLKtbButtonElement;
     }
 }
 declare namespace LocalJSX {
@@ -70,33 +115,70 @@ declare namespace LocalJSX {
          */
         "position"?: AlertPosition;
     }
-    interface MyComponent {
+    interface KtbButton {
         /**
-          * The first name
+          * สีปุ่ม
+          * @default ''
          */
-        "first"?: string;
+        "color"?: ButtonColor;
         /**
-          * The last name
+          * ปิดการใช้งาน
+          * @default false
          */
-        "last"?: string;
+        "disabled"?: boolean;
         /**
-          * The middle name
+          * ขยายเต็มความกว้าง
+          * @default false
          */
-        "middle"?: string;
+        "fullWidth"?: boolean;
+        /**
+          * แสดง spinner และล็อกการคลิก
+          * @default false
+         */
+        "loading"?: boolean;
+        /**
+          * Event เมื่อคลิก
+         */
+        "onKtbClick"?: (event: KtbButtonCustomEvent<MouseEvent>) => void;
+        /**
+          * แสดงแบบ outline
+          * @default false
+         */
+        "outline"?: boolean;
+        /**
+          * ความโค้งมุม
+          * @default 'md'
+         */
+        "rounded"?: ButtonRounded;
+        /**
+          * ขนาดปุ่ม
+          * @default 'md'
+         */
+        "size"?: ButtonSize;
+        /**
+          * ประเภทของ button element
+          * @default 'button'
+         */
+        "type"?: ButtonType;
     }
 
     interface KtbAlertAttributes {
         "position": AlertPosition;
     }
-    interface MyComponentAttributes {
-        "first": string;
-        "middle": string;
-        "last": string;
+    interface KtbButtonAttributes {
+        "size": ButtonSize;
+        "color": ButtonColor;
+        "rounded": ButtonRounded;
+        "type": ButtonType;
+        "disabled": boolean;
+        "loading": boolean;
+        "fullWidth": boolean;
+        "outline": boolean;
     }
 
     interface IntrinsicElements {
         "ktb-alert": Omit<KtbAlert, keyof KtbAlertAttributes> & { [K in keyof KtbAlert & keyof KtbAlertAttributes]?: KtbAlert[K] } & { [K in keyof KtbAlert & keyof KtbAlertAttributes as `attr:${K}`]?: KtbAlertAttributes[K] } & { [K in keyof KtbAlert & keyof KtbAlertAttributes as `prop:${K}`]?: KtbAlert[K] };
-        "my-component": Omit<MyComponent, keyof MyComponentAttributes> & { [K in keyof MyComponent & keyof MyComponentAttributes]?: MyComponent[K] } & { [K in keyof MyComponent & keyof MyComponentAttributes as `attr:${K}`]?: MyComponentAttributes[K] } & { [K in keyof MyComponent & keyof MyComponentAttributes as `prop:${K}`]?: MyComponent[K] };
+        "ktb-button": Omit<KtbButton, keyof KtbButtonAttributes> & { [K in keyof KtbButton & keyof KtbButtonAttributes]?: KtbButton[K] } & { [K in keyof KtbButton & keyof KtbButtonAttributes as `attr:${K}`]?: KtbButtonAttributes[K] } & { [K in keyof KtbButton & keyof KtbButtonAttributes as `prop:${K}`]?: KtbButton[K] };
     }
 }
 export { LocalJSX as JSX };
@@ -104,7 +186,7 @@ declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
             "ktb-alert": LocalJSX.IntrinsicElements["ktb-alert"] & JSXBase.HTMLAttributes<HTMLKtbAlertElement>;
-            "my-component": LocalJSX.IntrinsicElements["my-component"] & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
+            "ktb-button": LocalJSX.IntrinsicElements["ktb-button"] & JSXBase.HTMLAttributes<HTMLKtbButtonElement>;
         }
     }
 }

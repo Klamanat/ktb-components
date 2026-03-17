@@ -394,30 +394,111 @@
         color: #1d4ed8;
       }
 
-      /* ── Position selector ── */
-      .pos-grid {
+      /* ── Alert demo box ── */
+      .alert-demo-box {
+        border: 1.5px dashed var(--border);
+        border-radius: 10px;
+        background: var(--bg);
+        display: flex;
+        align-items: center;
+        gap: 0;
+        margin-bottom: 1.5rem;
+        overflow: hidden;
+      }
+
+      /* Position map */
+      .alert-pos-map {
+        padding: 1.25rem 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+      .pos-map-grid {
         display: grid;
-        grid-template-columns: repeat(3, auto);
+        grid-template-columns: repeat(3, 36px);
+        grid-template-rows: 36px 72px 36px;
         gap: 4px;
       }
-      .pos-btn {
-        padding: 3px 10px;
-        font-size: .75rem;
+      .pos-map-screen {
+        grid-column: 1 / -1;
+        border: 2px solid var(--border);
+        border-radius: 6px;
+        background: var(--surface);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: .7rem;
+        color: var(--text-muted);
+        font-weight: 600;
+      }
+      .pos-map-btn {
+        width: 36px;
+        height: 36px;
         border: 1.5px solid var(--border);
-        border-radius: 5px;
+        border-radius: 6px;
         background: var(--surface);
         color: var(--text-muted);
+        font-size: 1rem;
         cursor: pointer;
         transition: all .15s;
-        white-space: nowrap;
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
-      .pos-btn:hover { border-color: var(--ktb-blue); color: var(--ktb-blue); }
-      .pos-btn--active {
+      .pos-map-btn:hover { border-color: var(--ktb-blue); color: var(--ktb-blue); background: #eef2ff; }
+      .pos-map-btn--active {
         background: var(--ktb-blue);
         border-color: var(--ktb-blue);
         color: #fff;
-        font-weight: 600;
       }
+
+      /* Divider */
+      .alert-demo-divider {
+        width: 1px;
+        height: 120px;
+        background: var(--border);
+        flex-shrink: 0;
+      }
+
+      /* Triggers */
+      .alert-demo-triggers {
+        padding: 1.25rem 1.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: .75rem;
+        flex: 1;
+      }
+      .alert-demo-hint {
+        font-size: .78rem;
+        color: var(--text-muted);
+      }
+      .alert-type-btns {
+        display: flex;
+        gap: .5rem;
+        flex-wrap: wrap;
+      }
+      .alert-type-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: .4rem;
+        padding: .4rem .9rem;
+        border-radius: 6px;
+        border: 1.5px solid transparent;
+        font-size: .85rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all .15s;
+      }
+      .alert-type-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+      .alert-type-btn--success { background: #dcfce7; color: #15803d; border-color: #bbf7d0; }
+      .alert-type-btn--success:hover { background: #bbf7d0; }
+      .alert-type-btn--error   { background: #fee2e2; color: #b91c1c; border-color: #fecaca; }
+      .alert-type-btn--error:hover   { background: #fecaca; }
+      .alert-type-btn--warning { background: #ffedd5; color: #c2410c; border-color: #fed7aa; }
+      .alert-type-btn--warning:hover { background: #fed7aa; }
+      .alert-type-btn--info    { background: #dbeafe; color: #1d4ed8; border-color: #bfdbfe; }
+      .alert-type-btn--info:hover    { background: #bfdbfe; }
 
       /* ── Theme toggle button ── */
       .theme-toggle {
@@ -503,8 +584,8 @@
 
         <div class="nav-section">Components</div>
         <ul>
-          <li><a href="#my-component">&lt;my-component&gt;</a></li>
-          <li><a href="#ktb-alert">&lt;ktb-alert&gt;</a></li>
+          <li><a href="#ktb-alert">&lt;alert&gt;</a></li>
+          <li><a href="#ktb-button">&lt;button&gt;</a></li>
         </ul>
       </nav>
 
@@ -556,116 +637,8 @@
         </div>
 
         <!-- Components heading -->
-        <div class="section" id="my-component">
+        <div class="section">
           <h3>Components</h3>
-
-          <div class="component-card">
-            <div class="card-header">
-              <div>
-                <span class="tag-chip">&lt;my-component&gt;</span>
-                <p>แสดงชื่อจากส่วนประกอบ first, middle, last</p>
-              </div>
-            </div>
-
-            <div class="card-body">
-              <!-- Live Preview -->
-              <div class="preview-label">Live Preview</div>
-              <div class="preview-box">
-                <my-component first="KTB" middle="Digital" last="Bank"></my-component>
-                <my-component first="Krungthai" last="Components"></my-component>
-              </div>
-
-              <!-- Props Table -->
-              <div class="preview-label">Props</div>
-              <table>
-                <thead>
-                  <tr>
-                    <th>Property</th>
-                    <th>Attribute</th>
-                    <th>Description</th>
-                    <th>Type</th>
-                    <th>Default</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><code class="inline">first</code></td>
-                    <td><code class="inline">first</code></td>
-                    <td>ชื่อแรก (First name)</td>
-                    <td><span class="type-badge">string</span></td>
-                    <td><code class="inline">undefined</code></td>
-                  </tr>
-                  <tr>
-                    <td><code class="inline">middle</code></td>
-                    <td><code class="inline">middle</code></td>
-                    <td>ชื่อกลาง (Middle name)</td>
-                    <td><span class="type-badge">string</span></td>
-                    <td><code class="inline">undefined</code></td>
-                  </tr>
-                  <tr>
-                    <td><code class="inline">last</code></td>
-                    <td><code class="inline">last</code></td>
-                    <td>นามสกุล (Last name)</td>
-                    <td><span class="type-badge">string</span></td>
-                    <td><code class="inline">undefined</code></td>
-                  </tr>
-                </tbody>
-              </table>
-
-              <!-- CSS Custom Properties -->
-              <div class="preview-label">CSS Custom Properties</div>
-              <table>
-                <thead><tr><th>Property</th><th>Default</th><th>Description</th></tr></thead>
-                <tbody>
-                  <tr><td><code class="inline">--my-component-color</code></td><td><code class="inline">#1a2340</code></td><td>สีตัวอักษร</td></tr>
-                  <tr><td><code class="inline">--my-component-font-size</code></td><td><code class="inline">1rem</code></td><td>ขนาดตัวอักษร</td></tr>
-                  <tr><td><code class="inline">--my-component-font-weight</code></td><td><code class="inline">400</code></td><td>น้ำหนักตัวอักษร</td></tr>
-                </tbody>
-              </table>
-              <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">copy</button><span class="tag">my-component</span> {
-  <span class="attr">--my-component-color</span>:       <span class="str">#003f87</span>;
-  <span class="attr">--my-component-font-size</span>:   <span class="str">1.25rem</span>;
-  <span class="attr">--my-component-font-weight</span>: <span class="str">600</span>;
-}</div>
-
-              <!-- Code Examples -->
-              <div class="preview-label">HTML</div>
-              <div class="code-block">
-                <button class="copy-btn" onclick="copyCode(this)">copy</button><span class="cm">&lt;!-- ใช้งานพื้นฐาน --&gt;</span>
-                <span class="tag">&lt;my-component</span>
-                <span class="attr">first</span>=<span class="str">"KTB"</span> <span class="attr">middle</span>=<span class="str">"Digital"</span>
-                <span class="attr">last</span>=<span class="str">"Bank"</span>
-                <span class="tag">&gt;&lt;/my-component&gt;</span>
-
-                <span class="cm">&lt;!-- ไม่มีชื่อกลาง --&gt;</span>
-                <span class="tag">&lt;my-component</span> <span class="attr">first</span>=<span class="str">"Krungthai"</span> <span class="attr">last</span>=<span class="str"
-                  >"Components"</span
-                ><span class="tag">&gt;&lt;/my-component&gt;</span>
-              </div>
-
-              <div class="preview-label">React (JSX)</div>
-              <div class="code-block">
-                <button class="copy-btn" onclick="copyCode(this)">copy</button><span class="kw">import</span> { defineCustomElements } <span class="kw">from</span>
-                <span class="str">'ktb-components/loader'</span>; defineCustomElements();
-
-                <span class="kw">export default function</span> <span class="attr">App</span>() { <span class="kw">return</span> ( <span class="tag">&lt;my-component</span>
-                <span class="attr">first</span>=<span class="str">"KTB"</span> <span class="attr">middle</span>=<span class="str">"Digital"</span>
-                <span class="attr">last</span>=<span class="str">"Bank"</span> <span class="tag">/&gt;</span> ); }
-              </div>
-
-              <div class="preview-label">Vue</div>
-              <div class="code-block">
-                <button class="copy-btn" onclick="copyCode(this)">copy</button><span class="tag">&lt;template&gt;</span> <span class="tag">&lt;my-component</span>
-                <span class="attr">first</span>=<span class="str">"KTB"</span> <span class="attr">middle</span>=<span class="str">"Digital"</span>
-                <span class="attr">last</span>=<span class="str">"Bank"</span> <span class="tag">/&gt;</span>
-                <span class="tag">&lt;/template&gt;</span>
-
-                <span class="tag">&lt;script setup&gt;</span>
-                <span class="kw">import</span> { defineCustomElements } <span class="kw">from</span> <span class="str">'ktb-components/loader'</span>; defineCustomElements();
-                <span class="tag">&lt;/script&gt;</span>
-              </div>
-            </div>
-          </div>
         </div>
 
         <!-- Component: ktb-alert -->
@@ -681,29 +654,45 @@
             <div class="card-body">
               <!-- Live Preview -->
               <div class="preview-label">Live Preview</div>
-              <div class="preview-box" style="flex-direction:column; align-items:flex-start; gap:.75rem;">
+              <div class="alert-demo-box">
 
-                <!-- Position selector -->
-                <div style="display:flex; align-items:center; gap:.75rem; flex-wrap:wrap;">
-                  <span style="font-size:.8rem; color:var(--text-muted); font-weight:600;">position:</span>
-                  <div class="pos-grid" id="pos-grid">
-                    <button class="pos-btn" data-pos="top-left"     onclick="setAlertPosition('top-left')">top-left</button>
-                    <button class="pos-btn pos-btn--active" data-pos="top-center"   onclick="setAlertPosition('top-center')">top-center</button>
-                    <button class="pos-btn" data-pos="top-right"    onclick="setAlertPosition('top-right')">top-right</button>
-                    <button class="pos-btn" data-pos="bottom-left"  onclick="setAlertPosition('bottom-left')">bottom-left</button>
-                    <button class="pos-btn" data-pos="bottom-center" onclick="setAlertPosition('bottom-center')">bottom-center</button>
-                    <button class="pos-btn" data-pos="bottom-right" onclick="setAlertPosition('bottom-right')">bottom-right</button>
+                <!-- Position map -->
+                <div class="alert-pos-map">
+                  <div class="pos-map-grid">
+                    <button class="pos-map-btn" data-pos="top-left"      onclick="setAlertPosition('top-left')">↖</button>
+                    <button class="pos-map-btn pos-map-btn--active" data-pos="top-center"    onclick="setAlertPosition('top-center')">↑</button>
+                    <button class="pos-map-btn" data-pos="top-right"     onclick="setAlertPosition('top-right')">↗</button>
+                    <div class="pos-map-screen">
+                      <span id="pos-label-display">top-center</span>
+                    </div>
+                    <button class="pos-map-btn" data-pos="bottom-left"   onclick="setAlertPosition('bottom-left')">↙</button>
+                    <button class="pos-map-btn" data-pos="bottom-center" onclick="setAlertPosition('bottom-center')">↓</button>
+                    <button class="pos-map-btn" data-pos="bottom-right"  onclick="setAlertPosition('bottom-right')">↘</button>
                   </div>
                 </div>
 
-                <!-- Type buttons -->
-                <div style="display:flex; gap:.75rem; flex-wrap:wrap;">
-                  <button class="demo-btn demo-btn--success" onclick="triggerAlert('success', 'บันทึกข้อมูลสำเร็จแล้ว')">Success</button>
-                  <button class="demo-btn demo-btn--error"   onclick="triggerAlert('error',   'ไม่สามารถเชื่อมต่อกับเซิร์ฟเวอร์ได้')">Error</button>
-                  <button class="demo-btn demo-btn--warning" onclick="triggerAlert('warning', 'Session ของคุณกำลังจะหมดอายุ')">Warning</button>
-                  <button class="demo-btn demo-btn--info"    onclick="triggerAlert('info',    'มีการอัปเดตระบบในวันพรุ่งนี้')">Info</button>
+                <!-- Divider -->
+                <div class="alert-demo-divider"></div>
+
+                <!-- Type + trigger -->
+                <div class="alert-demo-triggers">
+                  <p class="alert-demo-hint">เลือกตำแหน่ง แล้วกด type ที่ต้องการ</p>
+                  <div class="alert-type-btns">
+                    <button class="alert-type-btn alert-type-btn--success" onclick="triggerAlert('success', 'บันทึกข้อมูลสำเร็จแล้ว')">
+                      <span class="alert-type-dot" style="background:#16a34a;"></span>Success
+                    </button>
+                    <button class="alert-type-btn alert-type-btn--error"   onclick="triggerAlert('error',   'ไม่สามารถเชื่อมต่อกับเซิร์ฟเวอร์ได้')">
+                      <span class="alert-type-dot" style="background:#dc2626;"></span>Error
+                    </button>
+                    <button class="alert-type-btn alert-type-btn--warning" onclick="triggerAlert('warning', 'Session ของคุณกำลังจะหมดอายุ')">
+                      <span class="alert-type-dot" style="background:#f97316;"></span>Warning
+                    </button>
+                    <button class="alert-type-btn alert-type-btn--info"    onclick="triggerAlert('info',    'มีการอัปเดตระบบในวันพรุ่งนี้')">
+                      <span class="alert-type-dot" style="background:#2563eb;"></span>Info
+                    </button>
+                  </div>
                 </div>
-                <p style="font-size:.8rem; color:var(--text-muted);">* คลิกปุ่มเพื่อดู alert จริง — เลือกตำแหน่งก่อนกด</p>
+
               </div>
 
               <!-- Methods Table -->
@@ -871,6 +860,201 @@
             </div>
           </div>
         </div>
+
+        <!-- Component: ktb-button -->
+        <div class="section" id="ktb-button">
+          <div class="component-card">
+            <div class="card-header">
+              <div>
+                <span class="tag-chip">&lt;ktb-button&gt;</span>
+                <p>ปุ่มกด — รองรับ 5 สี, 4 ขนาด, outline, loading, icon slot</p>
+              </div>
+            </div>
+
+            <div class="card-body">
+
+              <!-- Live Preview -->
+              <div class="preview-label">Live Preview</div>
+              <div class="preview-box" style="flex-direction:column; align-items:flex-start; gap:1rem;">
+
+                <!-- Solid colors -->
+                <div>
+                  <div class="preview-label" style="margin-bottom:.5rem;">Solid</div>
+                  <div style="display:flex; gap:.5rem; flex-wrap:wrap; align-items:center;">
+                    <ktb-button color="primary">Primary</ktb-button>
+                    <ktb-button color="info">Info</ktb-button>
+                    <ktb-button color="warning">Warning</ktb-button>
+                    <ktb-button color="danger">Danger</ktb-button>
+                    <ktb-button color="success">Success</ktb-button>
+                    <ktb-button>Default</ktb-button>
+                  </div>
+                </div>
+
+                <!-- Outline -->
+                <div style="background:#374151; padding:.75rem 1rem; border-radius:8px; width:100%;">
+                  <div class="preview-label" style="margin-bottom:.5rem; color:#9ca3af;">Outline</div>
+                  <div style="display:flex; gap:.5rem; flex-wrap:wrap; align-items:center;">
+                    <ktb-button color="primary" outline>Primary</ktb-button>
+                    <ktb-button color="info"    outline>Info</ktb-button>
+                    <ktb-button color="warning" outline>Warning</ktb-button>
+                    <ktb-button color="danger"  outline>Danger</ktb-button>
+                    <ktb-button color="success" outline>Success</ktb-button>
+                  </div>
+                </div>
+
+                <!-- Sizes -->
+                <div>
+                  <div class="preview-label" style="margin-bottom:.5rem;">Size</div>
+                  <div style="display:flex; gap:.5rem; flex-wrap:wrap; align-items:center;">
+                    <ktb-button color="primary" size="sm">Small</ktb-button>
+                    <ktb-button color="primary" size="md">Medium</ktb-button>
+                    <ktb-button color="primary" size="lg">Large</ktb-button>
+                    <ktb-button color="primary" size="in-table"></ktb-button>
+                  </div>
+                </div>
+
+                <!-- States -->
+                <div>
+                  <div class="preview-label" style="margin-bottom:.5rem;">States</div>
+                  <div style="display:flex; gap:.5rem; flex-wrap:wrap; align-items:center;">
+                    <ktb-button color="primary" loading>Loading</ktb-button>
+                    <ktb-button color="primary" disabled>Disabled</ktb-button>
+                    <ktb-button color="primary" full-width>Full Width</ktb-button>
+                  </div>
+                </div>
+
+                <!-- Rounded -->
+                <div>
+                  <div class="preview-label" style="margin-bottom:.5rem;">Rounded</div>
+                  <div style="display:flex; gap:.5rem; flex-wrap:wrap; align-items:center;">
+                    <ktb-button color="primary" rounded="none">none</ktb-button>
+                    <ktb-button color="primary" rounded="sm">sm</ktb-button>
+                    <ktb-button color="primary" rounded="md">md</ktb-button>
+                    <ktb-button color="primary" rounded="lg">lg</ktb-button>
+                    <ktb-button color="primary" rounded="full">full</ktb-button>
+                  </div>
+                </div>
+
+              </div>
+
+              <!-- Props Table -->
+              <div class="preview-label">Props</div>
+              <table>
+                <thead><tr><th>Property</th><th>Attribute</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+                <tbody>
+                  <tr><td><code class="inline">size</code></td><td><code class="inline">size</code></td><td><span class="type-badge">ButtonSize</span></td><td><code class="inline">"md"</code></td><td>ขนาดปุ่ม</td></tr>
+                  <tr><td><code class="inline">color</code></td><td><code class="inline">color</code></td><td><span class="type-badge">ButtonColor</span></td><td><code class="inline">""</code></td><td>สีปุ่ม</td></tr>
+                  <tr><td><code class="inline">rounded</code></td><td><code class="inline">rounded</code></td><td><span class="type-badge">ButtonRounded</span></td><td><code class="inline">"md"</code></td><td>ความโค้งมุม</td></tr>
+                  <tr><td><code class="inline">type</code></td><td><code class="inline">type</code></td><td><span class="type-badge">ButtonType</span></td><td><code class="inline">"button"</code></td><td>HTML button type</td></tr>
+                  <tr><td><code class="inline">disabled</code></td><td><code class="inline">disabled</code></td><td><span class="type-badge">boolean</span></td><td><code class="inline">false</code></td><td>ปิดการใช้งาน</td></tr>
+                  <tr><td><code class="inline">loading</code></td><td><code class="inline">loading</code></td><td><span class="type-badge">boolean</span></td><td><code class="inline">false</code></td><td>แสดง spinner และล็อกการคลิก</td></tr>
+                  <tr><td><code class="inline">fullWidth</code></td><td><code class="inline">full-width</code></td><td><span class="type-badge">boolean</span></td><td><code class="inline">false</code></td><td>ขยายเต็มความกว้าง</td></tr>
+                  <tr><td><code class="inline">outline</code></td><td><code class="inline">outline</code></td><td><span class="type-badge">boolean</span></td><td><code class="inline">false</code></td><td>แสดงแบบ outline (ไม่มีพื้นหลัง)</td></tr>
+                </tbody>
+              </table>
+
+              <!-- Types -->
+              <div class="preview-label">Types</div>
+              <table>
+                <thead><tr><th>Type</th><th>Values</th></tr></thead>
+                <tbody>
+                  <tr><td><span class="type-badge">ButtonSize</span></td><td><code class="inline">"sm"</code> | <code class="inline">"md"</code> | <code class="inline">"lg"</code> | <code class="inline">"in-table"</code></td></tr>
+                  <tr><td><span class="type-badge">ButtonColor</span></td><td><code class="inline">"primary"</code> | <code class="inline">"info"</code> | <code class="inline">"warning"</code> | <code class="inline">"danger"</code> | <code class="inline">"success"</code> | <code class="inline">""</code></td></tr>
+                  <tr><td><span class="type-badge">ButtonRounded</span></td><td><code class="inline">"none"</code> | <code class="inline">"sm"</code> | <code class="inline">"md"</code> | <code class="inline">"lg"</code> | <code class="inline">"full"</code></td></tr>
+                  <tr><td><span class="type-badge">ButtonType</span></td><td><code class="inline">"button"</code> | <code class="inline">"submit"</code> | <code class="inline">"reset"</code></td></tr>
+                </tbody>
+              </table>
+
+              <!-- Events -->
+              <div class="preview-label">Events</div>
+              <table>
+                <thead><tr><th>Event</th><th>Detail</th><th>Description</th></tr></thead>
+                <tbody>
+                  <tr><td><code class="inline">ktbClick</code></td><td><code class="inline">MouseEvent</code></td><td>เมื่อคลิกปุ่ม — ไม่ emit เมื่อ disabled หรือ loading</td></tr>
+                </tbody>
+              </table>
+
+              <!-- Slots -->
+              <div class="preview-label">Slots</div>
+              <table>
+                <thead><tr><th>Slot</th><th>Description</th></tr></thead>
+                <tbody>
+                  <tr><td><code class="inline">(default)</code></td><td>ข้อความหรือ content ของปุ่ม</td></tr>
+                  <tr><td><code class="inline">icon-left</code></td><td>ไอคอนด้านซ้าย — ซ่อนเมื่อ loading</td></tr>
+                  <tr><td><code class="inline">icon-right</code></td><td>ไอคอนด้านขวา — ซ่อนเมื่อ loading</td></tr>
+                </tbody>
+              </table>
+
+              <!-- CSS Custom Properties -->
+              <div class="preview-label">CSS Custom Properties</div>
+              <table>
+                <thead><tr><th>Property</th><th>Default</th><th>Description</th></tr></thead>
+                <tbody>
+                  <tr><td><code class="inline">--btn-primary-bg</code></td><td><code class="inline">#60a5fa</code></td><td>สีพื้นหลัง primary</td></tr>
+                  <tr><td><code class="inline">--btn-primary-hover</code></td><td><code class="inline">#3b82f6</code></td><td>สี hover primary</td></tr>
+                  <tr><td><code class="inline">--btn-primary-active</code></td><td><code class="inline">#2563eb</code></td><td>สี active primary</td></tr>
+                  <tr><td><code class="inline">--btn-danger-bg</code></td><td><code class="inline">#ef4444</code></td><td>สีพื้นหลัง danger</td></tr>
+                  <tr><td><code class="inline">--btn-default-bg</code></td><td><code class="inline">#ffffff</code></td><td>สีพื้นหลัง default</td></tr>
+                  <tr><td><code class="inline">--btn-default-color</code></td><td><code class="inline">#374151</code></td><td>สีตัวอักษร default</td></tr>
+                  <tr><td><code class="inline">--btn-font-family</code></td><td><code class="inline">inherit</code></td><td>font family</td></tr>
+                  <tr><td><code class="inline">--btn-transition</code></td><td><code class="inline">150ms ease-in-out</code></td><td>CSS transition</td></tr>
+                </tbody>
+              </table>
+
+              <!-- Code Examples -->
+              <div class="preview-label">HTML</div>
+              <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">copy</button><span class="cm">&lt;!-- Solid --&gt;</span>
+<span class="tag">&lt;ktb-button</span> <span class="attr">color</span>=<span class="str">"primary"</span><span class="tag">&gt;</span>Save<span class="tag">&lt;/ktb-button&gt;</span>
+
+<span class="cm">&lt;!-- Outline --&gt;</span>
+<span class="tag">&lt;ktb-button</span> <span class="attr">color</span>=<span class="str">"danger"</span> <span class="attr">outline</span><span class="tag">&gt;</span>Delete<span class="tag">&lt;/ktb-button&gt;</span>
+
+<span class="cm">&lt;!-- Loading --&gt;</span>
+<span class="tag">&lt;ktb-button</span> <span class="attr">color</span>=<span class="str">"primary"</span> <span class="attr">loading</span><span class="tag">&gt;</span>Saving...<span class="tag">&lt;/ktb-button&gt;</span>
+
+<span class="cm">&lt;!-- With icon slot --&gt;</span>
+<span class="tag">&lt;ktb-button</span> <span class="attr">color</span>=<span class="str">"success"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;svg</span> <span class="attr">slot</span>=<span class="str">"icon-left"</span> <span class="attr">width</span>=<span class="str">"16"</span> <span class="attr">height</span>=<span class="str">"16"</span> <span class="attr">viewBox</span>=<span class="str">"0 0 24 24"</span> <span class="attr">fill</span>=<span class="str">"none"</span> <span class="attr">stroke</span>=<span class="str">"currentColor"</span> <span class="attr">stroke-width</span>=<span class="str">"2"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;path</span> <span class="attr">d</span>=<span class="str">"M5 13l4 4L19 7"</span><span class="tag">/&gt;&lt;/svg&gt;</span>
+  Confirm
+<span class="tag">&lt;/ktb-button&gt;</span>
+
+<span class="cm">&lt;!-- Submit form --&gt;</span>
+<span class="tag">&lt;ktb-button</span> <span class="attr">type</span>=<span class="str">"submit"</span> <span class="attr">color</span>=<span class="str">"primary"</span> <span class="attr">full-width</span> <span class="attr">rounded</span>=<span class="str">"full"</span><span class="tag">&gt;</span>Submit<span class="tag">&lt;/ktb-button&gt;</span></div>
+
+              <div class="preview-label">React (JSX)</div>
+              <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">copy</button><span class="kw">function</span> <span class="attr">App</span>() {
+  <span class="kw">const</span> [loading, setLoading] = useState(<span class="kw">false</span>);
+
+  <span class="kw">const</span> handleSave = () => {
+    setLoading(<span class="kw">true</span>);
+    <span class="cm">// ... async operation</span>
+    setLoading(<span class="kw">false</span>);
+  };
+
+  <span class="kw">return</span> (
+    <span class="tag">&lt;ktb-button</span>
+      <span class="attr">color</span>=<span class="str">"primary"</span>
+      <span class="attr">loading</span>={loading}
+      <span class="attr">onKtbClick</span>={handleSave}
+    <span class="tag">&gt;</span>Save<span class="tag">&lt;/ktb-button&gt;</span>
+  );
+}</div>
+
+              <div class="preview-label">Angular</div>
+              <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">copy</button><span class="tag">&lt;ktb-button</span>
+  <span class="attr">color</span>=<span class="str">"primary"</span>
+  [<span class="attr">loading</span>]=<span class="str">"isLoading"</span>
+  [<span class="attr">disabled</span>]=<span class="str">"form.invalid"</span>
+  (<span class="attr">ktbClick</span>)=<span class="str">"onSave()"</span>
+<span class="tag">&gt;</span>
+  บันทึก
+<span class="tag">&lt;/ktb-button&gt;</span></div>
+
+            </div>
+          </div>
+        </div>
+
       </main>
     </div>
 
@@ -906,9 +1090,11 @@
       function setAlertPosition(pos) {
         const el = document.getElementById('global-alert');
         if (el) el.setPosition(pos);
-        document.querySelectorAll('.pos-btn').forEach(b => {
-          b.classList.toggle('pos-btn--active', b.dataset.pos === pos);
+        document.querySelectorAll('.pos-map-btn').forEach(b => {
+          b.classList.toggle('pos-map-btn--active', b.dataset.pos === pos);
         });
+        const label = document.getElementById('pos-label-display');
+        if (label) label.textContent = pos;
       }
 
       function triggerAlert(type, message) {
