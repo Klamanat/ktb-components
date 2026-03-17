@@ -5,7 +5,27 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
+import { AlertPosition, AlertType } from "./components/ktb-alert/ktb-alert";
+export { AlertPosition, AlertType } from "./components/ktb-alert/ktb-alert";
 export namespace Components {
+    interface KtbAlert {
+        /**
+          * เพิ่ม alert ใหม่
+         */
+        "add": (message: string, type?: AlertType, duration?: number) => Promise<void>;
+        /**
+          * @default 'top-right'
+         */
+        "position": AlertPosition;
+        /**
+          * ปิด alert ตาม id (มี fade-out animation)
+         */
+        "remove": (id: number) => Promise<void>;
+        /**
+          * เปลี่ยนตำแหน่งของ alert container
+         */
+        "setPosition": (pos: AlertPosition) => Promise<void>;
+    }
     interface MyComponent {
         /**
           * The first name
@@ -22,6 +42,16 @@ export namespace Components {
     }
 }
 declare global {
+    interface HTMLKtbAlertElement extends Omit<Components.KtbAlert, "remove">, HTMLStencilElement {
+        /**
+          * ปิด alert ตาม id (มี fade-out animation)
+         */
+        "remove": (id: number) => Promise<void>;
+    }
+    var HTMLKtbAlertElement: {
+        prototype: HTMLKtbAlertElement;
+        new (): HTMLKtbAlertElement;
+    };
     interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {
     }
     var HTMLMyComponentElement: {
@@ -29,10 +59,17 @@ declare global {
         new (): HTMLMyComponentElement;
     };
     interface HTMLElementTagNameMap {
+        "ktb-alert": HTMLKtbAlertElement;
         "my-component": HTMLMyComponentElement;
     }
 }
 declare namespace LocalJSX {
+    interface KtbAlert {
+        /**
+          * @default 'top-right'
+         */
+        "position"?: AlertPosition;
+    }
     interface MyComponent {
         /**
           * The first name
@@ -48,6 +85,9 @@ declare namespace LocalJSX {
         "middle"?: string;
     }
 
+    interface KtbAlertAttributes {
+        "position": AlertPosition;
+    }
     interface MyComponentAttributes {
         "first": string;
         "middle": string;
@@ -55,6 +95,7 @@ declare namespace LocalJSX {
     }
 
     interface IntrinsicElements {
+        "ktb-alert": Omit<KtbAlert, keyof KtbAlertAttributes> & { [K in keyof KtbAlert & keyof KtbAlertAttributes]?: KtbAlert[K] } & { [K in keyof KtbAlert & keyof KtbAlertAttributes as `attr:${K}`]?: KtbAlertAttributes[K] } & { [K in keyof KtbAlert & keyof KtbAlertAttributes as `prop:${K}`]?: KtbAlert[K] };
         "my-component": Omit<MyComponent, keyof MyComponentAttributes> & { [K in keyof MyComponent & keyof MyComponentAttributes]?: MyComponent[K] } & { [K in keyof MyComponent & keyof MyComponentAttributes as `attr:${K}`]?: MyComponentAttributes[K] } & { [K in keyof MyComponent & keyof MyComponentAttributes as `prop:${K}`]?: MyComponent[K] };
     }
 }
@@ -62,6 +103,7 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
+            "ktb-alert": LocalJSX.IntrinsicElements["ktb-alert"] & JSXBase.HTMLAttributes<HTMLKtbAlertElement>;
             "my-component": LocalJSX.IntrinsicElements["my-component"] & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
         }
     }
