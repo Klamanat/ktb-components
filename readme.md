@@ -109,3 +109,61 @@ export default App;
 ```
 
 Check out this [Live Demo](https://stackblitz.com/edit/vitejs-vite-b6zuds?file=src%2FApp.tsx).
+
+## Deployment
+
+### 1. Build
+
+รัน build ก่อนทุกครั้ง ผลลัพธ์จะอยู่ที่โฟลเดอร์ `www/` (docs) และ `dist/` (library)
+
+```bash
+npm run build
+```
+
+---
+
+### 2. Deploy หน้า Docs (Static Site)
+
+#### Netlify
+
+```bash
+npx netlify-cli deploy --prod --dir=www
+```
+
+#### GitHub Pages
+
+```bash
+npx gh-pages -d www
+```
+
+#### Vercel
+
+```bash
+npx vercel --prod www
+```
+
+#### Netlify Drop (ไม่ต้องติดตั้งอะไร)
+
+ลาก โฟลเดอร์ `www/` ไปวางที่ https://app.netlify.com/drop
+
+---
+
+### 3. Publish Library ขึ้น npm
+
+ให้ทีมอื่น `npm install ktb-components` ได้
+
+```bash
+# login ครั้งแรก
+npm login
+
+# เพิ่ม version (patch / minor / major)
+npm version patch
+
+# publish
+npm publish
+```
+
+> สำหรับ private registry ของ KTB ให้เพิ่ม flag:
+> ```bash
+> npm publish --registry https://your-registry.ktb.co.th
+> ```

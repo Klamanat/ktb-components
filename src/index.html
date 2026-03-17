@@ -1,14 +1,510 @@
 <!DOCTYPE html>
-<html dir="ltr" lang="en">
+<html dir="ltr" lang="th">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0" />
-    <title>Stencil Component Starter</title>
+    <title>KTB Components — Docs</title>
 
     <script type="module" src="/build/ktb-components.esm.js"></script>
     <script nomodule src="/build/ktb-components.js"></script>
+
+    <style>
+      /* ── Reset & base ── */
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+      :root {
+        --ktb-blue:    #003f87;
+        --ktb-blue-lt: #0057b8;
+        --ktb-gold:    #f5a623;
+        --bg:          #f4f6fb;
+        --surface:     #ffffff;
+        --border:      #dde3ef;
+        --text:        #1a2340;
+        --text-muted:  #6b7a9b;
+        --code-bg:     #1e2433;
+        --code-text:   #cdd6f4;
+        --radius:      10px;
+        --shadow:      0 2px 12px rgba(0,0,0,.08);
+      }
+
+      body {
+        font-family: 'Segoe UI', Arial, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.6;
+      }
+
+      /* ── Top nav ── */
+      header {
+        background: var(--ktb-blue);
+        color: #fff;
+        padding: 0 2rem;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        height: 60px;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        box-shadow: 0 2px 8px rgba(0,0,0,.25);
+      }
+      .logo-badge {
+        background: var(--ktb-gold);
+        color: var(--ktb-blue);
+        font-weight: 800;
+        font-size: .85rem;
+        padding: 4px 10px;
+        border-radius: 6px;
+        letter-spacing: .5px;
+      }
+      header h1 { font-size: 1.1rem; font-weight: 600; }
+      header .version {
+        margin-left: auto;
+        font-size: .78rem;
+        opacity: .7;
+        background: rgba(255,255,255,.12);
+        padding: 3px 10px;
+        border-radius: 20px;
+      }
+
+      /* ── Layout ── */
+      .layout {
+        display: grid;
+        grid-template-columns: 240px 1fr;
+        min-height: calc(100vh - 60px);
+      }
+
+      /* ── Sidebar ── */
+      nav.sidebar {
+        background: var(--surface);
+        border-right: 1px solid var(--border);
+        padding: 2rem 0;
+        position: sticky;
+        top: 60px;
+        height: calc(100vh - 60px);
+        overflow-y: auto;
+      }
+      .nav-section {
+        padding: 0 1rem .5rem 1rem;
+        font-size: .7rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: var(--text-muted);
+      }
+      nav.sidebar ul { list-style: none; margin-bottom: 1.5rem; }
+      nav.sidebar ul li a {
+        display: block;
+        padding: .45rem 1.25rem;
+        color: var(--text);
+        text-decoration: none;
+        font-size: .9rem;
+        border-left: 3px solid transparent;
+        transition: all .15s;
+      }
+      nav.sidebar ul li a:hover,
+      nav.sidebar ul li a.active {
+        background: #eef2ff;
+        border-left-color: var(--ktb-blue);
+        color: var(--ktb-blue);
+        font-weight: 600;
+      }
+
+      /* ── Main content ── */
+      main {
+        padding: 2.5rem 3rem;
+        max-width: 900px;
+      }
+
+      /* ── Hero ── */
+      .hero {
+        background: linear-gradient(135deg, var(--ktb-blue) 0%, var(--ktb-blue-lt) 100%);
+        color: #fff;
+        border-radius: var(--radius);
+        padding: 2.5rem;
+        margin-bottom: 2.5rem;
+        box-shadow: var(--shadow);
+      }
+      .hero h2 { font-size: 1.8rem; margin-bottom: .5rem; }
+      .hero p  { opacity: .85; font-size: 1rem; max-width: 540px; }
+      .badges  { display: flex; gap: .5rem; margin-top: 1.2rem; flex-wrap: wrap; }
+      .badge {
+        font-size: .75rem;
+        padding: 4px 12px;
+        border-radius: 20px;
+        font-weight: 600;
+        letter-spacing: .3px;
+      }
+      .badge-gold    { background: var(--ktb-gold); color: #1a2340; }
+      .badge-outline { border: 1.5px solid rgba(255,255,255,.5); color: #fff; }
+
+      /* ── Section headings ── */
+      .section { margin-bottom: 2.5rem; }
+      .section h3 {
+        font-size: 1.2rem;
+        color: var(--ktb-blue);
+        margin-bottom: 1rem;
+        padding-bottom: .5rem;
+        border-bottom: 2px solid var(--border);
+      }
+
+      /* ── Component card ── */
+      .component-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        overflow: hidden;
+        box-shadow: var(--shadow);
+        margin-bottom: 2rem;
+      }
+      .card-header {
+        background: var(--ktb-blue);
+        color: #fff;
+        padding: 1rem 1.5rem;
+        display: flex;
+        align-items: center;
+        gap: .75rem;
+      }
+      .card-header .tag-chip {
+        font-family: monospace;
+        font-size: .85rem;
+        background: rgba(255,255,255,.15);
+        padding: 3px 10px;
+        border-radius: 5px;
+      }
+      .card-header p {
+        font-size: .85rem;
+        opacity: .8;
+        margin-top: .2rem;
+      }
+      .card-body { padding: 1.5rem; }
+
+      /* ── Preview box ── */
+      .preview-label {
+        font-size: .75rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: .8px;
+        color: var(--text-muted);
+        margin-bottom: .5rem;
+      }
+      .preview-box {
+        border: 1.5px dashed var(--border);
+        border-radius: 8px;
+        padding: 1.5rem;
+        background: var(--bg);
+        margin-bottom: 1.5rem;
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        align-items: center;
+      }
+
+      /* ── Props table ── */
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: .875rem;
+        margin-bottom: 1.5rem;
+      }
+      th {
+        background: #eef2ff;
+        color: var(--ktb-blue);
+        padding: .6rem .9rem;
+        text-align: left;
+        font-weight: 700;
+        font-size: .8rem;
+        text-transform: uppercase;
+        letter-spacing: .5px;
+      }
+      td {
+        padding: .6rem .9rem;
+        border-bottom: 1px solid var(--border);
+        vertical-align: middle;
+      }
+      tr:last-child td { border-bottom: none; }
+      tr:hover td { background: #f8faff; }
+      code.inline {
+        font-family: monospace;
+        background: #eef2ff;
+        color: var(--ktb-blue);
+        padding: 2px 7px;
+        border-radius: 4px;
+        font-size: .82rem;
+      }
+      .type-badge {
+        font-family: monospace;
+        font-size: .78rem;
+        background: #fff3e0;
+        color: #b45309;
+        padding: 2px 8px;
+        border-radius: 4px;
+      }
+
+      /* ── Code block ── */
+      .code-block {
+        background: var(--code-bg);
+        color: var(--code-text);
+        border-radius: 8px;
+        padding: 1rem 1.25rem;
+        font-family: 'Cascadia Code', 'Fira Code', monospace;
+        font-size: .85rem;
+        overflow-x: auto;
+        position: relative;
+        margin-bottom: 1rem;
+        white-space: pre;
+      }
+      .code-block .copy-btn {
+        position: absolute;
+        top: .6rem;
+        right: .75rem;
+        background: rgba(255,255,255,.1);
+        border: none;
+        color: #aaa;
+        font-size: .72rem;
+        padding: 3px 10px;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: all .15s;
+      }
+      .code-block .copy-btn:hover { background: rgba(255,255,255,.2); color: #fff; }
+      .code-block .copy-btn.copied { color: #a6e3a1; }
+
+      .kw   { color: #cba6f7; }
+      .attr { color: #89dceb; }
+      .str  { color: #a6e3a1; }
+      .tag  { color: #89b4fa; }
+      .cm   { color: #6c7086; }
+
+      /* ── Install section ── */
+      .install-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+        margin-bottom: 1rem;
+      }
+      @media (max-width: 640px) { .install-grid { grid-template-columns: 1fr; } }
+
+      /* ── Footer ── */
+      footer {
+        border-top: 1px solid var(--border);
+        padding: 2rem 3rem;
+        font-size: .82rem;
+        color: var(--text-muted);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: .5rem;
+        background: var(--surface);
+      }
+      footer a { color: var(--ktb-blue); text-decoration: none; }
+
+      /* ── Responsive ── */
+      @media (max-width: 768px) {
+        .layout { grid-template-columns: 1fr; }
+        nav.sidebar { display: none; }
+        main { padding: 1.5rem; }
+      }
+    </style>
   </head>
   <body>
-    <my-component first="Stencil" middle="'Don't call me a framework'" last="JS"></my-component>
+
+    <!-- Header -->
+    <header>
+      <span class="logo-badge">KTB</span>
+      <h1>Components</h1>
+      <span class="version">v0.0.1</span>
+    </header>
+
+    <div class="layout">
+
+      <!-- Sidebar -->
+      <nav class="sidebar">
+        <div class="nav-section">Getting Started</div>
+        <ul>
+          <li><a href="#overview" class="active">Overview</a></li>
+          <li><a href="#installation">Installation</a></li>
+          <li><a href="#usage">Usage</a></li>
+        </ul>
+
+        <div class="nav-section">Components</div>
+        <ul>
+          <li><a href="#my-component">&lt;my-component&gt;</a></li>
+        </ul>
+      </nav>
+
+      <!-- Main -->
+      <main>
+
+        <!-- Hero -->
+        <div class="hero" id="overview">
+          <h2>KTB Component Library</h2>
+          <p>Web Components สำหรับระบบงาน KTB — สร้างด้วย StencilJS รองรับทุก Framework</p>
+          <div class="badges">
+            <span class="badge badge-gold">StencilJS</span>
+            <span class="badge badge-outline">Web Components</span>
+            <span class="badge badge-outline">TypeScript</span>
+            <span class="badge badge-outline">Framework Agnostic</span>
+          </div>
+        </div>
+
+        <!-- Installation -->
+        <div class="section" id="installation">
+          <h3>Installation</h3>
+          <div class="install-grid">
+            <div>
+              <div class="preview-label">npm</div>
+              <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">copy</button><span class="kw">npm</span> install ktb-components</div>
+            </div>
+            <div>
+              <div class="preview-label">yarn</div>
+              <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">copy</button><span class="kw">yarn</span> add ktb-components</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Usage -->
+        <div class="section" id="usage">
+          <h3>Usage</h3>
+
+          <div class="preview-label">Via Script Tag (CDN)</div>
+          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">copy</button><span class="tag">&lt;script</span> <span class="attr">type</span>=<span class="str">"module"</span>
+        <span class="attr">src</span>=<span class="str">"https://cdn.jsdelivr.net/npm/ktb-components/dist/ktb-components.esm.js"</span><span class="tag">&gt;&lt;/script&gt;</span></div>
+
+          <div class="preview-label">React / Vue / Angular</div>
+          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">copy</button><span class="kw">import</span> { defineCustomElements } <span class="kw">from</span> <span class="str">'ktb-components/loader'</span>;
+defineCustomElements();</div>
+        </div>
+
+        <!-- Component: my-component -->
+        <div class="section" id="my-component">
+          <h3>Components</h3>
+
+          <div class="component-card">
+            <div class="card-header">
+              <div>
+                <span class="tag-chip">&lt;my-component&gt;</span>
+                <p>แสดงชื่อจากส่วนประกอบ first, middle, last</p>
+              </div>
+            </div>
+
+            <div class="card-body">
+
+              <!-- Live Preview -->
+              <div class="preview-label">Live Preview</div>
+              <div class="preview-box">
+                <my-component first="KTB" middle="Digital" last="Bank"></my-component>
+                <my-component first="Krungthai" last="Components"></my-component>
+              </div>
+
+              <!-- Props Table -->
+              <div class="preview-label">Props</div>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Property</th>
+                    <th>Attribute</th>
+                    <th>Description</th>
+                    <th>Type</th>
+                    <th>Default</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code class="inline">first</code></td>
+                    <td><code class="inline">first</code></td>
+                    <td>ชื่อแรก (First name)</td>
+                    <td><span class="type-badge">string</span></td>
+                    <td><code class="inline">undefined</code></td>
+                  </tr>
+                  <tr>
+                    <td><code class="inline">middle</code></td>
+                    <td><code class="inline">middle</code></td>
+                    <td>ชื่อกลาง (Middle name)</td>
+                    <td><span class="type-badge">string</span></td>
+                    <td><code class="inline">undefined</code></td>
+                  </tr>
+                  <tr>
+                    <td><code class="inline">last</code></td>
+                    <td><code class="inline">last</code></td>
+                    <td>นามสกุล (Last name)</td>
+                    <td><span class="type-badge">string</span></td>
+                    <td><code class="inline">undefined</code></td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <!-- Code Examples -->
+              <div class="preview-label">HTML</div>
+              <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">copy</button><span class="cm">&lt;!-- ใช้งานพื้นฐาน --&gt;</span>
+<span class="tag">&lt;my-component</span>
+  <span class="attr">first</span>=<span class="str">"KTB"</span>
+  <span class="attr">middle</span>=<span class="str">"Digital"</span>
+  <span class="attr">last</span>=<span class="str">"Bank"</span>
+<span class="tag">&gt;&lt;/my-component&gt;</span>
+
+<span class="cm">&lt;!-- ไม่มีชื่อกลาง --&gt;</span>
+<span class="tag">&lt;my-component</span> <span class="attr">first</span>=<span class="str">"Krungthai"</span> <span class="attr">last</span>=<span class="str">"Components"</span><span class="tag">&gt;&lt;/my-component&gt;</span></div>
+
+              <div class="preview-label">React (JSX)</div>
+              <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">copy</button><span class="kw">import</span> { defineCustomElements } <span class="kw">from</span> <span class="str">'ktb-components/loader'</span>;
+defineCustomElements();
+
+<span class="kw">export default function</span> <span class="attr">App</span>() {
+  <span class="kw">return</span> (
+    <span class="tag">&lt;my-component</span> <span class="attr">first</span>=<span class="str">"KTB"</span> <span class="attr">middle</span>=<span class="str">"Digital"</span> <span class="attr">last</span>=<span class="str">"Bank"</span> <span class="tag">/&gt;</span>
+  );
+}</div>
+
+              <div class="preview-label">Vue</div>
+              <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">copy</button><span class="tag">&lt;template&gt;</span>
+  <span class="tag">&lt;my-component</span> <span class="attr">first</span>=<span class="str">"KTB"</span> <span class="attr">middle</span>=<span class="str">"Digital"</span> <span class="attr">last</span>=<span class="str">"Bank"</span> <span class="tag">/&gt;</span>
+<span class="tag">&lt;/template&gt;</span>
+
+<span class="tag">&lt;script setup&gt;</span>
+<span class="kw">import</span> { defineCustomElements } <span class="kw">from</span> <span class="str">'ktb-components/loader'</span>;
+defineCustomElements();
+<span class="tag">&lt;/script&gt;</span></div>
+
+            </div>
+          </div>
+        </div>
+
+      </main>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <div>KTB Components v0.0.1 — Built with <a href="https://stenciljs.com" target="_blank">StencilJS</a></div>
+      <div>&copy; 2026 Krungthai Bank PCL.</div>
+    </footer>
+
+    <script>
+      function copyCode(btn) {
+        const block = btn.closest('.code-block');
+        const text = block.innerText.replace(/^copy\n|^copied\n/, '').trim();
+        navigator.clipboard.writeText(text).then(() => {
+          btn.textContent = 'copied';
+          btn.classList.add('copied');
+          setTimeout(() => { btn.textContent = 'copy'; btn.classList.remove('copied'); }, 2000);
+        });
+      }
+
+      // Active nav highlight on scroll
+      const sections = document.querySelectorAll('[id]');
+      const navLinks = document.querySelectorAll('nav.sidebar a');
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            navLinks.forEach(a => a.classList.remove('active'));
+            const active = document.querySelector('nav.sidebar a[href="#' + e.target.id + '"]');
+            if (active) active.classList.add('active');
+          }
+        });
+      }, { rootMargin: '-20% 0px -70% 0px' });
+      sections.forEach(s => observer.observe(s));
+    </script>
+
   </body>
 </html>
