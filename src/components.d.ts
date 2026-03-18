@@ -11,14 +11,24 @@ import { BannerType } from "./components/ktb-banner/ktb-banner";
 import { ButtonColor, ButtonRounded, ButtonSize, ButtonType } from "./components/ktb-button/ktb-button";
 import { CheckboxColor } from "./components/ktb-checkbox/ktb-checkbox";
 import { ChipSize, ChipVariant } from "./components/ktb-chip/ktb-chip";
+import { DropdownOption } from "./components/ktb-dropdown/ktb-dropdown";
+import { ExpandColor, ExpandIconPosition } from "./components/ktb-expand/ktb-expand";
+import { InputSize, InputType } from "./components/ktb-input/ktb-input";
+import { ProgressColor, ProgressSize } from "./components/ktb-progress/ktb-progress";
 import { RadioDirection, RadioOption } from "./components/ktb-radio/ktb-radio";
+import { TabItem, TabStyle, TabVariant } from "./components/ktb-tabs/ktb-tabs";
 export { AlertPosition, AlertType } from "./components/ktb-alert/ktb-alert";
 export { BadgeSize, BadgeVariant } from "./components/ktb-badge/ktb-badge";
 export { BannerType } from "./components/ktb-banner/ktb-banner";
 export { ButtonColor, ButtonRounded, ButtonSize, ButtonType } from "./components/ktb-button/ktb-button";
 export { CheckboxColor } from "./components/ktb-checkbox/ktb-checkbox";
 export { ChipSize, ChipVariant } from "./components/ktb-chip/ktb-chip";
+export { DropdownOption } from "./components/ktb-dropdown/ktb-dropdown";
+export { ExpandColor, ExpandIconPosition } from "./components/ktb-expand/ktb-expand";
+export { InputSize, InputType } from "./components/ktb-input/ktb-input";
+export { ProgressColor, ProgressSize } from "./components/ktb-progress/ktb-progress";
 export { RadioDirection, RadioOption } from "./components/ktb-radio/ktb-radio";
+export { TabItem, TabStyle, TabVariant } from "./components/ktb-tabs/ktb-tabs";
 export namespace Components {
     interface KtbAlert {
         /**
@@ -162,6 +172,128 @@ export namespace Components {
         "span": number;
         "xl"?: number;
     }
+    interface KtbDropdown {
+        /**
+          * @default false
+         */
+        "disabled": boolean;
+        "hint"?: string;
+        "label"?: string;
+        /**
+          * @default false
+         */
+        "multiple": boolean;
+        /**
+          * @default 'label'
+         */
+        "optionLabel": string;
+        /**
+          * @default 'value'
+         */
+        "optionValue": string;
+        /**
+          * @default []
+         */
+        "options": DropdownOption[];
+        /**
+          * @default 'เลือก...'
+         */
+        "placeholder": string;
+        /**
+          * @default false
+         */
+        "required": boolean;
+        "value": any;
+    }
+    interface KtbExpand {
+        /**
+          * @default 'default'
+         */
+        "color": ExpandColor;
+        /**
+          * @default false
+         */
+        "disabled": boolean;
+        /**
+          * @default false
+         */
+        "expanded": boolean;
+        /**
+          * @default ''
+         */
+        "heading": string;
+        /**
+          * @default 'right'
+         */
+        "iconPosition": ExpandIconPosition;
+    }
+    interface KtbInput {
+        /**
+          * @default true
+         */
+        "clearable": boolean;
+        /**
+          * @default false
+         */
+        "disabled": boolean;
+        "hint"?: string;
+        "label"?: string;
+        "maxlength"?: number;
+        /**
+          * @default ''
+         */
+        "placeholder": string;
+        /**
+          * @default false
+         */
+        "readonly": boolean;
+        /**
+          * @default false
+         */
+        "required": boolean;
+        /**
+          * @default 'md'
+         */
+        "size": InputSize;
+        /**
+          * @default 'text'
+         */
+        "type": InputType;
+        /**
+          * @default ''
+         */
+        "value": string;
+    }
+    interface KtbProgress {
+        /**
+          * @default 'primary'
+         */
+        "color": ProgressColor;
+        /**
+          * @default 100
+         */
+        "max": number;
+        /**
+          * @default false
+         */
+        "showValue": boolean;
+        /**
+          * @default 'md'
+         */
+        "size": ProgressSize;
+        /**
+          * @default '%'
+         */
+        "suffix": string;
+        /**
+          * @default 3
+         */
+        "thickness": number;
+        /**
+          * @default 0
+         */
+        "value": number;
+    }
     interface KtbRadio {
         /**
           * @default 'vertical'
@@ -193,6 +325,61 @@ export namespace Components {
          */
         "gap": number;
     }
+    interface KtbTabs {
+        /**
+          * @default 0
+         */
+        "active": number;
+        /**
+          * @default 'default'
+         */
+        "tabStyle": TabStyle;
+        /**
+          * @default []
+         */
+        "tabs": TabItem[];
+        /**
+          * @default 'primary'
+         */
+        "variant": TabVariant;
+    }
+    interface KtbTextarea {
+        /**
+          * @default true
+         */
+        "autoResize": boolean;
+        /**
+          * @default false
+         */
+        "disabled": boolean;
+        "hint"?: string;
+        "label"?: string;
+        /**
+          * @default 12
+         */
+        "maxAutoRows": number;
+        "maxlength"?: number;
+        /**
+          * @default ''
+         */
+        "placeholder": string;
+        /**
+          * @default false
+         */
+        "readonly": boolean;
+        /**
+          * @default false
+         */
+        "required": boolean;
+        /**
+          * @default 3
+         */
+        "rows": number;
+        /**
+          * @default ''
+         */
+        "value": string;
+    }
 }
 export interface KtbButtonCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -206,9 +393,29 @@ export interface KtbChipCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLKtbChipElement;
 }
+export interface KtbDropdownCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLKtbDropdownElement;
+}
+export interface KtbExpandCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLKtbExpandElement;
+}
+export interface KtbInputCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLKtbInputElement;
+}
 export interface KtbRadioCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLKtbRadioElement;
+}
+export interface KtbTabsCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLKtbTabsElement;
+}
+export interface KtbTextareaCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLKtbTextareaElement;
 }
 declare global {
     interface HTMLKtbAlertElement extends Omit<Components.KtbAlert, "remove">, HTMLStencilElement {
@@ -291,6 +498,65 @@ declare global {
         prototype: HTMLKtbColElement;
         new (): HTMLKtbColElement;
     };
+    interface HTMLKtbDropdownElementEventMap {
+        "ktbChange": any;
+    }
+    interface HTMLKtbDropdownElement extends Components.KtbDropdown, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLKtbDropdownElementEventMap>(type: K, listener: (this: HTMLKtbDropdownElement, ev: KtbDropdownCustomEvent<HTMLKtbDropdownElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLKtbDropdownElementEventMap>(type: K, listener: (this: HTMLKtbDropdownElement, ev: KtbDropdownCustomEvent<HTMLKtbDropdownElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLKtbDropdownElement: {
+        prototype: HTMLKtbDropdownElement;
+        new (): HTMLKtbDropdownElement;
+    };
+    interface HTMLKtbExpandElementEventMap {
+        "ktbToggle": boolean;
+    }
+    interface HTMLKtbExpandElement extends Components.KtbExpand, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLKtbExpandElementEventMap>(type: K, listener: (this: HTMLKtbExpandElement, ev: KtbExpandCustomEvent<HTMLKtbExpandElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLKtbExpandElementEventMap>(type: K, listener: (this: HTMLKtbExpandElement, ev: KtbExpandCustomEvent<HTMLKtbExpandElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLKtbExpandElement: {
+        prototype: HTMLKtbExpandElement;
+        new (): HTMLKtbExpandElement;
+    };
+    interface HTMLKtbInputElementEventMap {
+        "ktbInput": string;
+        "ktbChange": string;
+        "ktbClear": void;
+    }
+    interface HTMLKtbInputElement extends Components.KtbInput, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLKtbInputElementEventMap>(type: K, listener: (this: HTMLKtbInputElement, ev: KtbInputCustomEvent<HTMLKtbInputElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLKtbInputElementEventMap>(type: K, listener: (this: HTMLKtbInputElement, ev: KtbInputCustomEvent<HTMLKtbInputElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLKtbInputElement: {
+        prototype: HTMLKtbInputElement;
+        new (): HTMLKtbInputElement;
+    };
+    interface HTMLKtbProgressElement extends Components.KtbProgress, HTMLStencilElement {
+    }
+    var HTMLKtbProgressElement: {
+        prototype: HTMLKtbProgressElement;
+        new (): HTMLKtbProgressElement;
+    };
     interface HTMLKtbRadioElementEventMap {
         "ktbChange": any;
     }
@@ -314,6 +580,41 @@ declare global {
         prototype: HTMLKtbRowElement;
         new (): HTMLKtbRowElement;
     };
+    interface HTMLKtbTabsElementEventMap {
+        "ktbChange": number;
+    }
+    interface HTMLKtbTabsElement extends Components.KtbTabs, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLKtbTabsElementEventMap>(type: K, listener: (this: HTMLKtbTabsElement, ev: KtbTabsCustomEvent<HTMLKtbTabsElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLKtbTabsElementEventMap>(type: K, listener: (this: HTMLKtbTabsElement, ev: KtbTabsCustomEvent<HTMLKtbTabsElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLKtbTabsElement: {
+        prototype: HTMLKtbTabsElement;
+        new (): HTMLKtbTabsElement;
+    };
+    interface HTMLKtbTextareaElementEventMap {
+        "ktbInput": string;
+        "ktbChange": string;
+    }
+    interface HTMLKtbTextareaElement extends Components.KtbTextarea, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLKtbTextareaElementEventMap>(type: K, listener: (this: HTMLKtbTextareaElement, ev: KtbTextareaCustomEvent<HTMLKtbTextareaElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLKtbTextareaElementEventMap>(type: K, listener: (this: HTMLKtbTextareaElement, ev: KtbTextareaCustomEvent<HTMLKtbTextareaElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLKtbTextareaElement: {
+        prototype: HTMLKtbTextareaElement;
+        new (): HTMLKtbTextareaElement;
+    };
     interface HTMLElementTagNameMap {
         "ktb-alert": HTMLKtbAlertElement;
         "ktb-badge": HTMLKtbBadgeElement;
@@ -322,8 +623,14 @@ declare global {
         "ktb-checkbox": HTMLKtbCheckboxElement;
         "ktb-chip": HTMLKtbChipElement;
         "ktb-col": HTMLKtbColElement;
+        "ktb-dropdown": HTMLKtbDropdownElement;
+        "ktb-expand": HTMLKtbExpandElement;
+        "ktb-input": HTMLKtbInputElement;
+        "ktb-progress": HTMLKtbProgressElement;
         "ktb-radio": HTMLKtbRadioElement;
         "ktb-row": HTMLKtbRowElement;
+        "ktb-tabs": HTMLKtbTabsElement;
+        "ktb-textarea": HTMLKtbTextareaElement;
     }
 }
 declare namespace LocalJSX {
@@ -464,6 +771,133 @@ declare namespace LocalJSX {
         "span"?: number;
         "xl"?: number;
     }
+    interface KtbDropdown {
+        /**
+          * @default false
+         */
+        "disabled"?: boolean;
+        "hint"?: string;
+        "label"?: string;
+        /**
+          * @default false
+         */
+        "multiple"?: boolean;
+        "onKtbChange"?: (event: KtbDropdownCustomEvent<any>) => void;
+        /**
+          * @default 'label'
+         */
+        "optionLabel"?: string;
+        /**
+          * @default 'value'
+         */
+        "optionValue"?: string;
+        /**
+          * @default []
+         */
+        "options"?: DropdownOption[];
+        /**
+          * @default 'เลือก...'
+         */
+        "placeholder"?: string;
+        /**
+          * @default false
+         */
+        "required"?: boolean;
+        "value"?: any;
+    }
+    interface KtbExpand {
+        /**
+          * @default 'default'
+         */
+        "color"?: ExpandColor;
+        /**
+          * @default false
+         */
+        "disabled"?: boolean;
+        /**
+          * @default false
+         */
+        "expanded"?: boolean;
+        /**
+          * @default ''
+         */
+        "heading"?: string;
+        /**
+          * @default 'right'
+         */
+        "iconPosition"?: ExpandIconPosition;
+        "onKtbToggle"?: (event: KtbExpandCustomEvent<boolean>) => void;
+    }
+    interface KtbInput {
+        /**
+          * @default true
+         */
+        "clearable"?: boolean;
+        /**
+          * @default false
+         */
+        "disabled"?: boolean;
+        "hint"?: string;
+        "label"?: string;
+        "maxlength"?: number;
+        "onKtbChange"?: (event: KtbInputCustomEvent<string>) => void;
+        "onKtbClear"?: (event: KtbInputCustomEvent<void>) => void;
+        "onKtbInput"?: (event: KtbInputCustomEvent<string>) => void;
+        /**
+          * @default ''
+         */
+        "placeholder"?: string;
+        /**
+          * @default false
+         */
+        "readonly"?: boolean;
+        /**
+          * @default false
+         */
+        "required"?: boolean;
+        /**
+          * @default 'md'
+         */
+        "size"?: InputSize;
+        /**
+          * @default 'text'
+         */
+        "type"?: InputType;
+        /**
+          * @default ''
+         */
+        "value"?: string;
+    }
+    interface KtbProgress {
+        /**
+          * @default 'primary'
+         */
+        "color"?: ProgressColor;
+        /**
+          * @default 100
+         */
+        "max"?: number;
+        /**
+          * @default false
+         */
+        "showValue"?: boolean;
+        /**
+          * @default 'md'
+         */
+        "size"?: ProgressSize;
+        /**
+          * @default '%'
+         */
+        "suffix"?: string;
+        /**
+          * @default 3
+         */
+        "thickness"?: number;
+        /**
+          * @default 0
+         */
+        "value"?: number;
+    }
     interface KtbRadio {
         /**
           * @default 'vertical'
@@ -495,6 +929,64 @@ declare namespace LocalJSX {
           * @default 4
          */
         "gap"?: number;
+    }
+    interface KtbTabs {
+        /**
+          * @default 0
+         */
+        "active"?: number;
+        "onKtbChange"?: (event: KtbTabsCustomEvent<number>) => void;
+        /**
+          * @default 'default'
+         */
+        "tabStyle"?: TabStyle;
+        /**
+          * @default []
+         */
+        "tabs"?: TabItem[];
+        /**
+          * @default 'primary'
+         */
+        "variant"?: TabVariant;
+    }
+    interface KtbTextarea {
+        /**
+          * @default true
+         */
+        "autoResize"?: boolean;
+        /**
+          * @default false
+         */
+        "disabled"?: boolean;
+        "hint"?: string;
+        "label"?: string;
+        /**
+          * @default 12
+         */
+        "maxAutoRows"?: number;
+        "maxlength"?: number;
+        "onKtbChange"?: (event: KtbTextareaCustomEvent<string>) => void;
+        "onKtbInput"?: (event: KtbTextareaCustomEvent<string>) => void;
+        /**
+          * @default ''
+         */
+        "placeholder"?: string;
+        /**
+          * @default false
+         */
+        "readonly"?: boolean;
+        /**
+          * @default false
+         */
+        "required"?: boolean;
+        /**
+          * @default 3
+         */
+        "rows"?: number;
+        /**
+          * @default ''
+         */
+        "value"?: string;
     }
 
     interface KtbAlertAttributes {
@@ -544,6 +1036,46 @@ declare namespace LocalJSX {
         "lg": number;
         "xl": number;
     }
+    interface KtbDropdownAttributes {
+        "value": string;
+        "placeholder": string;
+        "label": string;
+        "hint": string;
+        "multiple": boolean;
+        "disabled": boolean;
+        "required": boolean;
+        "optionLabel": string;
+        "optionValue": string;
+    }
+    interface KtbExpandAttributes {
+        "heading": string;
+        "expanded": boolean;
+        "color": ExpandColor;
+        "iconPosition": ExpandIconPosition;
+        "disabled": boolean;
+    }
+    interface KtbInputAttributes {
+        "label": string;
+        "hint": string;
+        "value": string;
+        "placeholder": string;
+        "type": InputType;
+        "disabled": boolean;
+        "required": boolean;
+        "readonly": boolean;
+        "maxlength": number;
+        "size": InputSize;
+        "clearable": boolean;
+    }
+    interface KtbProgressAttributes {
+        "value": number;
+        "max": number;
+        "size": ProgressSize;
+        "color": ProgressColor;
+        "showValue": boolean;
+        "suffix": string;
+        "thickness": number;
+    }
     interface KtbRadioAttributes {
         "value": string;
         "name": string;
@@ -555,6 +1087,24 @@ declare namespace LocalJSX {
     interface KtbRowAttributes {
         "gap": number;
     }
+    interface KtbTabsAttributes {
+        "active": number;
+        "tabStyle": TabStyle;
+        "variant": TabVariant;
+    }
+    interface KtbTextareaAttributes {
+        "label": string;
+        "hint": string;
+        "value": string;
+        "placeholder": string;
+        "disabled": boolean;
+        "required": boolean;
+        "readonly": boolean;
+        "rows": number;
+        "maxlength": number;
+        "autoResize": boolean;
+        "maxAutoRows": number;
+    }
 
     interface IntrinsicElements {
         "ktb-alert": Omit<KtbAlert, keyof KtbAlertAttributes> & { [K in keyof KtbAlert & keyof KtbAlertAttributes]?: KtbAlert[K] } & { [K in keyof KtbAlert & keyof KtbAlertAttributes as `attr:${K}`]?: KtbAlertAttributes[K] } & { [K in keyof KtbAlert & keyof KtbAlertAttributes as `prop:${K}`]?: KtbAlert[K] };
@@ -564,8 +1114,14 @@ declare namespace LocalJSX {
         "ktb-checkbox": Omit<KtbCheckbox, keyof KtbCheckboxAttributes> & { [K in keyof KtbCheckbox & keyof KtbCheckboxAttributes]?: KtbCheckbox[K] } & { [K in keyof KtbCheckbox & keyof KtbCheckboxAttributes as `attr:${K}`]?: KtbCheckboxAttributes[K] } & { [K in keyof KtbCheckbox & keyof KtbCheckboxAttributes as `prop:${K}`]?: KtbCheckbox[K] };
         "ktb-chip": Omit<KtbChip, keyof KtbChipAttributes> & { [K in keyof KtbChip & keyof KtbChipAttributes]?: KtbChip[K] } & { [K in keyof KtbChip & keyof KtbChipAttributes as `attr:${K}`]?: KtbChipAttributes[K] } & { [K in keyof KtbChip & keyof KtbChipAttributes as `prop:${K}`]?: KtbChip[K] };
         "ktb-col": Omit<KtbCol, keyof KtbColAttributes> & { [K in keyof KtbCol & keyof KtbColAttributes]?: KtbCol[K] } & { [K in keyof KtbCol & keyof KtbColAttributes as `attr:${K}`]?: KtbColAttributes[K] } & { [K in keyof KtbCol & keyof KtbColAttributes as `prop:${K}`]?: KtbCol[K] };
+        "ktb-dropdown": Omit<KtbDropdown, keyof KtbDropdownAttributes> & { [K in keyof KtbDropdown & keyof KtbDropdownAttributes]?: KtbDropdown[K] } & { [K in keyof KtbDropdown & keyof KtbDropdownAttributes as `attr:${K}`]?: KtbDropdownAttributes[K] } & { [K in keyof KtbDropdown & keyof KtbDropdownAttributes as `prop:${K}`]?: KtbDropdown[K] };
+        "ktb-expand": Omit<KtbExpand, keyof KtbExpandAttributes> & { [K in keyof KtbExpand & keyof KtbExpandAttributes]?: KtbExpand[K] } & { [K in keyof KtbExpand & keyof KtbExpandAttributes as `attr:${K}`]?: KtbExpandAttributes[K] } & { [K in keyof KtbExpand & keyof KtbExpandAttributes as `prop:${K}`]?: KtbExpand[K] };
+        "ktb-input": Omit<KtbInput, keyof KtbInputAttributes> & { [K in keyof KtbInput & keyof KtbInputAttributes]?: KtbInput[K] } & { [K in keyof KtbInput & keyof KtbInputAttributes as `attr:${K}`]?: KtbInputAttributes[K] } & { [K in keyof KtbInput & keyof KtbInputAttributes as `prop:${K}`]?: KtbInput[K] };
+        "ktb-progress": Omit<KtbProgress, keyof KtbProgressAttributes> & { [K in keyof KtbProgress & keyof KtbProgressAttributes]?: KtbProgress[K] } & { [K in keyof KtbProgress & keyof KtbProgressAttributes as `attr:${K}`]?: KtbProgressAttributes[K] } & { [K in keyof KtbProgress & keyof KtbProgressAttributes as `prop:${K}`]?: KtbProgress[K] };
         "ktb-radio": Omit<KtbRadio, keyof KtbRadioAttributes> & { [K in keyof KtbRadio & keyof KtbRadioAttributes]?: KtbRadio[K] } & { [K in keyof KtbRadio & keyof KtbRadioAttributes as `attr:${K}`]?: KtbRadioAttributes[K] } & { [K in keyof KtbRadio & keyof KtbRadioAttributes as `prop:${K}`]?: KtbRadio[K] };
         "ktb-row": Omit<KtbRow, keyof KtbRowAttributes> & { [K in keyof KtbRow & keyof KtbRowAttributes]?: KtbRow[K] } & { [K in keyof KtbRow & keyof KtbRowAttributes as `attr:${K}`]?: KtbRowAttributes[K] } & { [K in keyof KtbRow & keyof KtbRowAttributes as `prop:${K}`]?: KtbRow[K] };
+        "ktb-tabs": Omit<KtbTabs, keyof KtbTabsAttributes> & { [K in keyof KtbTabs & keyof KtbTabsAttributes]?: KtbTabs[K] } & { [K in keyof KtbTabs & keyof KtbTabsAttributes as `attr:${K}`]?: KtbTabsAttributes[K] } & { [K in keyof KtbTabs & keyof KtbTabsAttributes as `prop:${K}`]?: KtbTabs[K] };
+        "ktb-textarea": Omit<KtbTextarea, keyof KtbTextareaAttributes> & { [K in keyof KtbTextarea & keyof KtbTextareaAttributes]?: KtbTextarea[K] } & { [K in keyof KtbTextarea & keyof KtbTextareaAttributes as `attr:${K}`]?: KtbTextareaAttributes[K] } & { [K in keyof KtbTextarea & keyof KtbTextareaAttributes as `prop:${K}`]?: KtbTextarea[K] };
     }
 }
 export { LocalJSX as JSX };
@@ -579,8 +1135,14 @@ declare module "@stencil/core" {
             "ktb-checkbox": LocalJSX.IntrinsicElements["ktb-checkbox"] & JSXBase.HTMLAttributes<HTMLKtbCheckboxElement>;
             "ktb-chip": LocalJSX.IntrinsicElements["ktb-chip"] & JSXBase.HTMLAttributes<HTMLKtbChipElement>;
             "ktb-col": LocalJSX.IntrinsicElements["ktb-col"] & JSXBase.HTMLAttributes<HTMLKtbColElement>;
+            "ktb-dropdown": LocalJSX.IntrinsicElements["ktb-dropdown"] & JSXBase.HTMLAttributes<HTMLKtbDropdownElement>;
+            "ktb-expand": LocalJSX.IntrinsicElements["ktb-expand"] & JSXBase.HTMLAttributes<HTMLKtbExpandElement>;
+            "ktb-input": LocalJSX.IntrinsicElements["ktb-input"] & JSXBase.HTMLAttributes<HTMLKtbInputElement>;
+            "ktb-progress": LocalJSX.IntrinsicElements["ktb-progress"] & JSXBase.HTMLAttributes<HTMLKtbProgressElement>;
             "ktb-radio": LocalJSX.IntrinsicElements["ktb-radio"] & JSXBase.HTMLAttributes<HTMLKtbRadioElement>;
             "ktb-row": LocalJSX.IntrinsicElements["ktb-row"] & JSXBase.HTMLAttributes<HTMLKtbRowElement>;
+            "ktb-tabs": LocalJSX.IntrinsicElements["ktb-tabs"] & JSXBase.HTMLAttributes<HTMLKtbTabsElement>;
+            "ktb-textarea": LocalJSX.IntrinsicElements["ktb-textarea"] & JSXBase.HTMLAttributes<HTMLKtbTextareaElement>;
         }
     }
 }

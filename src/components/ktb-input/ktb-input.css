@@ -1,0 +1,88 @@
+:host { display: block; }
+
+.input-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.input-label {
+  font-size: var(--text-sm);
+  font-weight: var(--font-semibold);
+  color: var(--color-text-subtle);
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+.input-required { color: var(--color-danger); }
+
+/* ── Box ── */
+.input-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  transition: border-color var(--transition-fast);
+}
+.input-box:focus-within { border-color: var(--color-primary); }
+.input-box--disabled { opacity: .5; cursor: not-allowed; background: var(--color-surface-alt, #f1f5f9); }
+
+/* ── Sizes ── */
+.input-box--sm .input { font-size: var(--text-xs);   padding: var(--space-1) var(--space-2); height: 2rem; }
+.input-box--md .input { font-size: var(--text-sm);   padding: var(--space-2) var(--space-3); height: 2.5rem; }
+.input-box--lg .input { font-size: var(--text-base); padding: var(--space-2) var(--space-4); height: 3rem; }
+
+/* ── Native input ── */
+.input {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: var(--color-text);
+  min-width: 0;
+  width: 100%;
+}
+.input--padded-right { padding-right: 0 !important; }
+
+/* ── Icons ── */
+.input-icons {
+  display: flex;
+  align-items: center;
+  padding-right: var(--space-2);
+  gap: var(--space-1);
+  flex-shrink: 0;
+}
+.input-icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-text-subtle);
+  padding: 2px;
+  border-radius: var(--radius-sm);
+  line-height: 1;
+  transition: color var(--transition-fast);
+}
+.input-icon-btn:hover { color: var(--color-text); }
+.input-icon-btn svg { width: 16px; height: 16px; display: block; }
+
+/* ── Footer ── */
+.input-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  min-height: 1rem;
+}
+.input-hint {
+  font-size: var(--text-xs);
+  color: var(--color-text-subtle);
+}
+.input-counter {
+  font-size: var(--text-xs);
+  color: var(--color-text-subtle);
+  white-space: nowrap;
+}

@@ -625,6 +625,12 @@
           <li><a href="#ktb-radio">&lt;radio&gt;</a></li>
           <li><a href="#ktb-chip">&lt;chip&gt;</a></li>
           <li><a href="#ktb-grid">&lt;row&gt; / &lt;col&gt;</a></li>
+          <li><a href="#ktb-input">&lt;input&gt;</a></li>
+          <li><a href="#ktb-textarea">&lt;textarea&gt;</a></li>
+          <li><a href="#ktb-dropdown">&lt;dropdown&gt;</a></li>
+          <li><a href="#ktb-expand">&lt;expand&gt;</a></li>
+          <li><a href="#ktb-progress">&lt;progress&gt;</a></li>
+          <li><a href="#ktb-tabs">&lt;tabs&gt;</a></li>
         </ul>
       </nav>
 
@@ -1285,6 +1291,26 @@ defineCustomElements();
 
               <div class="preview-label" style="margin-top:1.5rem; border-top:1px solid var(--color-border); padding-top:1.5rem;">ตัวอย่างการใช้งาน — Dynamic Status Badge จาก Data</div>
 
+              <div class="preview-label">Live Preview</div>
+              <div class="preview-box" style="flex-direction:column; gap:.5rem; align-items:stretch;">
+                <div style="display:flex; justify-content:space-between; align-items:center; padding:.5rem 1rem; background:var(--color-surface-alt,#f8fafc); border-radius:6px;">
+                  <span style="font-size:var(--text-sm);">ORD-001</span>
+                  <ktb-badge variant="warning" size="xs">รอดำเนินการ</ktb-badge>
+                </div>
+                <div style="display:flex; justify-content:space-between; align-items:center; padding:.5rem 1rem; background:var(--color-surface-alt,#f8fafc); border-radius:6px;">
+                  <span style="font-size:var(--text-sm);">ORD-002</span>
+                  <ktb-badge variant="success" size="xs">อนุมัติแล้ว</ktb-badge>
+                </div>
+                <div style="display:flex; justify-content:space-between; align-items:center; padding:.5rem 1rem; background:var(--color-surface-alt,#f8fafc); border-radius:6px;">
+                  <span style="font-size:var(--text-sm);">ORD-003</span>
+                  <ktb-badge variant="error" size="xs">ปฏิเสธ</ktb-badge>
+                </div>
+                <div style="display:flex; justify-content:space-between; align-items:center; padding:.5rem 1rem; background:var(--color-surface-alt,#f8fafc); border-radius:6px;">
+                  <span style="font-size:var(--text-sm);">ORD-004</span>
+                  <ktb-badge variant="default" size="xs">ยกเลิก</ktb-badge>
+                </div>
+              </div>
+
               <div class="preview-label">React (JSX)</div>
               <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">copy</button><span class="cm">// map สถานะ order → variant</span>
 <span class="kw">const</span> statusMap = {
@@ -1429,6 +1455,32 @@ getStatus(status: <span class="kw">string</span>) {
 <span class="tag">&gt;&lt;/ktb-banner&gt;</span></div>
 
               <div class="preview-label" style="margin-top:1.5rem; border-top:1px solid var(--color-border); padding-top:1.5rem;">ตัวอย่างการใช้งาน — แสดง Banner หลัง API Response</div>
+
+              <div class="preview-label">Live Preview</div>
+              <div class="preview-box" style="flex-direction:column; gap:1rem; align-items:stretch;">
+                <div style="display:flex; gap:.75rem;">
+                  <button class="btn-preview-success" onclick="previewApiBanner('success')" style="padding:.5rem 1rem; background:var(--color-success); color:#fff; border:none; border-radius:var(--radius-sm); cursor:pointer; font-size:var(--text-sm);">จำลองบันทึกสำเร็จ</button>
+                  <button onclick="previewApiBanner('error')" style="padding:.5rem 1rem; background:var(--color-danger); color:#fff; border:none; border-radius:var(--radius-sm); cursor:pointer; font-size:var(--text-sm);">จำลองข้อผิดพลาด</button>
+                  <button onclick="previewApiBanner('warning')" style="padding:.5rem 1rem; background:var(--color-warning); color:#fff; border:none; border-radius:var(--radius-sm); cursor:pointer; font-size:var(--text-sm);">คำเตือน</button>
+                </div>
+                <div id="api-banner-preview" style="min-height:2rem;"></div>
+              </div>
+              <script>
+                function previewApiBanner(type) {
+                  const container = document.getElementById('api-banner-preview');
+                  const msgs = {
+                    success: { title: 'บันทึกสำเร็จ',      message: 'ข้อมูลถูกบันทึกเรียบร้อยแล้ว' },
+                    error:   { title: 'เกิดข้อผิดพลาด',    message: 'ไม่สามารถเชื่อมต่อเซิร์ฟเวอร์ได้' },
+                    warning: { title: 'คำเตือน',            message: 'กรุณาตรวจสอบข้อมูลก่อนดำเนินการต่อ' },
+                  };
+                  container.innerHTML = '';
+                  const el = document.createElement('ktb-banner');
+                  el.setAttribute('type', type);
+                  el.setAttribute('title', msgs[type].title);
+                  el.setAttribute('message', msgs[type].message);
+                  container.appendChild(el);
+                }
+              </script>
 
               <div class="preview-label">React (JSX)</div>
               <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">copy</button><span class="kw">import</span> { useState } <span class="kw">from</span> <span class="str">'react'</span>;
@@ -1605,6 +1657,34 @@ banner: { type: <span class="kw">string</span>; title: <span class="kw">string</
 <span class="tag">&gt;&lt;/ktb-checkbox&gt;</span></div>
 
               <div class="preview-label" style="margin-top:1.5rem; border-top:1px solid var(--color-border); padding-top:1.5rem;">ตัวอย่างการใช้งาน — Select All พร้อม Indeterminate State</div>
+
+              <div class="preview-label">Live Preview</div>
+              <div class="preview-box" style="flex-direction:column; gap:.75rem; align-items:flex-start;">
+                <ktb-checkbox id="detail-chk-all" label="เลือกทั้งหมด" color="primary"></ktb-checkbox>
+                <div style="padding-left:1.5rem; display:flex; flex-direction:column; gap:.5rem;">
+                  <ktb-checkbox class="detail-chk-item" label="รายการที่ 1" color="primary"></ktb-checkbox>
+                  <ktb-checkbox class="detail-chk-item" label="รายการที่ 2" color="primary"></ktb-checkbox>
+                  <ktb-checkbox class="detail-chk-item" label="รายการที่ 3" color="primary"></ktb-checkbox>
+                </div>
+              </div>
+              <script>
+                (function () {
+                  const all   = document.getElementById('detail-chk-all');
+                  const items = document.querySelectorAll('.detail-chk-item');
+
+                  function updateAll() {
+                    const checkedCount = [...items].filter(i => i.checked).length;
+                    all.checked = checkedCount === items.length;
+                    all.indeterminate = checkedCount > 0 && checkedCount < items.length;
+                  }
+
+                  all.addEventListener('ktbChange', e => {
+                    items.forEach(i => { i.checked = e.detail; });
+                  });
+
+                  items.forEach(item => item.addEventListener('ktbChange', updateAll));
+                })();
+              </script>
 
               <div class="preview-label">React (JSX)</div>
               <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">copy</button><span class="kw">import</span> { useState, useRef, useEffect } <span class="kw">from</span> <span class="str">'react'</span>;
@@ -1853,6 +1933,40 @@ onMounted(() => { radioRef.value.$el.options = options; });
 
               <div class="preview-label" style="margin-top:1.5rem; border-top:1px solid var(--color-border); padding-top:1.5rem;">ตัวอย่างการใช้งาน — Conditional Form Section ตาม Radio ที่เลือก</div>
 
+              <div class="preview-label">Live Preview</div>
+              <div class="preview-box" style="flex-direction:column; gap:1rem; align-items:stretch;">
+                <ktb-radio id="detail-pay-radio" label="วิธีชำระเงิน" direction="horizontal"></ktb-radio>
+                <div id="detail-pay-card" style="display:none; flex-direction:column; gap:.5rem;">
+                  <input placeholder="หมายเลขบัตร" style="padding:.5rem .75rem; border:1px solid var(--color-border); border-radius:var(--radius-sm); font-size:var(--text-sm); background:var(--color-surface); color:var(--color-text);">
+                  <div style="display:flex; gap:.5rem;">
+                    <input placeholder="MM/YY" style="padding:.5rem .75rem; border:1px solid var(--color-border); border-radius:var(--radius-sm); font-size:var(--text-sm); width:80px; background:var(--color-surface); color:var(--color-text);">
+                    <input placeholder="CVV"   style="padding:.5rem .75rem; border:1px solid var(--color-border); border-radius:var(--radius-sm); font-size:var(--text-sm); width:70px; background:var(--color-surface); color:var(--color-text);">
+                  </div>
+                </div>
+                <div id="detail-pay-transfer" style="display:none; padding:.75rem 1rem; background:var(--primitive-blue-100); color:var(--primitive-blue-700); border-radius:var(--radius-sm); font-size:var(--text-sm);">
+                  โอนมายังเลขบัญชี <strong>123-456-7890</strong> ธนาคารกรุงไทย
+                </div>
+                <div id="detail-pay-cod" style="display:none; padding:.75rem 1rem; background:var(--primitive-amber-100); color:var(--primitive-amber-700); border-radius:var(--radius-sm); font-size:var(--text-sm);">
+                  ชำระเงินเมื่อได้รับสินค้า (มีค่าธรรมเนียม 30 บาท)
+                </div>
+              </div>
+              <script>
+                (function () {
+                  const radio = document.getElementById('detail-pay-radio');
+                  radio.options = [
+                    { label: 'บัตรเครดิต',    value: 'card'     },
+                    { label: 'โอนเงิน',       value: 'transfer'  },
+                    { label: 'เก็บเงินปลายทาง', value: 'cod'    },
+                  ];
+                  radio.addEventListener('ktbChange', function (e) {
+                    ['card', 'transfer', 'cod'].forEach(function (m) {
+                      var el = document.getElementById('detail-pay-' + m);
+                      el.style.display = e.detail === m ? (m === 'card' ? 'flex' : 'block') : 'none';
+                    });
+                  });
+                })();
+              </script>
+
               <div class="preview-label">React (JSX)</div>
               <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">copy</button><span class="kw">import</span> { useRef, useEffect, useState } <span class="kw">from</span> <span class="str">'react'</span>;
 
@@ -2095,6 +2209,44 @@ remove(tag: <span class="kw">string</span>) { <span class="kw">this</span>.tags 
 
               <div class="preview-label" style="margin-top:1.5rem; border-top:1px solid var(--color-border); padding-top:1.5rem;">ตัวอย่างการใช้งาน — Tag Input (พิมพ์แล้วกด Enter เพื่อเพิ่ม)</div>
 
+              <div class="preview-label">Live Preview</div>
+              <div class="preview-box">
+                <div id="detail-tag-wrap" style="display:flex; flex-wrap:wrap; gap:.5rem; align-items:center; padding:.5rem .75rem; border:1px solid var(--color-border); border-radius:var(--radius-sm); background:var(--color-surface); width:100%;">
+                  <input id="detail-tag-input" placeholder="พิมพ์แล้วกด Enter เพื่อเพิ่ม tag..." style="border:none; outline:none; background:transparent; font-size:var(--text-sm); flex:1; min-width:180px; color:var(--color-text);">
+                </div>
+              </div>
+              <script>
+                (function () {
+                  var tags    = ['React', 'Vue', 'Angular'];
+                  var wrap    = document.getElementById('detail-tag-wrap');
+                  var input   = document.getElementById('detail-tag-input');
+
+                  function renderChips() {
+                    wrap.querySelectorAll('ktb-chip').forEach(function (c) { c.remove(); });
+                    tags.forEach(function (tag) {
+                      var chip = document.createElement('ktb-chip');
+                      chip.setAttribute('label', tag);
+                      chip.setAttribute('variant', 'primary');
+                      chip.setAttribute('removable', '');
+                      chip.addEventListener('ktbRemove', function () {
+                        tags = tags.filter(function (t) { return t !== tag; });
+                        renderChips();
+                      });
+                      wrap.insertBefore(chip, input);
+                    });
+                  }
+
+                  input.addEventListener('keydown', function (e) {
+                    if (e.key !== 'Enter') return;
+                    var tag = input.value.trim();
+                    if (tag && !tags.includes(tag)) { tags.push(tag); renderChips(); }
+                    input.value = '';
+                  });
+
+                  renderChips();
+                })();
+              </script>
+
               <div class="preview-label">React (JSX)</div>
               <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">copy</button><span class="kw">import</span> { useState } <span class="kw">from</span> <span class="str">'react'</span>;
 
@@ -2299,6 +2451,45 @@ remove(tag: <span class="kw">string</span>) { <span class="kw">this</span>.tags 
 
               <div class="preview-label" style="margin-top:1.5rem; border-top:1px solid var(--color-border); padding-top:1.5rem;">ตัวอย่างการใช้งาน — Dashboard Layout (Sidebar + Content, Responsive)</div>
 
+              <div class="preview-label">Live Preview</div>
+              <div class="preview-box" style="flex-direction:column; align-items:stretch;">
+                <ktb-row gap="4">
+                  <ktb-col span="12" sm="3" md="3" lg="2">
+                    <div style="background:var(--primitive-blue-100); color:var(--primitive-blue-700); padding:.75rem; border-radius:6px; font-size:var(--text-xs); text-align:center;">
+                      <div style="font-weight:var(--font-semibold); margin-bottom:.25rem;">Sidebar</div>
+                      <div>12 → sm:3 → lg:2</div>
+                    </div>
+                  </ktb-col>
+                  <ktb-col span="12" sm="9" md="9" lg="10">
+                    <ktb-row gap="4">
+                      <ktb-col span="12" sm="4">
+                        <div style="background:var(--primitive-green-100); color:var(--primitive-green-700); padding:.75rem; border-radius:6px; font-size:var(--text-xs); text-align:center;">Stat Card 1</div>
+                      </ktb-col>
+                      <ktb-col span="12" sm="4">
+                        <div style="background:var(--primitive-green-100); color:var(--primitive-green-700); padding:.75rem; border-radius:6px; font-size:var(--text-xs); text-align:center;">Stat Card 2</div>
+                      </ktb-col>
+                      <ktb-col span="12" sm="4">
+                        <div style="background:var(--primitive-green-100); color:var(--primitive-green-700); padding:.75rem; border-radius:6px; font-size:var(--text-xs); text-align:center;">Stat Card 3</div>
+                      </ktb-col>
+                    </ktb-row>
+                    <ktb-row gap="4" style="margin-top:.5rem;">
+                      <ktb-col span="12" lg="8">
+                        <div style="background:var(--primitive-amber-100); color:var(--primitive-amber-700); padding:.75rem; border-radius:6px; font-size:var(--text-xs); text-align:center;">
+                          <div style="font-weight:var(--font-semibold);">Sales Chart</div>
+                          <div>12 → lg:8</div>
+                        </div>
+                      </ktb-col>
+                      <ktb-col span="12" lg="4">
+                        <div style="background:var(--primitive-amber-100); color:var(--primitive-amber-700); padding:.75rem; border-radius:6px; font-size:var(--text-xs); text-align:center;">
+                          <div style="font-weight:var(--font-semibold);">Activity Feed</div>
+                          <div>12 → lg:4</div>
+                        </div>
+                      </ktb-col>
+                    </ktb-row>
+                  </ktb-col>
+                </ktb-row>
+              </div>
+
               <div class="preview-label">HTML</div>
               <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">copy</button><span class="cm">&lt;!-- mobile: full width → tablet: sidebar 3col + content 9col → desktop: 2col + 10col --&gt;</span>
 <span class="tag">&lt;ktb-row</span> <span class="attr">gap</span>=<span class="str">"6"</span><span class="tag">&gt;</span>
@@ -2394,6 +2585,1252 @@ remove(tag: <span class="kw">string</span>) { <span class="kw">this</span>.tags 
     <span class="tag">&lt;/ktb-row&gt;</span>
   <span class="tag">&lt;/ktb-col&gt;</span>
 <span class="tag">&lt;/ktb-row&gt;</span></div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- ─────────────────────────── ktb-input ─────────────────────────── -->
+        <div class="section" id="ktb-input">
+          <div class="component-card">
+            <div class="card-header">
+              <div>
+                <span class="tag-chip">&lt;ktb-input&gt;</span>
+                <p>Input — รองรับ text / password / number / tel / email, clear button, label, hint, counter</p>
+              </div>
+            </div>
+            <div class="card-body">
+
+              <div class="preview-label">Live Preview</div>
+              <div class="preview-box" style="flex-direction:column; gap:1rem; align-items:stretch; max-width:400px;">
+                <ktb-input label="ชื่อผู้ใช้" placeholder="กรอกชื่อผู้ใช้" hint="ความยาว 3-20 ตัวอักษร" maxlength="20" required></ktb-input>
+                <ktb-input label="รหัสผ่าน" type="password" placeholder="กรอกรหัสผ่าน" required></ktb-input>
+                <ktb-input label="อีเมล" type="email" placeholder="example@email.com"></ktb-input>
+                <ktb-input label="ปิดใช้งาน" value="ค่าที่ไม่สามารถแก้ไข" disabled></ktb-input>
+              </div>
+
+              <div class="preview-label">Props</div>
+              <table>
+                <thead><tr><th>Property</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+                <tbody>
+                  <tr><td><code class="inline">value</code></td><td><span class="type-badge">string</span></td><td><code class="inline">""</code></td><td>ค่าปัจจุบัน</td></tr>
+                  <tr><td><code class="inline">type</code></td><td><span class="type-badge">InputType</span></td><td><code class="inline">"text"</code></td><td>text / password / number / tel / email / search</td></tr>
+                  <tr><td><code class="inline">label</code></td><td><span class="type-badge">string</span></td><td>—</td><td>ข้อความ label</td></tr>
+                  <tr><td><code class="inline">hint</code></td><td><span class="type-badge">string</span></td><td>—</td><td>ข้อความช่วยเหลือ</td></tr>
+                  <tr><td><code class="inline">placeholder</code></td><td><span class="type-badge">string</span></td><td><code class="inline">""</code></td><td>placeholder</td></tr>
+                  <tr><td><code class="inline">required</code></td><td><span class="type-badge">boolean</span></td><td><code class="inline">false</code></td><td>แสดงเครื่องหมาย *</td></tr>
+                  <tr><td><code class="inline">disabled</code></td><td><span class="type-badge">boolean</span></td><td><code class="inline">false</code></td><td>ปิดการใช้งาน</td></tr>
+                  <tr><td><code class="inline">readonly</code></td><td><span class="type-badge">boolean</span></td><td><code class="inline">false</code></td><td>อ่านอย่างเดียว</td></tr>
+                  <tr><td><code class="inline">maxlength</code></td><td><span class="type-badge">number</span></td><td>—</td><td>จำนวนตัวอักษรสูงสุด (แสดง counter)</td></tr>
+                  <tr><td><code class="inline">size</code></td><td><span class="type-badge">InputSize</span></td><td><code class="inline">"md"</code></td><td>sm / md / lg</td></tr>
+                  <tr><td><code class="inline">clearable</code></td><td><span class="type-badge">boolean</span></td><td><code class="inline">true</code></td><td>แสดงปุ่ม × เมื่อมีค่า</td></tr>
+                </tbody>
+              </table>
+
+              <div class="preview-label">Events</div>
+              <table>
+                <thead><tr><th>Event</th><th>Detail</th><th>Description</th></tr></thead>
+                <tbody>
+                  <tr><td><code class="inline">ktbInput</code></td><td><code class="inline">string</code></td><td>emit ทุกครั้งที่พิมพ์</td></tr>
+                  <tr><td><code class="inline">ktbChange</code></td><td><code class="inline">string</code></td><td>emit เมื่อ blur</td></tr>
+                  <tr><td><code class="inline">ktbClear</code></td><td><code class="inline">void</code></td><td>emit เมื่อกดปุ่ม ×</td></tr>
+                </tbody>
+              </table>
+
+              <div class="preview-label">HTML</div>
+              <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">copy</button><span class="tag">&lt;ktb-input</span>
+  <span class="attr">label</span>=<span class="str">"ชื่อผู้ใช้"</span>
+  <span class="attr">placeholder</span>=<span class="str">"กรอกชื่อผู้ใช้"</span>
+  <span class="attr">hint</span>=<span class="str">"ความยาว 3-20 ตัวอักษร"</span>
+  <span class="attr">maxlength</span>=<span class="str">"20"</span>
+  <span class="attr">required</span>
+<span class="tag">&gt;&lt;/ktb-input&gt;</span>
+
+<span class="tag">&lt;script&gt;</span>
+  document.querySelector(<span class="str">'ktb-input'</span>)
+    .addEventListener(<span class="str">'ktbInput'</span>, e => console.log(e.detail));
+<span class="tag">&lt;/script&gt;</span></div>
+
+              <div class="preview-label">React (JSX)</div>
+              <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">copy</button><span class="kw">import</span> { useState } <span class="kw">from</span> <span class="str">'react'</span>;
+
+<span class="kw">function</span> <span class="attr">App</span>() {
+  <span class="kw">const</span> [name, setName] = useState(<span class="str">''</span>);
+  <span class="kw">return</span> (
+    <span class="tag">&lt;KtbInput</span>
+      <span class="attr">label</span>=<span class="str">"ชื่อผู้ใช้"</span>
+      <span class="attr">value</span>={name}
+      <span class="attr">onKtbInput</span>={e => setName(e.detail)}
+      <span class="attr">maxlength</span>={20}
+      <span class="attr">required</span>
+    <span class="tag">/&gt;</span>
+  );
+}</div>
+
+              <div class="preview-label">Vue</div>
+              <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">copy</button><span class="tag">&lt;template&gt;</span>
+  <span class="tag">&lt;ktb-input</span>
+    <span class="attr">label</span>=<span class="str">"ชื่อผู้ใช้"</span>
+    :<span class="attr">value</span>=<span class="str">"name"</span>
+    <span class="attr">@ktb-input</span>=<span class="str">"name = $event.detail"</span>
+    :<span class="attr">maxlength</span>=<span class="str">"20"</span>
+    <span class="attr">required</span>
+  <span class="tag">/&gt;</span>
+<span class="tag">&lt;/template&gt;</span>
+
+<span class="tag">&lt;script setup&gt;</span>
+<span class="kw">import</span> { ref } <span class="kw">from</span> <span class="str">'vue'</span>;
+<span class="kw">const</span> name = ref(<span class="str">''</span>);
+<span class="tag">&lt;/script&gt;</span></div>
+
+              <div class="preview-label">Angular</div>
+              <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">copy</button><span class="tag">&lt;ktb-input</span>
+  <span class="attr">label</span>=<span class="str">"ชื่อผู้ใช้"</span>
+  [<span class="attr">value</span>]=<span class="str">"name"</span>
+  (<span class="attr">ktbInput</span>)=<span class="str">"name = $event.detail"</span>
+  [<span class="attr">maxlength</span>]=<span class="str">"20"</span>
+  <span class="attr">required</span>
+<span class="tag">&gt;&lt;/ktb-input&gt;</span></div>
+
+              <div class="preview-label" style="margin-top:1.5rem; border-top:1px solid var(--color-border); padding-top:1.5rem;">ตัวอย่างการใช้งาน — Form Validation (Login)</div>
+
+              <div class="preview-label">Live Preview</div>
+              <div class="preview-box" style="flex-direction:column; gap:.75rem; align-items:stretch; max-width:360px;">
+                <ktb-input id="login-user" label="ชื่อผู้ใช้" placeholder="กรอกชื่อผู้ใช้" required maxlength="20"></ktb-input>
+                <ktb-input id="login-pass" label="รหัสผ่าน" type="password" placeholder="กรอกรหัสผ่าน" required></ktb-input>
+                <div id="login-error" style="display:none; color:var(--color-danger); font-size:var(--text-xs); margin-top:-.25rem;"></div>
+                <button onclick="handleLogin()" style="padding:var(--space-2) var(--space-4); background:var(--color-primary); color:#fff; border:none; border-radius:var(--radius-sm); cursor:pointer; font-size:var(--text-sm); font-weight:var(--font-semibold);">ล็อกอิน</button>
+                <div id="login-success" style="display:none; color:var(--color-success); font-size:var(--text-sm);">✓ ล็อกอินสำเร็จ!</div>
+              </div>
+              <script>
+                function handleLogin() {
+                  var user = document.getElementById('login-user').value || '';
+                  var pass = document.getElementById('login-pass').value || '';
+                  var err  = document.getElementById('login-error');
+                  var ok   = document.getElementById('login-success');
+                  err.style.display = 'none';
+                  ok.style.display  = 'none';
+                  if (!user.trim() || !pass.trim()) {
+                    err.textContent = 'กรุณากรอกชื่อผู้ใช้และรหัสผ่าน';
+                    err.style.display = 'block';
+                    return;
+                  }
+                  if (pass.length < 6) {
+                    err.textContent = 'รหัสผ่านต้องมีอย่างน้อย 6 ตัวอักษร';
+                    err.style.display = 'block';
+                    return;
+                  }
+                  ok.style.display = 'block';
+                }
+              </script>
+
+              <div class="preview-label">React (JSX)</div>
+              <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">copy</button><span class="kw">import</span> { useState } <span class="kw">from</span> <span class="str">'react'</span>;
+
+<span class="kw">function</span> <span class="attr">LoginForm</span>() {
+  <span class="kw">const</span> [user, setUser]  = useState(<span class="str">''</span>);
+  <span class="kw">const</span> [pass, setPass]  = useState(<span class="str">''</span>);
+  <span class="kw">const</span> [error, setError] = useState(<span class="str">''</span>);
+
+  <span class="kw">function</span> <span class="attr">handleLogin</span>() {
+    <span class="kw">if</span> (!user.trim() || !pass.trim()) { setError(<span class="str">'กรุณากรอกชื่อผู้ใช้และรหัสผ่าน'</span>); <span class="kw">return</span>; }
+    <span class="kw">if</span> (pass.length < 6)              { setError(<span class="str">'รหัสผ่านต้องมีอย่างน้อย 6 ตัวอักษร'</span>); <span class="kw">return</span>; }
+    setError(<span class="str">''</span>);
+    <span class="cm">// call API...</span>
+  }
+
+  <span class="kw">return</span> (
+    &lt;&gt;
+      <span class="tag">&lt;KtbInput</span> <span class="attr">label</span>=<span class="str">"ชื่อผู้ใช้"</span> <span class="attr">value</span>={user} <span class="attr">onKtbInput</span>={e => setUser(e.detail)} <span class="attr">required</span> <span class="tag">/&gt;</span>
+      <span class="tag">&lt;KtbInput</span> <span class="attr">label</span>=<span class="str">"รหัสผ่าน"</span> <span class="attr">type</span>=<span class="str">"password"</span> <span class="attr">value</span>={pass} <span class="attr">onKtbInput</span>={e => setPass(e.detail)} <span class="attr">required</span> <span class="tag">/&gt;</span>
+      {error && <span class="tag">&lt;p</span> <span class="attr">style</span>={{ color: <span class="str">'var(--color-danger)'</span> }}<span class="tag">&gt;</span>{error}<span class="tag">&lt;/p&gt;</span>}
+      <span class="tag">&lt;button</span> <span class="attr">onClick</span>={handleLogin}<span class="tag">&gt;</span>ล็อกอิน<span class="tag">&lt;/button&gt;</span>
+    &lt;/&gt;
+  );
+}</div>
+
+              <div class="preview-label">Vue</div>
+              <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">copy</button><span class="tag">&lt;template&gt;</span>
+  <span class="tag">&lt;ktb-input</span> <span class="attr">label</span>=<span class="str">"ชื่อผู้ใช้"</span> :<span class="attr">value</span>=<span class="str">"user"</span> <span class="attr">@ktb-input</span>=<span class="str">"user = $event.detail"</span> <span class="attr">required</span> <span class="tag">/&gt;</span>
+  <span class="tag">&lt;ktb-input</span> <span class="attr">label</span>=<span class="str">"รหัสผ่าน"</span> <span class="attr">type</span>=<span class="str">"password"</span> :<span class="attr">value</span>=<span class="str">"pass"</span> <span class="attr">@ktb-input</span>=<span class="str">"pass = $event.detail"</span> <span class="attr">required</span> <span class="tag">/&gt;</span>
+  <span class="tag">&lt;p</span> <span class="attr">v-if</span>=<span class="str">"error"</span> <span class="attr">style</span>=<span class="str">"color:var(--color-danger)"</span><span class="tag">&gt;</span>{{ error }}<span class="tag">&lt;/p&gt;</span>
+  <span class="tag">&lt;button</span> <span class="attr">@click</span>=<span class="str">"handleLogin"</span><span class="tag">&gt;</span>ล็อกอิน<span class="tag">&lt;/button&gt;</span>
+<span class="tag">&lt;/template&gt;</span>
+
+<span class="tag">&lt;script setup&gt;</span>
+<span class="kw">import</span> { ref } <span class="kw">from</span> <span class="str">'vue'</span>;
+<span class="kw">const</span> user  = ref(<span class="str">''</span>);
+<span class="kw">const</span> pass  = ref(<span class="str">''</span>);
+<span class="kw">const</span> error = ref(<span class="str">''</span>);
+<span class="kw">function</span> <span class="attr">handleLogin</span>() {
+  <span class="kw">if</span> (!user.value.trim() || !pass.value.trim()) { error.value = <span class="str">'กรุณากรอกชื่อผู้ใช้และรหัสผ่าน'</span>; <span class="kw">return</span>; }
+  <span class="kw">if</span> (pass.value.length < 6)                    { error.value = <span class="str">'รหัสผ่านต้องมีอย่างน้อย 6 ตัวอักษร'</span>; <span class="kw">return</span>; }
+  error.value = <span class="str">''</span>;
+  <span class="cm">// call API...</span>
+}
+<span class="tag">&lt;/script&gt;</span></div>
+
+              <div class="preview-label">Angular</div>
+              <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">copy</button><span class="cm">// template</span>
+<span class="tag">&lt;ktb-input</span> <span class="attr">label</span>=<span class="str">"ชื่อผู้ใช้"</span>   [<span class="attr">value</span>]=<span class="str">"user"</span> (<span class="attr">ktbInput</span>)=<span class="str">"user = $event.detail"</span> <span class="attr">required</span><span class="tag">&gt;&lt;/ktb-input&gt;</span>
+<span class="tag">&lt;ktb-input</span> <span class="attr">label</span>=<span class="str">"รหัสผ่าน"</span> <span class="attr">type</span>=<span class="str">"password"</span> [<span class="attr">value</span>]=<span class="str">"pass"</span> (<span class="attr">ktbInput</span>)=<span class="str">"pass = $event.detail"</span> <span class="attr">required</span><span class="tag">&gt;&lt;/ktb-input&gt;</span>
+<span class="tag">&lt;p</span> <span class="attr">*ngIf</span>=<span class="str">"error"</span> <span class="attr">style</span>=<span class="str">"color:var(--color-danger)"</span><span class="tag">&gt;</span>{{ error }}<span class="tag">&lt;/p&gt;</span>
+<span class="tag">&lt;button</span> (<span class="attr">click</span>)=<span class="str">"handleLogin()"</span><span class="tag">&gt;</span>ล็อกอิน<span class="tag">&lt;/button&gt;</span>
+
+<span class="cm">// component.ts</span>
+user = <span class="str">''</span>; pass = <span class="str">''</span>; error = <span class="str">''</span>;
+handleLogin() {
+  <span class="kw">if</span> (!<span class="kw">this</span>.user.trim() || !<span class="kw">this</span>.pass.trim()) { <span class="kw">this</span>.error = <span class="str">'กรุณากรอกชื่อผู้ใช้และรหัสผ่าน'</span>; <span class="kw">return</span>; }
+  <span class="kw">if</span> (<span class="kw">this</span>.pass.length < 6)                    { <span class="kw">this</span>.error = <span class="str">'รหัสผ่านต้องมีอย่างน้อย 6 ตัวอักษร'</span>; <span class="kw">return</span>; }
+  <span class="kw">this</span>.error = <span class="str">''</span>;
+}</div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- ─────────────────────────── ktb-textarea ─────────────────────────── -->
+        <div class="section" id="ktb-textarea">
+          <div class="component-card">
+            <div class="card-header">
+              <div>
+                <span class="tag-chip">&lt;ktb-textarea&gt;</span>
+                <p>Textarea — auto-resize, label, hint, character counter</p>
+              </div>
+            </div>
+            <div class="card-body">
+
+              <div class="preview-label">Live Preview</div>
+              <div class="preview-box" style="flex-direction:column; gap:1rem; align-items:stretch; max-width:400px;">
+                <ktb-textarea label="หมายเหตุ" placeholder="กรอกหมายเหตุ..." hint="ข้อความเพิ่มเติม" maxlength="200" required></ktb-textarea>
+                <ktb-textarea label="คำอธิบาย" placeholder="กรอกคำอธิบาย..." rows="5"></ktb-textarea>
+                <ktb-textarea label="ปิดใช้งาน" value="ข้อความที่แก้ไขไม่ได้" disabled></ktb-textarea>
+              </div>
+
+              <div class="preview-label">Props</div>
+              <table>
+                <thead><tr><th>Property</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+                <tbody>
+                  <tr><td><code class="inline">value</code></td><td><span class="type-badge">string</span></td><td><code class="inline">""</code></td><td>ค่าปัจจุบัน</td></tr>
+                  <tr><td><code class="inline">label</code></td><td><span class="type-badge">string</span></td><td>—</td><td>ข้อความ label</td></tr>
+                  <tr><td><code class="inline">hint</code></td><td><span class="type-badge">string</span></td><td>—</td><td>ข้อความช่วยเหลือ</td></tr>
+                  <tr><td><code class="inline">placeholder</code></td><td><span class="type-badge">string</span></td><td><code class="inline">""</code></td><td>placeholder</td></tr>
+                  <tr><td><code class="inline">rows</code></td><td><span class="type-badge">number</span></td><td><code class="inline">3</code></td><td>จำนวนแถวเริ่มต้น</td></tr>
+                  <tr><td><code class="inline">maxlength</code></td><td><span class="type-badge">number</span></td><td>—</td><td>จำนวนตัวอักษรสูงสุด</td></tr>
+                  <tr><td><code class="inline">auto-resize</code></td><td><span class="type-badge">boolean</span></td><td><code class="inline">true</code></td><td>ขยายความสูงอัตโนมัติ</td></tr>
+                  <tr><td><code class="inline">max-auto-rows</code></td><td><span class="type-badge">number</span></td><td><code class="inline">12</code></td><td>จำนวนแถวสูงสุดเมื่อ auto-resize</td></tr>
+                  <tr><td><code class="inline">required</code></td><td><span class="type-badge">boolean</span></td><td><code class="inline">false</code></td><td>แสดงเครื่องหมาย *</td></tr>
+                  <tr><td><code class="inline">disabled</code></td><td><span class="type-badge">boolean</span></td><td><code class="inline">false</code></td><td>ปิดการใช้งาน</td></tr>
+                  <tr><td><code class="inline">readonly</code></td><td><span class="type-badge">boolean</span></td><td><code class="inline">false</code></td><td>อ่านอย่างเดียว</td></tr>
+                </tbody>
+              </table>
+
+              <div class="preview-label">Events</div>
+              <table>
+                <thead><tr><th>Event</th><th>Detail</th><th>Description</th></tr></thead>
+                <tbody>
+                  <tr><td><code class="inline">ktbInput</code></td><td><code class="inline">string</code></td><td>emit ทุกครั้งที่พิมพ์</td></tr>
+                  <tr><td><code class="inline">ktbChange</code></td><td><code class="inline">string</code></td><td>emit เมื่อ blur</td></tr>
+                </tbody>
+              </table>
+
+              <div class="preview-label">HTML</div>
+              <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">copy</button><span class="tag">&lt;ktb-textarea</span>
+  <span class="attr">label</span>=<span class="str">"หมายเหตุ"</span>
+  <span class="attr">placeholder</span>=<span class="str">"กรอกหมายเหตุ..."</span>
+  <span class="attr">maxlength</span>=<span class="str">"200"</span>
+  <span class="attr">required</span>
+<span class="tag">&gt;&lt;/ktb-textarea&gt;</span></div>
+
+              <div class="preview-label">React (JSX)</div>
+              <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">copy</button><span class="kw">const</span> [note, setNote] = useState(<span class="str">''</span>);
+
+<span class="tag">&lt;KtbTextarea</span>
+  <span class="attr">label</span>=<span class="str">"หมายเหตุ"</span>
+  <span class="attr">value</span>={note}
+  <span class="attr">onKtbInput</span>={e => setNote(e.detail)}
+  <span class="attr">maxlength</span>={200}
+  <span class="attr">required</span>
+<span class="tag">/&gt;</span></div>
+
+              <div class="preview-label">Vue</div>
+              <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">copy</button><span class="tag">&lt;ktb-textarea</span>
+  <span class="attr">label</span>=<span class="str">"หมายเหตุ"</span>
+  :<span class="attr">value</span>=<span class="str">"note"</span>
+  <span class="attr">@ktb-input</span>=<span class="str">"note = $event.detail"</span>
+  :<span class="attr">maxlength</span>=<span class="str">"200"</span>
+  <span class="attr">required</span>
+<span class="tag">/&gt;</span></div>
+
+              <div class="preview-label">Angular</div>
+              <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">copy</button><span class="tag">&lt;ktb-textarea</span>
+  <span class="attr">label</span>=<span class="str">"หมายเหตุ"</span>
+  [<span class="attr">value</span>]=<span class="str">"note"</span>
+  (<span class="attr">ktbInput</span>)=<span class="str">"note = $event.detail"</span>
+  [<span class="attr">maxlength</span>]=<span class="str">"200"</span>
+  <span class="attr">required</span>
+<span class="tag">&gt;&lt;/ktb-textarea&gt;</span></div>
+
+              <div class="preview-label" style="margin-top:1.5rem; border-top:1px solid var(--color-border); padding-top:1.5rem;">ตัวอย่างการใช้งาน — Feedback Form (แจ้งเตือนเมื่อใกล้ถึง limit)</div>
+
+              <div class="preview-label">Live Preview</div>
+              <div class="preview-box" style="flex-direction:column; gap:.75rem; align-items:stretch; max-width:400px;">
+                <ktb-textarea id="feedback-ta" label="ความคิดเห็น" placeholder="กรอกความคิดเห็น..." maxlength="150" required></ktb-textarea>
+                <div id="feedback-warn" style="display:none; font-size:var(--text-xs); color:var(--color-warning);">⚠ ใกล้ถึงจำนวนตัวอักษรสูงสุดแล้ว</div>
+                <button onclick="submitFeedback()" style="padding:var(--space-2) var(--space-4); background:var(--color-primary); color:#fff; border:none; border-radius:var(--radius-sm); cursor:pointer; font-size:var(--text-sm); font-weight:var(--font-semibold);">ส่งความคิดเห็น</button>
+                <div id="feedback-ok" style="display:none; color:var(--color-success); font-size:var(--text-sm);">✓ ส่งความคิดเห็นเรียบร้อยแล้ว</div>
+              </div>
+              <script>
+                (function () {
+                  var ta   = document.getElementById('feedback-ta');
+                  var warn = document.getElementById('feedback-warn');
+                  ta.addEventListener('ktbInput', function (e) {
+                    warn.style.display = e.detail.length >= 120 ? 'block' : 'none';
+                  });
+                })();
+                function submitFeedback() {
+                  var ta = document.getElementById('feedback-ta');
+                  var ok = document.getElementById('feedback-ok');
+                  if (!(ta.value || '').trim()) { alert('กรุณากรอกความคิดเห็น'); return; }
+                  ok.style.display = 'block';
+                  ta.value = '';
+                }
+              </script>
+
+              <div class="preview-label">React (JSX)</div>
+              <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">copy</button><span class="kw">const</span> [text, setText]   = useState(<span class="str">''</span>);
+<span class="kw">const</span> maxLen = 150;
+<span class="kw">const</span> nearLimit = text.length >= 120;
+
+<span class="tag">&lt;KtbTextarea</span>
+  <span class="attr">label</span>=<span class="str">"ความคิดเห็น"</span>
+  <span class="attr">value</span>={text}
+  <span class="attr">onKtbInput</span>={e => setText(e.detail)}
+  <span class="attr">maxlength</span>={maxLen}
+  <span class="attr">required</span>
+<span class="tag">/&gt;</span>
+{nearLimit && <span class="tag">&lt;p</span> <span class="attr">style</span>={{ color: <span class="str">'var(--color-warning)'</span> }}<span class="tag">&gt;</span>⚠ ใกล้ถึงจำนวนตัวอักษรสูงสุด<span class="tag">&lt;/p&gt;</span>}</div>
+
+              <div class="preview-label">Vue</div>
+              <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">copy</button><span class="tag">&lt;template&gt;</span>
+  <span class="tag">&lt;ktb-textarea</span>
+    <span class="attr">label</span>=<span class="str">"ความคิดเห็น"</span>
+    :<span class="attr">value</span>=<span class="str">"text"</span>
+    <span class="attr">@ktb-input</span>=<span class="str">"text = $event.detail"</span>
+    :<span class="attr">maxlength</span>=<span class="str">"150"</span>
+    <span class="attr">required</span>
+  <span class="tag">/&gt;</span>
+  <span class="tag">&lt;p</span> <span class="attr">v-if</span>=<span class="str">"text.length >= 120"</span> <span class="attr">style</span>=<span class="str">"color:var(--color-warning)"</span><span class="tag">&gt;</span>⚠ ใกล้ถึงจำนวนตัวอักษรสูงสุด<span class="tag">&lt;/p&gt;</span>
+<span class="tag">&lt;/template&gt;</span>
+
+<span class="tag">&lt;script setup&gt;</span>
+<span class="kw">const</span> text = ref(<span class="str">''</span>);
+<span class="tag">&lt;/script&gt;</span></div>
+
+              <div class="preview-label">Angular</div>
+              <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">copy</button><span class="tag">&lt;ktb-textarea</span>
+  <span class="attr">label</span>=<span class="str">"ความคิดเห็น"</span>
+  [<span class="attr">value</span>]=<span class="str">"text"</span>
+  (<span class="attr">ktbInput</span>)=<span class="str">"text = $event.detail"</span>
+  [<span class="attr">maxlength</span>]=<span class="str">"150"</span>
+  <span class="attr">required</span>
+<span class="tag">&gt;&lt;/ktb-textarea&gt;</span>
+<span class="tag">&lt;p</span> <span class="attr">*ngIf</span>=<span class="str">"text.length >= 120"</span> <span class="attr">style</span>=<span class="str">"color:var(--color-warning)"</span><span class="tag">&gt;</span>⚠ ใกล้ถึงจำนวนตัวอักษรสูงสุด<span class="tag">&lt;/p&gt;</span></div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- ─────────────────────────── ktb-dropdown ─────────────────────────── -->
+        <div class="section" id="ktb-dropdown">
+          <div class="component-card">
+            <div class="card-header">
+              <div>
+                <span class="tag-chip">&lt;ktb-dropdown&gt;</span>
+                <p>Dropdown — single / multiple select, clear, custom label/value keys</p>
+              </div>
+            </div>
+            <div class="card-body">
+
+              <div class="preview-label">Live Preview</div>
+              <div class="preview-box" style="gap:2rem; flex-wrap:wrap; align-items:flex-start;">
+                <div style="min-width:220px;">
+                  <ktb-dropdown id="dd-single" label="เลือกสาขา" placeholder="เลือกสาขา..." required></ktb-dropdown>
+                </div>
+                <div style="min-width:220px;">
+                  <ktb-dropdown id="dd-multi" label="เลือกประเภท (หลายรายการ)" placeholder="เลือก..." multiple></ktb-dropdown>
+                </div>
+              </div>
+              <script>
+                document.getElementById('dd-single').options = [
+                  { label: 'สาขาสีลม',    value: 'silom'    },
+                  { label: 'สาขาอโศก',    value: 'asok'     },
+                  { label: 'สาขาลาดพร้าว', value: 'ladprao'  },
+                  { label: 'สาขาปิ่นเกล้า (ปิด)', value: 'pinklao', disabled: true },
+                ];
+                document.getElementById('dd-multi').options = [
+                  { label: 'ออมทรัพย์',  value: 'saving'  },
+                  { label: 'กระแสรายวัน', value: 'current' },
+                  { label: 'ฝากประจำ',   value: 'fixed'   },
+                  { label: 'สลาก',       value: 'bond'    },
+                ];
+              </script>
+
+              <div class="preview-label">Props</div>
+              <table>
+                <thead><tr><th>Property</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+                <tbody>
+                  <tr><td><code class="inline">options</code></td><td><span class="type-badge">DropdownOption[]</span></td><td><code class="inline">[]</code></td><td>รายการตัวเลือก</td></tr>
+                  <tr><td><code class="inline">value</code></td><td><span class="type-badge">any</span></td><td>—</td><td>ค่าที่เลือก</td></tr>
+                  <tr><td><code class="inline">label</code></td><td><span class="type-badge">string</span></td><td>—</td><td>ข้อความ label</td></tr>
+                  <tr><td><code class="inline">placeholder</code></td><td><span class="type-badge">string</span></td><td><code class="inline">"เลือก..."</code></td><td>placeholder</td></tr>
+                  <tr><td><code class="inline">multiple</code></td><td><span class="type-badge">boolean</span></td><td><code class="inline">false</code></td><td>เลือกได้หลายรายการ</td></tr>
+                  <tr><td><code class="inline">disabled</code></td><td><span class="type-badge">boolean</span></td><td><code class="inline">false</code></td><td>ปิดการใช้งาน</td></tr>
+                  <tr><td><code class="inline">option-label</code></td><td><span class="type-badge">string</span></td><td><code class="inline">"label"</code></td><td>key ที่ใช้แสดงชื่อ</td></tr>
+                  <tr><td><code class="inline">option-value</code></td><td><span class="type-badge">string</span></td><td><code class="inline">"value"</code></td><td>key ที่ใช้เป็นค่า</td></tr>
+                  <tr><td><code class="inline">hint</code></td><td><span class="type-badge">string</span></td><td>—</td><td>ข้อความช่วยเหลือ</td></tr>
+                  <tr><td><code class="inline">required</code></td><td><span class="type-badge">boolean</span></td><td><code class="inline">false</code></td><td>แสดงเครื่องหมาย *</td></tr>
+                </tbody>
+              </table>
+
+              <div class="preview-label">Events</div>
+              <table>
+                <thead><tr><th>Event</th><th>Detail</th><th>Description</th></tr></thead>
+                <tbody>
+                  <tr><td><code class="inline">ktbChange</code></td><td><code class="inline">any | any[]</code></td><td>emit เมื่อเลือก (single: value, multiple: value[])</td></tr>
+                </tbody>
+              </table>
+
+              <div class="preview-label">HTML</div>
+              <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">copy</button><span class="tag">&lt;ktb-dropdown</span>
+  <span class="attr">id</span>=<span class="str">"myDropdown"</span>
+  <span class="attr">label</span>=<span class="str">"เลือกสาขา"</span>
+  <span class="attr">placeholder</span>=<span class="str">"เลือกสาขา..."</span>
+<span class="tag">&gt;&lt;/ktb-dropdown&gt;</span>
+
+<span class="tag">&lt;script&gt;</span>
+  <span class="kw">const</span> dd = document.getElementById(<span class="str">'myDropdown'</span>);
+  dd.options = [
+    { label: <span class="str">'สาขาสีลม'</span>,    value: <span class="str">'silom'</span>   },
+    { label: <span class="str">'สาขาอโศก'</span>,    value: <span class="str">'asok'</span>    },
+    { label: <span class="str">'สาขาลาดพร้าว'</span>, value: <span class="str">'ladprao'</span> },
+  ];
+  dd.addEventListener(<span class="str">'ktbChange'</span>, e => console.log(e.detail));
+<span class="tag">&lt;/script&gt;</span></div>
+
+              <div class="preview-label">React (JSX)</div>
+              <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">copy</button><span class="kw">import</span> { useRef, useEffect, useState } <span class="kw">from</span> <span class="str">'react'</span>;
+
+<span class="kw">const</span> branches = [
+  { label: <span class="str">'สาขาสีลม'</span>,    value: <span class="str">'silom'</span>   },
+  { label: <span class="str">'สาขาอโศก'</span>,    value: <span class="str">'asok'</span>    },
+  { label: <span class="str">'สาขาลาดพร้าว'</span>, value: <span class="str">'ladprao'</span> },
+];
+
+<span class="kw">function</span> <span class="attr">App</span>() {
+  <span class="kw">const</span> ref = useRef(<span class="kw">null</span>);
+  <span class="kw">const</span> [branch, setBranch] = useState(<span class="kw">null</span>);
+
+  useEffect(() => { <span class="kw">if</span> (ref.current) ref.current.options = branches; }, []);
+
+  <span class="kw">return</span> (
+    <span class="tag">&lt;KtbDropdown</span>
+      <span class="attr">ref</span>={ref}
+      <span class="attr">label</span>=<span class="str">"เลือกสาขา"</span>
+      <span class="attr">onKtbChange</span>={e => setBranch(e.detail)}
+    <span class="tag">/&gt;</span>
+  );
+}</div>
+
+              <div class="preview-label">Vue</div>
+              <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">copy</button><span class="tag">&lt;template&gt;</span>
+  <span class="tag">&lt;ktb-dropdown</span>
+    <span class="attr">ref</span>=<span class="str">"ddRef"</span>
+    <span class="attr">label</span>=<span class="str">"เลือกสาขา"</span>
+    <span class="attr">@ktb-change</span>=<span class="str">"branch = $event.detail"</span>
+  <span class="tag">/&gt;</span>
+<span class="tag">&lt;/template&gt;</span>
+
+<span class="tag">&lt;script setup&gt;</span>
+<span class="kw">import</span> { ref, onMounted } <span class="kw">from</span> <span class="str">'vue'</span>;
+<span class="kw">const</span> ddRef  = ref(<span class="kw">null</span>);
+<span class="kw">const</span> branch = ref(<span class="kw">null</span>);
+<span class="kw">const</span> branches = [
+  { label: <span class="str">'สาขาสีลม'</span>,    value: <span class="str">'silom'</span>   },
+  { label: <span class="str">'สาขาอโศก'</span>,    value: <span class="str">'asok'</span>    },
+  { label: <span class="str">'สาขาลาดพร้าว'</span>, value: <span class="str">'ladprao'</span> },
+];
+onMounted(() => { ddRef.value.$el.options = branches; });
+<span class="tag">&lt;/script&gt;</span></div>
+
+              <div class="preview-label">Angular</div>
+              <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">copy</button><span class="cm">// template</span>
+<span class="tag">&lt;ktb-dropdown</span>
+  #ddRef
+  <span class="attr">label</span>=<span class="str">"เลือกสาขา"</span>
+  (<span class="attr">ktbChange</span>)=<span class="str">"branch = $event.detail"</span>
+<span class="tag">&gt;&lt;/ktb-dropdown&gt;</span>
+
+<span class="cm">// component.ts</span>
+<span class="attr">@ViewChild</span>(<span class="str">'ddRef'</span>) ddRef!: ElementRef;
+branch: <span class="kw">string</span> | <span class="kw">null</span> = <span class="kw">null</span>;
+branches = [
+  { label: <span class="str">'สาขาสีลม'</span>,    value: <span class="str">'silom'</span>   },
+  { label: <span class="str">'สาขาอโศก'</span>,    value: <span class="str">'asok'</span>    },
+  { label: <span class="str">'สาขาลาดพร้าว'</span>, value: <span class="str">'ladprao'</span> },
+];
+ngAfterViewInit() {
+  <span class="kw">this</span>.ddRef.nativeElement.options = <span class="kw">this</span>.branches;
+}</div>
+
+              <div class="preview-label" style="margin-top:1.5rem; border-top:1px solid var(--color-border); padding-top:1.5rem;">ตัวอย่างการใช้งาน — Linked Dropdowns (จังหวัด → อำเภอ)</div>
+
+              <div class="preview-label">Live Preview</div>
+              <div class="preview-box" style="gap:1rem; flex-wrap:wrap; align-items:flex-end;">
+                <div style="min-width:180px;">
+                  <ktb-dropdown id="dd-province" label="จังหวัด" placeholder="เลือกจังหวัด..."></ktb-dropdown>
+                </div>
+                <div style="min-width:180px;">
+                  <ktb-dropdown id="dd-district" label="อำเภอ" placeholder="เลือกอำเภอ..." disabled></ktb-dropdown>
+                </div>
+              </div>
+              <script>
+                (function () {
+                  var districtMap = {
+                    bangkok:   [{ label: 'พระนคร', value: 'phranakhon' }, { label: 'บางรัก', value: 'bangrak' }, { label: 'สาทร', value: 'sathon' }],
+                    chiangmai: [{ label: 'เมืองเชียงใหม่', value: 'mueang' }, { label: 'สันทราย', value: 'sansai' }, { label: 'แม่ริม', value: 'maerim' }],
+                    khonkaen:  [{ label: 'เมืองขอนแก่น', value: 'mueang' }, { label: 'บ้านไผ่', value: 'banphai' }, { label: 'พล', value: 'phon' }],
+                  };
+                  var ddProv = document.getElementById('dd-province');
+                  var ddDist = document.getElementById('dd-district');
+                  ddProv.options = [
+                    { label: 'กรุงเทพมหานคร', value: 'bangkok'   },
+                    { label: 'เชียงใหม่',      value: 'chiangmai' },
+                    { label: 'ขอนแก่น',        value: 'khonkaen'  },
+                  ];
+                  ddProv.addEventListener('ktbChange', function (e) {
+                    ddDist.value    = undefined;
+                    ddDist.options  = districtMap[e.detail] || [];
+                    ddDist.disabled = false;
+                  });
+                })();
+              </script>
+
+              <div class="preview-label">React (JSX)</div>
+              <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">copy</button><span class="kw">const</span> districtMap = {
+  bangkok:   [{ label: <span class="str">'พระนคร'</span>, value: <span class="str">'phranakhon'</span> }, { label: <span class="str">'บางรัก'</span>, value: <span class="str">'bangrak'</span> }],
+  chiangmai: [{ label: <span class="str">'เมืองเชียงใหม่'</span>, value: <span class="str">'mueang'</span> }, { label: <span class="str">'สันทราย'</span>, value: <span class="str">'sansai'</span> }],
+};
+
+<span class="kw">function</span> <span class="attr">AddressForm</span>() {
+  <span class="kw">const</span> provRef  = useRef(<span class="kw">null</span>);
+  <span class="kw">const</span> distRef  = useRef(<span class="kw">null</span>);
+  <span class="kw">const</span> [districts, setDistricts] = useState([]);
+
+  useEffect(() => {
+    <span class="kw">if</span> (provRef.current) provRef.current.options = [
+      { label: <span class="str">'กรุงเทพมหานคร'</span>, value: <span class="str">'bangkok'</span>   },
+      { label: <span class="str">'เชียงใหม่'</span>,      value: <span class="str">'chiangmai'</span> },
+    ];
+  }, []);
+
+  useEffect(() => {
+    <span class="kw">if</span> (distRef.current) distRef.current.options = districts;
+  }, [districts]);
+
+  <span class="kw">return</span> (
+    &lt;&gt;
+      <span class="tag">&lt;KtbDropdown</span> <span class="attr">ref</span>={provRef} <span class="attr">label</span>=<span class="str">"จังหวัด"</span> <span class="attr">onKtbChange</span>={e => setDistricts(districtMap[e.detail] ?? [])} <span class="tag">/&gt;</span>
+      <span class="tag">&lt;KtbDropdown</span> <span class="attr">ref</span>={distRef} <span class="attr">label</span>=<span class="str">"อำเภอ"</span>   <span class="attr">disabled</span>={!districts.length} <span class="tag">/&gt;</span>
+    &lt;/&gt;
+  );
+}</div>
+
+              <div class="preview-label">Vue</div>
+              <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">copy</button><span class="tag">&lt;template&gt;</span>
+  <span class="tag">&lt;ktb-dropdown</span> <span class="attr">ref</span>=<span class="str">"provRef"</span> <span class="attr">label</span>=<span class="str">"จังหวัด"</span>   <span class="attr">@ktb-change</span>=<span class="str">"onProvince($event.detail)"</span> <span class="tag">/&gt;</span>
+  <span class="tag">&lt;ktb-dropdown</span> <span class="attr">ref</span>=<span class="str">"distRef"</span> <span class="attr">label</span>=<span class="str">"อำเภอ"</span>    :<span class="attr">disabled</span>=<span class="str">"!districts.length"</span> <span class="tag">/&gt;</span>
+<span class="tag">&lt;/template&gt;</span>
+
+<span class="tag">&lt;script setup&gt;</span>
+<span class="kw">import</span> { ref, onMounted, watch } <span class="kw">from</span> <span class="str">'vue'</span>;
+<span class="kw">const</span> provRef   = ref(<span class="kw">null</span>);
+<span class="kw">const</span> distRef   = ref(<span class="kw">null</span>);
+<span class="kw">const</span> districts = ref([]);
+<span class="kw">const</span> districtMap = { <span class="cm">/* ... */</span> };
+onMounted(() => { provRef.value.$el.options = [{ label: <span class="str">'กรุงเทพมหานคร'</span>, value: <span class="str">'bangkok'</span> } <span class="cm">/* ... */</span>]; });
+watch(districts, val => { distRef.value.$el.options = val; });
+<span class="kw">function</span> <span class="attr">onProvince</span>(val) { districts.value = districtMap[val] ?? []; }
+<span class="tag">&lt;/script&gt;</span></div>
+
+              <div class="preview-label">Angular</div>
+              <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">copy</button><span class="cm">// template</span>
+<span class="tag">&lt;ktb-dropdown</span> #provRef <span class="attr">label</span>=<span class="str">"จังหวัด"</span>  (<span class="attr">ktbChange</span>)=<span class="str">"onProvince($event.detail)"</span><span class="tag">&gt;&lt;/ktb-dropdown&gt;</span>
+<span class="tag">&lt;ktb-dropdown</span> #distRef <span class="attr">label</span>=<span class="str">"อำเภอ"</span>   [<span class="attr">disabled</span>]=<span class="str">"!districts.length"</span><span class="tag">&gt;&lt;/ktb-dropdown&gt;</span>
+
+<span class="cm">// component.ts</span>
+<span class="attr">@ViewChild</span>(<span class="str">'distRef'</span>) distRef!: ElementRef;
+districts: <span class="kw">any</span>[] = [];
+onProvince(val: <span class="kw">string</span>) {
+  <span class="kw">this</span>.districts = <span class="kw">this</span>.districtMap[val] ?? [];
+  <span class="kw">this</span>.distRef.nativeElement.options = <span class="kw">this</span>.districts;
+}</div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- ─────────────────────────── ktb-expand ─────────────────────────── -->
+        <div class="section" id="ktb-expand">
+          <div class="component-card">
+            <div class="card-header">
+              <div>
+                <span class="tag-chip">&lt;ktb-expand&gt;</span>
+                <p>Expand / Accordion — collapse/expand พร้อม color variants และ icon position</p>
+              </div>
+            </div>
+            <div class="card-body">
+
+              <div class="preview-label">Live Preview</div>
+              <div class="preview-box" style="flex-direction:column; gap:.75rem; align-items:stretch;">
+                <ktb-expand heading="Default (คลิกเพื่อขยาย)">
+                  <p style="margin:0; font-size:var(--text-sm); color:var(--color-text);">เนื้อหาภายใน expand — รองรับ HTML element ใดก็ได้ผ่าน slot</p>
+                </ktb-expand>
+                <ktb-expand heading="Primary" color="primary" expanded>
+                  <p style="margin:0; font-size:var(--text-sm); color:var(--color-text);">ค่าเริ่มต้น expanded=true — แสดงเนื้อหาทันที</p>
+                </ktb-expand>
+                <ktb-expand heading="Success" color="success">
+                  <p style="margin:0; font-size:var(--text-sm); color:var(--color-text);">Success color variant</p>
+                </ktb-expand>
+                <ktb-expand heading="Warning — icon ซ้าย" color="warning" icon-position="left">
+                  <p style="margin:0; font-size:var(--text-sm); color:var(--color-text);">iconPosition="left"</p>
+                </ktb-expand>
+              </div>
+
+              <div class="preview-label">Props</div>
+              <table>
+                <thead><tr><th>Property</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+                <tbody>
+                  <tr><td><code class="inline">heading</code></td><td><span class="type-badge">string</span></td><td><code class="inline">""</code></td><td>หัวข้อ expand</td></tr>
+                  <tr><td><code class="inline">expanded</code></td><td><span class="type-badge">boolean</span></td><td><code class="inline">false</code></td><td>สถานะเปิด/ปิด</td></tr>
+                  <tr><td><code class="inline">color</code></td><td><span class="type-badge">ExpandColor</span></td><td><code class="inline">"default"</code></td><td>default / primary / success / warning / danger / info</td></tr>
+                  <tr><td><code class="inline">icon-position</code></td><td><span class="type-badge">string</span></td><td><code class="inline">"right"</code></td><td>ตำแหน่ง chevron: left / right</td></tr>
+                  <tr><td><code class="inline">disabled</code></td><td><span class="type-badge">boolean</span></td><td><code class="inline">false</code></td><td>ปิดการโต้ตอบ</td></tr>
+                </tbody>
+              </table>
+
+              <div class="preview-label">Events</div>
+              <table>
+                <thead><tr><th>Event</th><th>Detail</th><th>Description</th></tr></thead>
+                <tbody>
+                  <tr><td><code class="inline">ktbToggle</code></td><td><code class="inline">boolean</code></td><td>emit ค่า expanded ใหม่เมื่อ toggle</td></tr>
+                </tbody>
+              </table>
+
+              <div class="preview-label">HTML</div>
+              <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">copy</button><span class="tag">&lt;ktb-expand</span>
+  <span class="attr">heading</span>=<span class="str">"รายละเอียดเพิ่มเติม"</span>
+  <span class="attr">color</span>=<span class="str">"primary"</span>
+<span class="tag">&gt;</span>
+  <span class="tag">&lt;p&gt;</span>เนื้อหาที่ต้องการซ่อน/แสดง<span class="tag">&lt;/p&gt;</span>
+<span class="tag">&lt;/ktb-expand&gt;</span>
+
+<span class="tag">&lt;script&gt;</span>
+  document.querySelector(<span class="str">'ktb-expand'</span>)
+    .addEventListener(<span class="str">'ktbToggle'</span>, e => console.log(<span class="str">'expanded:'</span>, e.detail));
+<span class="tag">&lt;/script&gt;</span></div>
+
+              <div class="preview-label">React (JSX)</div>
+              <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">copy</button><span class="kw">const</span> [open, setOpen] = useState(<span class="kw">false</span>);
+
+<span class="tag">&lt;KtbExpand</span>
+  <span class="attr">heading</span>=<span class="str">"รายละเอียดเพิ่มเติม"</span>
+  <span class="attr">color</span>=<span class="str">"primary"</span>
+  <span class="attr">expanded</span>={open}
+  <span class="attr">onKtbToggle</span>={e => setOpen(e.detail)}
+<span class="tag">&gt;</span>
+  <span class="tag">&lt;p&gt;</span>เนื้อหา<span class="tag">&lt;/p&gt;</span>
+<span class="tag">&lt;/KtbExpand&gt;</span></div>
+
+              <div class="preview-label">Vue</div>
+              <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">copy</button><span class="tag">&lt;ktb-expand</span>
+  <span class="attr">heading</span>=<span class="str">"รายละเอียดเพิ่มเติม"</span>
+  <span class="attr">color</span>=<span class="str">"primary"</span>
+  :<span class="attr">expanded</span>=<span class="str">"open"</span>
+  <span class="attr">@ktb-toggle</span>=<span class="str">"open = $event.detail"</span>
+<span class="tag">&gt;</span>
+  <span class="tag">&lt;p&gt;</span>เนื้อหา<span class="tag">&lt;/p&gt;</span>
+<span class="tag">&lt;/ktb-expand&gt;</span></div>
+
+              <div class="preview-label">Angular</div>
+              <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">copy</button><span class="tag">&lt;ktb-expand</span>
+  <span class="attr">heading</span>=<span class="str">"รายละเอียดเพิ่มเติม"</span>
+  <span class="attr">color</span>=<span class="str">"primary"</span>
+  [<span class="attr">expanded</span>]=<span class="str">"open"</span>
+  (<span class="attr">ktbToggle</span>)=<span class="str">"open = $event.detail"</span>
+<span class="tag">&gt;</span>
+  <span class="tag">&lt;p&gt;</span>เนื้อหา<span class="tag">&lt;/p&gt;</span>
+<span class="tag">&lt;/ktb-expand&gt;</span></div>
+
+              <div class="preview-label" style="margin-top:1.5rem; border-top:1px solid var(--color-border); padding-top:1.5rem;">ตัวอย่างการใช้งาน — FAQ Accordion (เปิดได้ทีละ 1 รายการ)</div>
+
+              <div class="preview-label">Live Preview</div>
+              <div class="preview-box" style="flex-direction:column; gap:.5rem; align-items:stretch;">
+                <ktb-expand class="faq-item" heading="KTB Components คืออะไร?" color="default">
+                  <p style="margin:0; font-size:var(--text-sm); color:var(--color-text); line-height:var(--leading-relaxed);">
+                    KTB Components คือไลบรารี Web Component ที่สร้างด้วย Stencil.js ใช้งานได้กับ React, Vue, Angular และ HTML ทั่วไป
+                  </p>
+                </ktb-expand>
+                <ktb-expand class="faq-item" heading="ติดตั้งอย่างไร?" color="default">
+                  <p style="margin:0; font-size:var(--text-sm); color:var(--color-text); line-height:var(--leading-relaxed);">
+                    เพิ่ม script tag หรือ import จาก npm package จากนั้นใช้ tag ได้เลยโดยไม่ต้องลงทะเบียน component เพิ่มเติม
+                  </p>
+                </ktb-expand>
+                <ktb-expand class="faq-item" heading="รองรับ dark mode ไหม?" color="default">
+                  <p style="margin:0; font-size:var(--text-sm); color:var(--color-text); line-height:var(--leading-relaxed);">
+                    รองรับผ่าน CSS custom properties — เปลี่ยน data-theme="dark" บน html element ก็ได้ทันที
+                  </p>
+                </ktb-expand>
+                <ktb-expand class="faq-item" heading="สามารถ customize สีได้ไหม?" color="default">
+                  <p style="margin:0; font-size:var(--text-sm); color:var(--color-text); line-height:var(--leading-relaxed);">
+                    ได้ — override CSS custom properties ที่ :root เช่น --color-primary: #your-color
+                  </p>
+                </ktb-expand>
+              </div>
+              <script>
+                (function () {
+                  var faqs = document.querySelectorAll('.faq-item');
+                  faqs.forEach(function (faq) {
+                    faq.addEventListener('ktbToggle', function (e) {
+                      if (e.detail) {
+                        faqs.forEach(function (other) { if (other !== faq) other.expanded = false; });
+                      }
+                    });
+                  });
+                })();
+              </script>
+
+              <div class="preview-label">React (JSX)</div>
+              <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">copy</button><span class="kw">const</span> faqs = [
+  { id: 1, q: <span class="str">'KTB Components คืออะไร?'</span>, a: <span class="str">'ไลบรารี Web Component สร้างด้วย Stencil.js'</span> },
+  { id: 2, q: <span class="str">'ติดตั้งอย่างไร?'</span>,            a: <span class="str">'เพิ่ม script tag หรือ import จาก npm'</span>    },
+  { id: 3, q: <span class="str">'รองรับ dark mode ไหม?'</span>,       a: <span class="str">'รองรับผ่าน CSS custom properties'</span>       },
+];
+
+<span class="kw">function</span> <span class="attr">FaqList</span>() {
+  <span class="kw">const</span> [openId, setOpenId] = useState(<span class="kw">null</span>);
+  <span class="kw">return</span> (
+    &lt;&gt;
+      {faqs.map(f => (
+        <span class="tag">&lt;KtbExpand</span>
+          <span class="attr">key</span>={f.id}
+          <span class="attr">heading</span>={f.q}
+          <span class="attr">expanded</span>={openId === f.id}
+          <span class="attr">onKtbToggle</span>={e => setOpenId(e.detail ? f.id : <span class="kw">null</span>)}
+        <span class="tag">&gt;</span>
+          <span class="tag">&lt;p&gt;</span>{f.a}<span class="tag">&lt;/p&gt;</span>
+        <span class="tag">&lt;/KtbExpand&gt;</span>
+      ))}
+    &lt;/&gt;
+  );
+}</div>
+
+              <div class="preview-label">Vue</div>
+              <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">copy</button><span class="tag">&lt;template&gt;</span>
+  <span class="tag">&lt;ktb-expand</span>
+    <span class="attr">v-for</span>=<span class="str">"f in faqs"</span>
+    :<span class="attr">key</span>=<span class="str">"f.id"</span>
+    :<span class="attr">heading</span>=<span class="str">"f.q"</span>
+    :<span class="attr">expanded</span>=<span class="str">"openId === f.id"</span>
+    <span class="attr">@ktb-toggle</span>=<span class="str">"openId = $event.detail ? f.id : null"</span>
+  <span class="tag">&gt;</span>
+    <span class="tag">&lt;p&gt;</span>{{ f.a }}<span class="tag">&lt;/p&gt;</span>
+  <span class="tag">&lt;/ktb-expand&gt;</span>
+<span class="tag">&lt;/template&gt;</span>
+
+<span class="tag">&lt;script setup&gt;</span>
+<span class="kw">const</span> openId = ref(<span class="kw">null</span>);
+<span class="kw">const</span> faqs   = [{ id: 1, q: <span class="str">'...'</span>, a: <span class="str">'...'</span> }];
+<span class="tag">&lt;/script&gt;</span></div>
+
+              <div class="preview-label">Angular</div>
+              <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">copy</button><span class="cm">// template</span>
+<span class="tag">&lt;ktb-expand</span>
+  <span class="attr">*ngFor</span>=<span class="str">"let f of faqs"</span>
+  [<span class="attr">heading</span>]=<span class="str">"f.q"</span>
+  [<span class="attr">expanded</span>]=<span class="str">"openId === f.id"</span>
+  (<span class="attr">ktbToggle</span>)=<span class="str">"openId = $event.detail ? f.id : null"</span>
+<span class="tag">&gt;</span>
+  <span class="tag">&lt;p&gt;</span>{{ f.a }}<span class="tag">&lt;/p&gt;</span>
+<span class="tag">&lt;/ktb-expand&gt;</span>
+
+<span class="cm">// component.ts</span>
+openId: <span class="kw">number</span> | <span class="kw">null</span> = <span class="kw">null</span>;
+faqs = [{ id: 1, q: <span class="str">'...'</span>, a: <span class="str">'...'</span> }];</div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- ─────────────────────────── ktb-progress ─────────────────────────── -->
+        <div class="section" id="ktb-progress">
+          <div class="component-card">
+            <div class="card-header">
+              <div>
+                <span class="tag-chip">&lt;ktb-progress&gt;</span>
+                <p>Progress Radial — วงกลมแสดง % ความคืบหน้า, รองรับ 5 ขนาด, 7 สี</p>
+              </div>
+            </div>
+            <div class="card-body">
+
+              <div class="preview-label">Live Preview</div>
+              <div class="preview-box" style="flex-wrap:wrap; gap:1.5rem; align-items:center;">
+                <ktb-progress value="75" show-value></ktb-progress>
+                <ktb-progress value="45" color="warning" show-value size="lg"></ktb-progress>
+                <ktb-progress value="90" color="success" show-value size="xl"></ktb-progress>
+                <ktb-progress value="30" color="danger"  show-value size="sm"></ktb-progress>
+                <ktb-progress value="60" color="info"    show-value size="xs"></ktb-progress>
+              </div>
+
+              <div class="preview-label">Props</div>
+              <table>
+                <thead><tr><th>Property</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+                <tbody>
+                  <tr><td><code class="inline">value</code></td><td><span class="type-badge">number</span></td><td><code class="inline">0</code></td><td>ค่าปัจจุบัน</td></tr>
+                  <tr><td><code class="inline">max</code></td><td><span class="type-badge">number</span></td><td><code class="inline">100</code></td><td>ค่าสูงสุด</td></tr>
+                  <tr><td><code class="inline">size</code></td><td><span class="type-badge">ProgressSize</span></td><td><code class="inline">"md"</code></td><td>xs / sm / md / lg / xl</td></tr>
+                  <tr><td><code class="inline">color</code></td><td><span class="type-badge">ProgressColor</span></td><td><code class="inline">"primary"</code></td><td>primary / success / warning / danger / info / error</td></tr>
+                  <tr><td><code class="inline">show-value</code></td><td><span class="type-badge">boolean</span></td><td><code class="inline">false</code></td><td>แสดงตัวเลข %</td></tr>
+                  <tr><td><code class="inline">suffix</code></td><td><span class="type-badge">string</span></td><td><code class="inline">"%"</code></td><td>หน่วยที่แสดงหลังตัวเลข</td></tr>
+                  <tr><td><code class="inline">thickness</code></td><td><span class="type-badge">number</span></td><td><code class="inline">3</code></td><td>ความหนาของวงกลม</td></tr>
+                </tbody>
+              </table>
+
+              <div class="preview-label">HTML</div>
+              <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">copy</button><span class="tag">&lt;ktb-progress</span>
+  <span class="attr">value</span>=<span class="str">"75"</span>
+  <span class="attr">color</span>=<span class="str">"primary"</span>
+  <span class="attr">size</span>=<span class="str">"lg"</span>
+  <span class="attr">show-value</span>
+<span class="tag">&gt;&lt;/ktb-progress&gt;</span></div>
+
+              <div class="preview-label">React (JSX)</div>
+              <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">copy</button><span class="tag">&lt;KtbProgress</span>
+  <span class="attr">value</span>={uploadProgress}
+  <span class="attr">max</span>={100}
+  <span class="attr">color</span>=<span class="str">"primary"</span>
+  <span class="attr">size</span>=<span class="str">"lg"</span>
+  <span class="attr">showValue</span>
+<span class="tag">/&gt;</span></div>
+
+              <div class="preview-label">Vue</div>
+              <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">copy</button><span class="tag">&lt;ktb-progress</span>
+  :<span class="attr">value</span>=<span class="str">"uploadProgress"</span>
+  :<span class="attr">max</span>=<span class="str">"100"</span>
+  <span class="attr">color</span>=<span class="str">"primary"</span>
+  <span class="attr">size</span>=<span class="str">"lg"</span>
+  <span class="attr">show-value</span>
+<span class="tag">/&gt;</span></div>
+
+              <div class="preview-label">Angular</div>
+              <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">copy</button><span class="tag">&lt;ktb-progress</span>
+  [<span class="attr">value</span>]=<span class="str">"uploadProgress"</span>
+  [<span class="attr">max</span>]=<span class="str">"100"</span>
+  <span class="attr">color</span>=<span class="str">"primary"</span>
+  <span class="attr">size</span>=<span class="str">"lg"</span>
+  <span class="attr">show-value</span>
+<span class="tag">&gt;&lt;/ktb-progress&gt;</span></div>
+
+              <div class="preview-label" style="margin-top:1.5rem; border-top:1px solid var(--color-border); padding-top:1.5rem;">ตัวอย่างการใช้งาน — จำลองการอัปโหลดไฟล์</div>
+
+              <div class="preview-label">Live Preview</div>
+              <div class="preview-box" style="flex-direction:column; gap:1rem; align-items:center;">
+                <div style="display:flex; gap:1.5rem; align-items:center; flex-wrap:wrap;">
+                  <ktb-progress id="upload-prog" value="0" size="xl" color="primary" show-value></ktb-progress>
+                  <div style="display:flex; flex-direction:column; gap:.5rem;">
+                    <div id="upload-status" style="font-size:var(--text-sm); color:var(--color-text-subtle);">พร้อมอัปโหลด</div>
+                    <div style="display:flex; gap:.5rem;">
+                      <button id="upload-start-btn" onclick="startUpload()" style="padding:var(--space-1) var(--space-3); background:var(--color-primary); color:#fff; border:none; border-radius:var(--radius-sm); cursor:pointer; font-size:var(--text-sm);">เริ่มอัปโหลด</button>
+                      <button onclick="resetUpload()" style="padding:var(--space-1) var(--space-3); background:var(--color-surface); color:var(--color-text); border:1px solid var(--color-border); border-radius:var(--radius-sm); cursor:pointer; font-size:var(--text-sm);">รีเซ็ต</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <script>
+                var uploadTimer = null;
+                function startUpload() {
+                  var prog   = document.getElementById('upload-prog');
+                  var status = document.getElementById('upload-status');
+                  var btn    = document.getElementById('upload-start-btn');
+                  if (uploadTimer) return;
+                  prog.value = 0;
+                  btn.disabled = true;
+                  status.textContent = 'กำลังอัปโหลด...';
+                  uploadTimer = setInterval(function () {
+                    var cur = Number(prog.value) + Math.floor(Math.random() * 8 + 3);
+                    if (cur >= 100) {
+                      prog.value = 100;
+                      prog.setAttribute('color', 'success');
+                      status.textContent = '✓ อัปโหลดสำเร็จ!';
+                      clearInterval(uploadTimer);
+                      uploadTimer = null;
+                    } else {
+                      prog.value = cur;
+                    }
+                  }, 150);
+                }
+                function resetUpload() {
+                  clearInterval(uploadTimer);
+                  uploadTimer = null;
+                  var prog   = document.getElementById('upload-prog');
+                  var status = document.getElementById('upload-status');
+                  var btn    = document.getElementById('upload-start-btn');
+                  prog.value = 0;
+                  prog.setAttribute('color', 'primary');
+                  status.textContent = 'พร้อมอัปโหลด';
+                  btn.disabled = false;
+                }
+              </script>
+
+              <div class="preview-label">React (JSX)</div>
+              <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">copy</button><span class="kw">import</span> { useState, useRef } <span class="kw">from</span> <span class="str">'react'</span>;
+
+<span class="kw">function</span> <span class="attr">UploadDemo</span>() {
+  <span class="kw">const</span> [progress, setProgress] = useState(0);
+  <span class="kw">const</span> [running,  setRunning]  = useState(<span class="kw">false</span>);
+  <span class="kw">const</span> timer = useRef(<span class="kw">null</span>);
+
+  <span class="kw">function</span> <span class="attr">start</span>() {
+    <span class="kw">if</span> (running) <span class="kw">return</span>;
+    setRunning(<span class="kw">true</span>); setProgress(0);
+    timer.current = setInterval(() => {
+      setProgress(p => {
+        <span class="kw">const</span> next = p + Math.floor(Math.random() * 8 + 3);
+        <span class="kw">if</span> (next >= 100) { clearInterval(timer.current); setRunning(<span class="kw">false</span>); <span class="kw">return</span> 100; }
+        <span class="kw">return</span> next;
+      });
+    }, 150);
+  }
+
+  <span class="kw">return</span> (
+    &lt;&gt;
+      <span class="tag">&lt;KtbProgress</span>
+        <span class="attr">value</span>={progress}
+        <span class="attr">color</span>={progress >= 100 ? <span class="str">'success'</span> : <span class="str">'primary'</span>}
+        <span class="attr">size</span>=<span class="str">"xl"</span>
+        <span class="attr">showValue</span>
+      <span class="tag">/&gt;</span>
+      <span class="tag">&lt;button</span> <span class="attr">onClick</span>={start} <span class="attr">disabled</span>={running}<span class="tag">&gt;</span>เริ่มอัปโหลด<span class="tag">&lt;/button&gt;</span>
+    &lt;/&gt;
+  );
+}</div>
+
+              <div class="preview-label">Vue</div>
+              <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">copy</button><span class="tag">&lt;template&gt;</span>
+  <span class="tag">&lt;ktb-progress</span>
+    :<span class="attr">value</span>=<span class="str">"progress"</span>
+    :<span class="attr">color</span>=<span class="str">"progress >= 100 ? 'success' : 'primary'"</span>
+    <span class="attr">size</span>=<span class="str">"xl"</span>
+    <span class="attr">show-value</span>
+  <span class="tag">/&gt;</span>
+  <span class="tag">&lt;button</span> <span class="attr">@click</span>=<span class="str">"start"</span> :<span class="attr">disabled</span>=<span class="str">"running"</span><span class="tag">&gt;</span>เริ่มอัปโหลด<span class="tag">&lt;/button&gt;</span>
+<span class="tag">&lt;/template&gt;</span>
+
+<span class="tag">&lt;script setup&gt;</span>
+<span class="kw">const</span> progress = ref(0);
+<span class="kw">const</span> running  = ref(<span class="kw">false</span>);
+<span class="kw">function</span> <span class="attr">start</span>() {
+  <span class="kw">if</span> (running.value) <span class="kw">return</span>;
+  running.value = <span class="kw">true</span>; progress.value = 0;
+  <span class="kw">const</span> t = setInterval(() => {
+    progress.value += Math.floor(Math.random() * 8 + 3);
+    <span class="kw">if</span> (progress.value >= 100) { progress.value = 100; running.value = <span class="kw">false</span>; clearInterval(t); }
+  }, 150);
+}
+<span class="tag">&lt;/script&gt;</span></div>
+
+              <div class="preview-label">Angular</div>
+              <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">copy</button><span class="cm">// template</span>
+<span class="tag">&lt;ktb-progress</span>
+  [<span class="attr">value</span>]=<span class="str">"progress"</span>
+  [<span class="attr">color</span>]=<span class="str">"progress >= 100 ? 'success' : 'primary'"</span>
+  <span class="attr">size</span>=<span class="str">"xl"</span>
+  <span class="attr">show-value</span>
+<span class="tag">&gt;&lt;/ktb-progress&gt;</span>
+<span class="tag">&lt;button</span> (<span class="attr">click</span>)=<span class="str">"start()"</span> [<span class="attr">disabled</span>]=<span class="str">"running"</span><span class="tag">&gt;</span>เริ่มอัปโหลด<span class="tag">&lt;/button&gt;</span>
+
+<span class="cm">// component.ts</span>
+progress = 0; running = <span class="kw">false</span>;
+start() {
+  <span class="kw">if</span> (<span class="kw">this</span>.running) <span class="kw">return</span>;
+  <span class="kw">this</span>.running = <span class="kw">true</span>; <span class="kw">this</span>.progress = 0;
+  <span class="kw">const</span> t = setInterval(() => {
+    <span class="kw">this</span>.progress += Math.floor(Math.random() * 8 + 3);
+    <span class="kw">if</span> (<span class="kw">this</span>.progress >= 100) { <span class="kw">this</span>.progress = 100; <span class="kw">this</span>.running = <span class="kw">false</span>; clearInterval(t); }
+  }, 150);
+}</div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- ─────────────────────────── ktb-tabs ─────────────────────────── -->
+        <div class="section" id="ktb-tabs">
+          <div class="component-card">
+            <div class="card-header">
+              <div>
+                <span class="tag-chip">&lt;ktb-tabs&gt;</span>
+                <p>Tabs — 4 styles (default / underline / pills / minimal), 3 variants, named-slot content</p>
+              </div>
+            </div>
+            <div class="card-body">
+
+              <div class="preview-label">Live Preview — Default</div>
+              <div class="preview-box" style="flex-direction:column; align-items:stretch;">
+                <ktb-tabs id="tabs-default">
+                  <div slot="panel-0" style="font-size:var(--text-sm);">เนื้อหาแท็บ <strong>ข้อมูลทั่วไป</strong> — ใส่ element ใดก็ได้</div>
+                  <div slot="panel-1" style="font-size:var(--text-sm);">เนื้อหาแท็บ <strong>การตั้งค่า</strong></div>
+                  <div slot="panel-2" style="font-size:var(--text-sm);">แท็บ <strong>ประวัติ</strong> (disabled ไม่สามารถคลิกได้)</div>
+                </ktb-tabs>
+              </div>
+
+              <div class="preview-label">Live Preview — Underline</div>
+              <div class="preview-box" style="flex-direction:column; align-items:stretch;">
+                <ktb-tabs id="tabs-underline" tab-style="underline">
+                  <div slot="panel-0" style="font-size:var(--text-sm);">Underline style — แท็บ 1</div>
+                  <div slot="panel-1" style="font-size:var(--text-sm);">Underline style — แท็บ 2</div>
+                </ktb-tabs>
+              </div>
+
+              <div class="preview-label">Live Preview — Pills</div>
+              <div class="preview-box" style="flex-direction:column; align-items:stretch;">
+                <ktb-tabs id="tabs-pills" tab-style="pills">
+                  <div slot="panel-0" style="font-size:var(--text-sm);">Pills style — แท็บ 1</div>
+                  <div slot="panel-1" style="font-size:var(--text-sm);">Pills style — แท็บ 2</div>
+                  <div slot="panel-2" style="font-size:var(--text-sm);">Pills style — แท็บ 3</div>
+                </ktb-tabs>
+              </div>
+
+              <script>
+                document.getElementById('tabs-default').tabs = [
+                  { label: 'ข้อมูลทั่วไป' },
+                  { label: 'การตั้งค่า' },
+                  { label: 'ประวัติ', disabled: true },
+                ];
+                document.getElementById('tabs-underline').tabs = [
+                  { label: 'แท็บ 1' },
+                  { label: 'แท็บ 2' },
+                ];
+                document.getElementById('tabs-pills').tabs = [
+                  { label: 'รายวัน' },
+                  { label: 'รายเดือน' },
+                  { label: 'รายปี' },
+                ];
+              </script>
+
+              <div class="preview-label">Props</div>
+              <table>
+                <thead><tr><th>Property</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+                <tbody>
+                  <tr><td><code class="inline">tabs</code></td><td><span class="type-badge">TabItem[]</span></td><td><code class="inline">[]</code></td><td>รายการแท็บ <code class="inline">{ label, disabled? }</code></td></tr>
+                  <tr><td><code class="inline">active</code></td><td><span class="type-badge">number</span></td><td><code class="inline">0</code></td><td>index ของแท็บที่เลือก</td></tr>
+                  <tr><td><code class="inline">tab-style</code></td><td><span class="type-badge">TabStyle</span></td><td><code class="inline">"default"</code></td><td>default / underline / pills / minimal</td></tr>
+                  <tr><td><code class="inline">variant</code></td><td><span class="type-badge">TabVariant</span></td><td><code class="inline">"primary"</code></td><td>primary / secondary / accent</td></tr>
+                </tbody>
+              </table>
+
+              <div class="preview-label">Events</div>
+              <table>
+                <thead><tr><th>Event</th><th>Detail</th><th>Description</th></tr></thead>
+                <tbody>
+                  <tr><td><code class="inline">ktbChange</code></td><td><code class="inline">number</code></td><td>emit index ของแท็บที่เลือก</td></tr>
+                </tbody>
+              </table>
+
+              <div class="preview-label">HTML</div>
+              <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">copy</button><span class="tag">&lt;ktb-tabs</span> <span class="attr">id</span>=<span class="str">"myTabs"</span> <span class="attr">tab-style</span>=<span class="str">"underline"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;div</span> <span class="attr">slot</span>=<span class="str">"panel-0"</span><span class="tag">&gt;</span>เนื้อหาแท็บ 1<span class="tag">&lt;/div&gt;</span>
+  <span class="tag">&lt;div</span> <span class="attr">slot</span>=<span class="str">"panel-1"</span><span class="tag">&gt;</span>เนื้อหาแท็บ 2<span class="tag">&lt;/div&gt;</span>
+<span class="tag">&lt;/ktb-tabs&gt;</span>
+
+<span class="tag">&lt;script&gt;</span>
+  <span class="kw">const</span> tabs = document.getElementById(<span class="str">'myTabs'</span>);
+  tabs.tabs = [
+    { label: <span class="str">'ข้อมูลทั่วไป'</span> },
+    { label: <span class="str">'การตั้งค่า'</span>, disabled: <span class="kw">true</span> },
+  ];
+  tabs.addEventListener(<span class="str">'ktbChange'</span>, e => console.log(<span class="str">'active tab:'</span>, e.detail));
+<span class="tag">&lt;/script&gt;</span></div>
+
+              <div class="preview-label">React (JSX)</div>
+              <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">copy</button><span class="kw">import</span> { useRef, useEffect, useState } <span class="kw">from</span> <span class="str">'react'</span>;
+
+<span class="kw">const</span> tabItems = [
+  { label: <span class="str">'ข้อมูลทั่วไป'</span> },
+  { label: <span class="str">'การตั้งค่า'</span>  },
+  { label: <span class="str">'ประวัติ'</span>, disabled: <span class="kw">true</span> },
+];
+
+<span class="kw">function</span> <span class="attr">App</span>() {
+  <span class="kw">const</span> ref = useRef(<span class="kw">null</span>);
+  <span class="kw">const</span> [active, setActive] = useState(0);
+
+  useEffect(() => { <span class="kw">if</span> (ref.current) ref.current.tabs = tabItems; }, []);
+
+  <span class="kw">return</span> (
+    <span class="tag">&lt;KtbTabs</span>
+      <span class="attr">ref</span>={ref}
+      <span class="attr">tabStyle</span>=<span class="str">"underline"</span>
+      <span class="attr">active</span>={active}
+      <span class="attr">onKtbChange</span>={e => setActive(e.detail)}
+    <span class="tag">&gt;</span>
+      <span class="tag">&lt;div</span> <span class="attr">slot</span>=<span class="str">"panel-0"</span><span class="tag">&gt;</span>เนื้อหาแท็บ 1<span class="tag">&lt;/div&gt;</span>
+      <span class="tag">&lt;div</span> <span class="attr">slot</span>=<span class="str">"panel-1"</span><span class="tag">&gt;</span>เนื้อหาแท็บ 2<span class="tag">&lt;/div&gt;</span>
+    <span class="tag">&lt;/KtbTabs&gt;</span>
+  );
+}</div>
+
+              <div class="preview-label">Vue</div>
+              <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">copy</button><span class="tag">&lt;template&gt;</span>
+  <span class="tag">&lt;ktb-tabs</span>
+    <span class="attr">ref</span>=<span class="str">"tabsRef"</span>
+    <span class="attr">tab-style</span>=<span class="str">"underline"</span>
+    :<span class="attr">active</span>=<span class="str">"active"</span>
+    <span class="attr">@ktb-change</span>=<span class="str">"active = $event.detail"</span>
+  <span class="tag">&gt;</span>
+    <span class="tag">&lt;div</span> <span class="attr">slot</span>=<span class="str">"panel-0"</span><span class="tag">&gt;</span>เนื้อหาแท็บ 1<span class="tag">&lt;/div&gt;</span>
+    <span class="tag">&lt;div</span> <span class="attr">slot</span>=<span class="str">"panel-1"</span><span class="tag">&gt;</span>เนื้อหาแท็บ 2<span class="tag">&lt;/div&gt;</span>
+  <span class="tag">&lt;/ktb-tabs&gt;</span>
+<span class="tag">&lt;/template&gt;</span>
+
+<span class="tag">&lt;script setup&gt;</span>
+<span class="kw">import</span> { ref, onMounted } <span class="kw">from</span> <span class="str">'vue'</span>;
+<span class="kw">const</span> tabsRef = ref(<span class="kw">null</span>);
+<span class="kw">const</span> active  = ref(0);
+<span class="kw">const</span> tabItems = [{ label: <span class="str">'ข้อมูลทั่วไป'</span> }, { label: <span class="str">'การตั้งค่า'</span> }];
+onMounted(() => { tabsRef.value.$el.tabs = tabItems; });
+<span class="tag">&lt;/script&gt;</span></div>
+
+              <div class="preview-label">Angular</div>
+              <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">copy</button><span class="cm">// template</span>
+<span class="tag">&lt;ktb-tabs</span>
+  #tabsRef
+  <span class="attr">tab-style</span>=<span class="str">"underline"</span>
+  [<span class="attr">active</span>]=<span class="str">"active"</span>
+  (<span class="attr">ktbChange</span>)=<span class="str">"active = $event.detail"</span>
+<span class="tag">&gt;</span>
+  <span class="tag">&lt;div</span> <span class="attr">slot</span>=<span class="str">"panel-0"</span><span class="tag">&gt;</span>เนื้อหาแท็บ 1<span class="tag">&lt;/div&gt;</span>
+  <span class="tag">&lt;div</span> <span class="attr">slot</span>=<span class="str">"panel-1"</span><span class="tag">&gt;</span>เนื้อหาแท็บ 2<span class="tag">&lt;/div&gt;</span>
+<span class="tag">&lt;/ktb-tabs&gt;</span>
+
+<span class="cm">// component.ts</span>
+<span class="attr">@ViewChild</span>(<span class="str">'tabsRef'</span>) tabsRef!: ElementRef;
+active = 0;
+tabItems = [{ label: <span class="str">'ข้อมูลทั่วไป'</span> }, { label: <span class="str">'การตั้งค่า'</span> }];
+ngAfterViewInit() {
+  <span class="kw">this</span>.tabsRef.nativeElement.tabs = <span class="kw">this</span>.tabItems;
+}</div>
+
+              <div class="preview-label" style="margin-top:1.5rem; border-top:1px solid var(--color-border); padding-top:1.5rem;">ตัวอย่างการใช้งาน — Tabbed Detail Panel</div>
+
+              <div class="preview-label">Live Preview</div>
+              <div class="preview-box" style="flex-direction:column; align-items:stretch;">
+                <ktb-tabs id="detail-tabs" tab-style="underline">
+                  <div slot="panel-0" style="display:flex; flex-direction:column; gap:.75rem;">
+                    <ktb-input label="ชื่อ-นามสกุล" placeholder="กรอกชื่อ-นามสกุล"></ktb-input>
+                    <ktb-input label="เบอร์โทรศัพท์" type="tel" placeholder="0XX-XXX-XXXX"></ktb-input>
+                  </div>
+                  <div slot="panel-1" style="display:flex; flex-direction:column; gap:.75rem;">
+                    <ktb-input label="บ้านเลขที่" placeholder="กรอกที่อยู่"></ktb-input>
+                    <ktb-input label="รหัสไปรษณีย์" placeholder="XXXXX"></ktb-input>
+                  </div>
+                  <div slot="panel-2" style="font-size:var(--text-sm); color:var(--color-text-subtle); padding:.5rem 0;">ยังไม่มีเอกสารที่แนบ</div>
+                </ktb-tabs>
+              </div>
+              <script>
+                document.getElementById('detail-tabs').tabs = [
+                  { label: 'ข้อมูลส่วนตัว' },
+                  { label: 'ที่อยู่' },
+                  { label: 'เอกสาร' },
+                ];
+              </script>
+
+              <div class="preview-label">React (JSX)</div>
+              <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">copy</button><span class="kw">const</span> tabItems = [
+  { label: <span class="str">'ข้อมูลส่วนตัว'</span> },
+  { label: <span class="str">'ที่อยู่'</span>       },
+  { label: <span class="str">'เอกสาร'</span>       },
+];
+
+<span class="kw">function</span> <span class="attr">DetailPanel</span>() {
+  <span class="kw">const</span> ref    = useRef(<span class="kw">null</span>);
+  <span class="kw">const</span> [active, setActive] = useState(0);
+
+  useEffect(() => { <span class="kw">if</span> (ref.current) ref.current.tabs = tabItems; }, []);
+
+  <span class="kw">return</span> (
+    <span class="tag">&lt;KtbTabs</span>
+      <span class="attr">ref</span>={ref}
+      <span class="attr">tabStyle</span>=<span class="str">"underline"</span>
+      <span class="attr">active</span>={active}
+      <span class="attr">onKtbChange</span>={e => setActive(e.detail)}
+    <span class="tag">&gt;</span>
+      <span class="tag">&lt;div</span> <span class="attr">slot</span>=<span class="str">"panel-0"</span><span class="tag">&gt;</span>
+        <span class="tag">&lt;KtbInput</span> <span class="attr">label</span>=<span class="str">"ชื่อ-นามสกุล"</span> <span class="tag">/&gt;</span>
+        <span class="tag">&lt;KtbInput</span> <span class="attr">label</span>=<span class="str">"เบอร์โทรศัพท์"</span> <span class="attr">type</span>=<span class="str">"tel"</span> <span class="tag">/&gt;</span>
+      <span class="tag">&lt;/div&gt;</span>
+      <span class="tag">&lt;div</span> <span class="attr">slot</span>=<span class="str">"panel-1"</span><span class="tag">&gt;</span>
+        <span class="tag">&lt;KtbInput</span> <span class="attr">label</span>=<span class="str">"ที่อยู่"</span> <span class="tag">/&gt;</span>
+        <span class="tag">&lt;KtbInput</span> <span class="attr">label</span>=<span class="str">"รหัสไปรษณีย์"</span> <span class="tag">/&gt;</span>
+      <span class="tag">&lt;/div&gt;</span>
+      <span class="tag">&lt;div</span> <span class="attr">slot</span>=<span class="str">"panel-2"</span><span class="tag">&gt;</span>ยังไม่มีเอกสาร<span class="tag">&lt;/div&gt;</span>
+    <span class="tag">&lt;/KtbTabs&gt;</span>
+  );
+}</div>
+
+              <div class="preview-label">Vue</div>
+              <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">copy</button><span class="tag">&lt;template&gt;</span>
+  <span class="tag">&lt;ktb-tabs</span>
+    <span class="attr">ref</span>=<span class="str">"tabsRef"</span>
+    <span class="attr">tab-style</span>=<span class="str">"underline"</span>
+    :<span class="attr">active</span>=<span class="str">"active"</span>
+    <span class="attr">@ktb-change</span>=<span class="str">"active = $event.detail"</span>
+  <span class="tag">&gt;</span>
+    <span class="tag">&lt;div</span> <span class="attr">slot</span>=<span class="str">"panel-0"</span><span class="tag">&gt;</span>
+      <span class="tag">&lt;ktb-input</span> <span class="attr">label</span>=<span class="str">"ชื่อ-นามสกุล"</span> <span class="tag">/&gt;</span>
+      <span class="tag">&lt;ktb-input</span> <span class="attr">label</span>=<span class="str">"เบอร์โทรศัพท์"</span> <span class="attr">type</span>=<span class="str">"tel"</span> <span class="tag">/&gt;</span>
+    <span class="tag">&lt;/div&gt;</span>
+    <span class="tag">&lt;div</span> <span class="attr">slot</span>=<span class="str">"panel-1"</span><span class="tag">&gt;</span>
+      <span class="tag">&lt;ktb-input</span> <span class="attr">label</span>=<span class="str">"ที่อยู่"</span> <span class="tag">/&gt;</span>
+    <span class="tag">&lt;/div&gt;</span>
+  <span class="tag">&lt;/ktb-tabs&gt;</span>
+<span class="tag">&lt;/template&gt;</span>
+
+<span class="tag">&lt;script setup&gt;</span>
+<span class="kw">import</span> { ref, onMounted } <span class="kw">from</span> <span class="str">'vue'</span>;
+<span class="kw">const</span> tabsRef = ref(<span class="kw">null</span>);
+<span class="kw">const</span> active  = ref(0);
+onMounted(() => {
+  tabsRef.value.$el.tabs = [{ label: <span class="str">'ข้อมูลส่วนตัว'</span> }, { label: <span class="str">'ที่อยู่'</span> }];
+});
+<span class="tag">&lt;/script&gt;</span></div>
+
+              <div class="preview-label">Angular</div>
+              <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">copy</button><span class="cm">// template</span>
+<span class="tag">&lt;ktb-tabs</span>
+  #tabsRef
+  <span class="attr">tab-style</span>=<span class="str">"underline"</span>
+  [<span class="attr">active</span>]=<span class="str">"active"</span>
+  (<span class="attr">ktbChange</span>)=<span class="str">"active = $event.detail"</span>
+<span class="tag">&gt;</span>
+  <span class="tag">&lt;div</span> <span class="attr">slot</span>=<span class="str">"panel-0"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;ktb-input</span> <span class="attr">label</span>=<span class="str">"ชื่อ-นามสกุล"</span><span class="tag">&gt;&lt;/ktb-input&gt;</span>
+    <span class="tag">&lt;ktb-input</span> <span class="attr">label</span>=<span class="str">"เบอร์โทรศัพท์"</span> <span class="attr">type</span>=<span class="str">"tel"</span><span class="tag">&gt;&lt;/ktb-input&gt;</span>
+  <span class="tag">&lt;/div&gt;</span>
+  <span class="tag">&lt;div</span> <span class="attr">slot</span>=<span class="str">"panel-1"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;ktb-input</span> <span class="attr">label</span>=<span class="str">"ที่อยู่"</span><span class="tag">&gt;&lt;/ktb-input&gt;</span>
+  <span class="tag">&lt;/div&gt;</span>
+<span class="tag">&lt;/ktb-tabs&gt;</span></div>
 
             </div>
           </div>
