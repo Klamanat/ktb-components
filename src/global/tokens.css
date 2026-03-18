@@ -1,0 +1,201 @@
+/* ═══════════════════════════════════════════════════════
+   KTB Design Tokens
+   Layer 1: Primitive  — raw values, no semantic meaning
+   Layer 2: Semantic   — purpose-bound, reference primitives
+   ═══════════════════════════════════════════════════════ */
+
+/* ── Layer 1: Primitive Tokens ─────────────────────────── */
+:root {
+
+  /* Brand Blue */
+  --primitive-blue-950: #001030;
+  --primitive-blue-900: #001f44;
+  --primitive-blue-800: #003f87;
+  --primitive-blue-700: #0057b8;
+  --primitive-blue-600: #0068d6;
+  --primitive-blue-500: #3b82f6;
+  --primitive-blue-400: #60a5fa;
+  --primitive-blue-300: #93c5fd;
+  --primitive-blue-200: #bfdbfe;
+  --primitive-blue-100: #dbeafe;
+  --primitive-blue-50:  #eff6ff;
+
+  /* Brand Gold */
+  --primitive-gold-700: #b45309;
+  --primitive-gold-600: #d97706;
+  --primitive-gold-500: #f5a623;
+  --primitive-gold-400: #fbbf24;
+  --primitive-gold-300: #fcd34d;
+
+  /* Gray scale */
+  --primitive-gray-950: #0d1117;
+  --primitive-gray-900: #111827;
+  --primitive-gray-800: #1f2937;
+  --primitive-gray-700: #374151;
+  --primitive-gray-600: #4b5563;
+  --primitive-gray-500: #6b7280;
+  --primitive-gray-400: #9ca3af;
+  --primitive-gray-300: #d1d5db;
+  --primitive-gray-200: #e5e7eb;
+  --primitive-gray-100: #f3f4f6;
+  --primitive-gray-50:  #f9fafb;
+  --primitive-white:    #ffffff;
+
+  /* Red / Danger */
+  --primitive-red-800:  #991b1b;
+  --primitive-red-700:  #b91c1c;
+  --primitive-red-600:  #dc2626;
+  --primitive-red-500:  #ef4444;
+  --primitive-red-400:  #f87171;
+  --primitive-red-100:  #fee2e2;
+  --primitive-red-50:   #fef2f2;
+
+  /* Green / Success */
+  --primitive-green-800: #166534;
+  --primitive-green-700: #15803d;
+  --primitive-green-600: #16a34a;
+  --primitive-green-500: #22c55e;
+  --primitive-green-400: #4ade80;
+  --primitive-green-100: #dcfce7;
+  --primitive-green-50:  #f0fdf4;
+
+  /* Amber / Warning */
+  --primitive-amber-800: #92400e;
+  --primitive-amber-700: #b45309;
+  --primitive-amber-600: #d97706;
+  --primitive-amber-500: #f97316;
+  --primitive-amber-400: #fb923c;
+  --primitive-amber-100: #fef3c7;
+  --primitive-amber-50:  #fffbeb;
+
+  /* Cyan / Info */
+  --primitive-cyan-800:  #155e75;
+  --primitive-cyan-700:  #0e7490;
+  --primitive-cyan-600:  #0891b2;
+  --primitive-cyan-500:  #06b6d4;
+  --primitive-cyan-400:  #22d3ee;
+  --primitive-cyan-100:  #cffafe;
+  --primitive-cyan-50:   #ecfeff;
+
+  /* ── Spacing (4px base unit) ── */
+  --space-0:   0;
+  --space-1:   0.25rem;    /*  4px */
+  --space-2:   0.5rem;     /*  8px */
+  --space-3:   0.75rem;    /* 12px */
+  --space-4:   1rem;       /* 16px */
+  --space-5:   1.25rem;    /* 20px */
+  --space-6:   1.5rem;     /* 24px */
+  --space-8:   2rem;       /* 32px */
+  --space-10:  2.5rem;     /* 40px */
+  --space-12:  3rem;       /* 48px */
+  --space-16:  4rem;       /* 64px */
+
+  /* ── Typography ── */
+  --text-xs:    0.75rem;    /* 12px */
+  --text-sm:    0.875rem;   /* 14px */
+  --text-base:  1rem;       /* 16px */
+  --text-lg:    1.125rem;   /* 18px */
+  --text-xl:    1.25rem;    /* 20px */
+  --text-2xl:   1.5rem;     /* 24px */
+
+  --font-normal:   400;
+  --font-medium:   500;
+  --font-semibold: 600;
+  --font-bold:     700;
+
+  --leading-none:   1;
+  --leading-tight:  1.25;
+  --leading-normal: 1.5;
+  --leading-loose:  1.75;
+
+  /* ── Border Radius ── */
+  --radius-none: 0;
+  --radius-sm:   0.125rem;  /*  2px */
+  --radius-md:   0.375rem;  /*  6px */
+  --radius-lg:   0.5rem;    /*  8px */
+  --radius-xl:   0.75rem;   /* 12px */
+  --radius-2xl:  1rem;      /* 16px */
+  --radius-full: 9999px;
+
+  /* ── Shadows ── */
+  --shadow-sm:  0 1px 2px rgba(0,0,0,.05);
+  --shadow-md:  0 4px 6px rgba(0,0,0,.07), 0 1px 3px rgba(0,0,0,.06);
+  --shadow-lg:  0 10px 15px rgba(0,0,0,.1), 0 4px 6px rgba(0,0,0,.05);
+  --shadow-xl:  0 20px 25px rgba(0,0,0,.1), 0 8px 10px rgba(0,0,0,.04);
+
+  /* ── Transitions ── */
+  --transition-fast:   150ms ease-in-out;
+  --transition-normal: 250ms ease-in-out;
+  --transition-slow:   350ms ease-in-out;
+
+  /* ── Z-index ── */
+  --z-base:     0;
+  --z-dropdown: 1000;
+  --z-sticky:   1020;
+  --z-fixed:    1030;
+  --z-modal:    1040;
+  --z-toast:    9999;
+}
+
+/* ── Layer 2: Semantic Tokens ───────────────────────────── */
+:root {
+
+  /* Brand */
+  --color-brand:         var(--primitive-blue-800);
+  --color-brand-light:   var(--primitive-blue-700);
+  --color-brand-accent:  var(--primitive-gold-500);
+
+  /* Action — Primary (blue) */
+  --color-primary:        var(--primitive-blue-400);
+  --color-primary-hover:  var(--primitive-blue-500);
+  --color-primary-active: var(--primitive-blue-600);
+  --color-primary-subtle: var(--primitive-blue-50);
+
+  /* Action — Info (cyan) */
+  --color-info:           var(--primitive-cyan-400);
+  --color-info-hover:     var(--primitive-cyan-500);
+  --color-info-active:    var(--primitive-cyan-600);
+  --color-info-subtle:    var(--primitive-cyan-50);
+
+  /* Action — Warning (amber) */
+  --color-warning:        var(--primitive-amber-400);
+  --color-warning-hover:  var(--primitive-amber-500);
+  --color-warning-active: var(--primitive-amber-600);
+  --color-warning-border: var(--primitive-amber-700);
+  --color-warning-subtle: var(--primitive-amber-50);
+
+  /* Action — Danger (red) */
+  --color-danger:         var(--primitive-red-500);
+  --color-danger-hover:   var(--primitive-red-600);
+  --color-danger-active:  var(--primitive-red-700);
+  --color-danger-subtle:  var(--primitive-red-50);
+
+  /* Action — Success (green) */
+  --color-success:        var(--primitive-green-500);
+  --color-success-hover:  var(--primitive-green-600);
+  --color-success-active: var(--primitive-green-700);
+  --color-success-subtle: var(--primitive-green-50);
+
+  /* Surface */
+  --color-surface:        var(--primitive-white);
+  --color-surface-subtle: var(--primitive-gray-50);
+  --color-surface-muted:  var(--primitive-gray-100);
+
+  /* Border */
+  --color-border:         var(--primitive-gray-300);
+  --color-border-strong:  var(--primitive-gray-400);
+
+  /* Text */
+  --color-text:           var(--primitive-gray-700);
+  --color-text-strong:    var(--primitive-gray-800);
+  --color-text-emphasis:  var(--primitive-gray-900);
+  --color-text-subtle:    var(--primitive-gray-500);
+  --color-text-disabled:  var(--primitive-gray-400);
+  --color-text-on-color:  var(--primitive-white);
+
+  /* Surface — interactive states */
+  --color-surface-active: var(--primitive-gray-200);
+
+  /* Info border (blue, distinct from info action cyan) */
+  --color-info-border:    var(--primitive-blue-600);
+}

@@ -1,0 +1,76 @@
+:host { display: inline-flex; }
+
+/* ── Wrap ── */
+.checkbox-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  cursor: pointer;
+  user-select: none;
+}
+.checkbox-wrap--disabled {
+  opacity: .5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* ── Native input reset + custom style ── */
+.checkbox {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background var(--transition-fast), border-color var(--transition-fast);
+  position: relative;
+}
+
+/* Checked state — draw checkmark via clip-path / pseudo */
+.checkbox:checked,
+.checkbox:indeterminate {
+  border-color: transparent;
+}
+.checkbox:checked::after {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 6px;
+  border-left: 2px solid #fff;
+  border-bottom: 2px solid #fff;
+  transform: rotate(-45deg) translate(0px, -1px);
+}
+.checkbox:indeterminate::after {
+  content: '';
+  position: absolute;
+  width: 8px;
+  height: 2px;
+  background: #fff;
+  border-radius: 1px;
+}
+
+/* Colors */
+.checkbox--primary:checked,
+.checkbox--primary:indeterminate { background: var(--color-primary-active); }
+
+.checkbox--success:checked,
+.checkbox--success:indeterminate { background: var(--color-success-hover); }
+
+.checkbox--error:checked,
+.checkbox--error:indeterminate   { background: var(--color-danger-hover); }
+
+.checkbox:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 2px; }
+
+/* ── Label ── */
+.checkbox__label {
+  font-size: var(--text-sm);
+  font-weight: var(--font-semibold);
+  color: var(--color-text);
+  line-height: var(--leading-normal);
+}

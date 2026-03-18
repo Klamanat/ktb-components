@@ -1,0 +1,7 @@
+:host {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: var(--ktb-row-gap, 1rem);
+  box-sizing: border-box;
+  width: 100%;
+}

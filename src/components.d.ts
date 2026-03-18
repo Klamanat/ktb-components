@@ -6,9 +6,19 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { AlertPosition, AlertType } from "./components/ktb-alert/ktb-alert";
+import { BadgeSize, BadgeVariant } from "./components/ktb-badge/ktb-badge";
+import { BannerType } from "./components/ktb-banner/ktb-banner";
 import { ButtonColor, ButtonRounded, ButtonSize, ButtonType } from "./components/ktb-button/ktb-button";
+import { CheckboxColor } from "./components/ktb-checkbox/ktb-checkbox";
+import { ChipSize, ChipVariant } from "./components/ktb-chip/ktb-chip";
+import { RadioDirection, RadioOption } from "./components/ktb-radio/ktb-radio";
 export { AlertPosition, AlertType } from "./components/ktb-alert/ktb-alert";
+export { BadgeSize, BadgeVariant } from "./components/ktb-badge/ktb-badge";
+export { BannerType } from "./components/ktb-banner/ktb-banner";
 export { ButtonColor, ButtonRounded, ButtonSize, ButtonType } from "./components/ktb-button/ktb-button";
+export { CheckboxColor } from "./components/ktb-checkbox/ktb-checkbox";
+export { ChipSize, ChipVariant } from "./components/ktb-chip/ktb-chip";
+export { RadioDirection, RadioOption } from "./components/ktb-radio/ktb-radio";
 export namespace Components {
     interface KtbAlert {
         /**
@@ -27,6 +37,28 @@ export namespace Components {
           * เปลี่ยนตำแหน่งของ alert container
          */
         "setPosition": (pos: AlertPosition) => Promise<void>;
+    }
+    interface KtbBadge {
+        /**
+          * @default false
+         */
+        "outline": boolean;
+        /**
+          * @default 'xs'
+         */
+        "size": BadgeSize;
+        /**
+          * @default 'default'
+         */
+        "variant": BadgeVariant;
+    }
+    interface KtbBanner {
+        "message"?: string;
+        "title"?: string;
+        /**
+          * @default 'info'
+         */
+        "type": BannerType;
     }
     interface KtbButton {
         /**
@@ -70,10 +102,113 @@ export namespace Components {
          */
         "type": ButtonType;
     }
+    interface KtbCheckbox {
+        /**
+          * @default false
+         */
+        "checked": boolean;
+        /**
+          * @default 'primary'
+         */
+        "color": CheckboxColor;
+        /**
+          * @default false
+         */
+        "disabled": boolean;
+        /**
+          * @default false
+         */
+        "indeterminate": boolean;
+        /**
+          * @default ''
+         */
+        "label": string;
+    }
+    interface KtbChip {
+        "avatar"?: string;
+        /**
+          * @default false
+         */
+        "clickable": boolean;
+        /**
+          * @default false
+         */
+        "disabled": boolean;
+        "label"?: string;
+        /**
+          * @default false
+         */
+        "outline": boolean;
+        /**
+          * @default false
+         */
+        "removable": boolean;
+        /**
+          * @default 'md'
+         */
+        "size": ChipSize;
+        /**
+          * @default 'default'
+         */
+        "variant": ChipVariant;
+    }
+    interface KtbCol {
+        "lg"?: number;
+        "md"?: number;
+        "sm"?: number;
+        /**
+          * @default 12
+         */
+        "span": number;
+        "xl"?: number;
+    }
+    interface KtbRadio {
+        /**
+          * @default 'vertical'
+         */
+        "direction": RadioDirection;
+        /**
+          * @default false
+         */
+        "disabled": boolean;
+        "label"?: string;
+        /**
+          * @default ''
+         */
+        "name": string;
+        /**
+          * @default []
+         */
+        "options": RadioOption[];
+        /**
+          * @default false
+         */
+        "required": boolean;
+        "value": any;
+    }
+    interface KtbRow {
+        /**
+          * จำนวน gap ตาม spacing scale (1 = 0.25rem, 4 = 1rem)
+          * @default 4
+         */
+        "gap": number;
+    }
 }
 export interface KtbButtonCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLKtbButtonElement;
+}
+export interface KtbCheckboxCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLKtbCheckboxElement;
+}
+export interface KtbChipCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLKtbChipElement;
+}
+export interface KtbRadioCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLKtbRadioElement;
 }
 declare global {
     interface HTMLKtbAlertElement extends Omit<Components.KtbAlert, "remove">, HTMLStencilElement {
@@ -85,6 +220,18 @@ declare global {
     var HTMLKtbAlertElement: {
         prototype: HTMLKtbAlertElement;
         new (): HTMLKtbAlertElement;
+    };
+    interface HTMLKtbBadgeElement extends Components.KtbBadge, HTMLStencilElement {
+    }
+    var HTMLKtbBadgeElement: {
+        prototype: HTMLKtbBadgeElement;
+        new (): HTMLKtbBadgeElement;
+    };
+    interface HTMLKtbBannerElement extends Components.KtbBanner, HTMLStencilElement {
+    }
+    var HTMLKtbBannerElement: {
+        prototype: HTMLKtbBannerElement;
+        new (): HTMLKtbBannerElement;
     };
     interface HTMLKtbButtonElementEventMap {
         "ktbClick": MouseEvent;
@@ -103,9 +250,80 @@ declare global {
         prototype: HTMLKtbButtonElement;
         new (): HTMLKtbButtonElement;
     };
+    interface HTMLKtbCheckboxElementEventMap {
+        "ktbChange": boolean;
+    }
+    interface HTMLKtbCheckboxElement extends Components.KtbCheckbox, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLKtbCheckboxElementEventMap>(type: K, listener: (this: HTMLKtbCheckboxElement, ev: KtbCheckboxCustomEvent<HTMLKtbCheckboxElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLKtbCheckboxElementEventMap>(type: K, listener: (this: HTMLKtbCheckboxElement, ev: KtbCheckboxCustomEvent<HTMLKtbCheckboxElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLKtbCheckboxElement: {
+        prototype: HTMLKtbCheckboxElement;
+        new (): HTMLKtbCheckboxElement;
+    };
+    interface HTMLKtbChipElementEventMap {
+        "ktbRemove": void;
+        "ktbClick": void;
+    }
+    interface HTMLKtbChipElement extends Components.KtbChip, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLKtbChipElementEventMap>(type: K, listener: (this: HTMLKtbChipElement, ev: KtbChipCustomEvent<HTMLKtbChipElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLKtbChipElementEventMap>(type: K, listener: (this: HTMLKtbChipElement, ev: KtbChipCustomEvent<HTMLKtbChipElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLKtbChipElement: {
+        prototype: HTMLKtbChipElement;
+        new (): HTMLKtbChipElement;
+    };
+    interface HTMLKtbColElement extends Components.KtbCol, HTMLStencilElement {
+    }
+    var HTMLKtbColElement: {
+        prototype: HTMLKtbColElement;
+        new (): HTMLKtbColElement;
+    };
+    interface HTMLKtbRadioElementEventMap {
+        "ktbChange": any;
+    }
+    interface HTMLKtbRadioElement extends Components.KtbRadio, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLKtbRadioElementEventMap>(type: K, listener: (this: HTMLKtbRadioElement, ev: KtbRadioCustomEvent<HTMLKtbRadioElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLKtbRadioElementEventMap>(type: K, listener: (this: HTMLKtbRadioElement, ev: KtbRadioCustomEvent<HTMLKtbRadioElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLKtbRadioElement: {
+        prototype: HTMLKtbRadioElement;
+        new (): HTMLKtbRadioElement;
+    };
+    interface HTMLKtbRowElement extends Components.KtbRow, HTMLStencilElement {
+    }
+    var HTMLKtbRowElement: {
+        prototype: HTMLKtbRowElement;
+        new (): HTMLKtbRowElement;
+    };
     interface HTMLElementTagNameMap {
         "ktb-alert": HTMLKtbAlertElement;
+        "ktb-badge": HTMLKtbBadgeElement;
+        "ktb-banner": HTMLKtbBannerElement;
         "ktb-button": HTMLKtbButtonElement;
+        "ktb-checkbox": HTMLKtbCheckboxElement;
+        "ktb-chip": HTMLKtbChipElement;
+        "ktb-col": HTMLKtbColElement;
+        "ktb-radio": HTMLKtbRadioElement;
+        "ktb-row": HTMLKtbRowElement;
     }
 }
 declare namespace LocalJSX {
@@ -114,6 +332,28 @@ declare namespace LocalJSX {
           * @default 'top-right'
          */
         "position"?: AlertPosition;
+    }
+    interface KtbBadge {
+        /**
+          * @default false
+         */
+        "outline"?: boolean;
+        /**
+          * @default 'xs'
+         */
+        "size"?: BadgeSize;
+        /**
+          * @default 'default'
+         */
+        "variant"?: BadgeVariant;
+    }
+    interface KtbBanner {
+        "message"?: string;
+        "title"?: string;
+        /**
+          * @default 'info'
+         */
+        "type"?: BannerType;
     }
     interface KtbButton {
         /**
@@ -161,9 +401,114 @@ declare namespace LocalJSX {
          */
         "type"?: ButtonType;
     }
+    interface KtbCheckbox {
+        /**
+          * @default false
+         */
+        "checked"?: boolean;
+        /**
+          * @default 'primary'
+         */
+        "color"?: CheckboxColor;
+        /**
+          * @default false
+         */
+        "disabled"?: boolean;
+        /**
+          * @default false
+         */
+        "indeterminate"?: boolean;
+        /**
+          * @default ''
+         */
+        "label"?: string;
+        "onKtbChange"?: (event: KtbCheckboxCustomEvent<boolean>) => void;
+    }
+    interface KtbChip {
+        "avatar"?: string;
+        /**
+          * @default false
+         */
+        "clickable"?: boolean;
+        /**
+          * @default false
+         */
+        "disabled"?: boolean;
+        "label"?: string;
+        "onKtbClick"?: (event: KtbChipCustomEvent<void>) => void;
+        "onKtbRemove"?: (event: KtbChipCustomEvent<void>) => void;
+        /**
+          * @default false
+         */
+        "outline"?: boolean;
+        /**
+          * @default false
+         */
+        "removable"?: boolean;
+        /**
+          * @default 'md'
+         */
+        "size"?: ChipSize;
+        /**
+          * @default 'default'
+         */
+        "variant"?: ChipVariant;
+    }
+    interface KtbCol {
+        "lg"?: number;
+        "md"?: number;
+        "sm"?: number;
+        /**
+          * @default 12
+         */
+        "span"?: number;
+        "xl"?: number;
+    }
+    interface KtbRadio {
+        /**
+          * @default 'vertical'
+         */
+        "direction"?: RadioDirection;
+        /**
+          * @default false
+         */
+        "disabled"?: boolean;
+        "label"?: string;
+        /**
+          * @default ''
+         */
+        "name"?: string;
+        "onKtbChange"?: (event: KtbRadioCustomEvent<any>) => void;
+        /**
+          * @default []
+         */
+        "options"?: RadioOption[];
+        /**
+          * @default false
+         */
+        "required"?: boolean;
+        "value"?: any;
+    }
+    interface KtbRow {
+        /**
+          * จำนวน gap ตาม spacing scale (1 = 0.25rem, 4 = 1rem)
+          * @default 4
+         */
+        "gap"?: number;
+    }
 
     interface KtbAlertAttributes {
         "position": AlertPosition;
+    }
+    interface KtbBadgeAttributes {
+        "variant": BadgeVariant;
+        "size": BadgeSize;
+        "outline": boolean;
+    }
+    interface KtbBannerAttributes {
+        "type": BannerType;
+        "title": string;
+        "message": string;
     }
     interface KtbButtonAttributes {
         "size": ButtonSize;
@@ -175,10 +520,52 @@ declare namespace LocalJSX {
         "fullWidth": boolean;
         "outline": boolean;
     }
+    interface KtbCheckboxAttributes {
+        "checked": boolean;
+        "indeterminate": boolean;
+        "disabled": boolean;
+        "label": string;
+        "color": CheckboxColor;
+    }
+    interface KtbChipAttributes {
+        "label": string;
+        "variant": ChipVariant;
+        "size": ChipSize;
+        "outline": boolean;
+        "removable": boolean;
+        "disabled": boolean;
+        "clickable": boolean;
+        "avatar": string;
+    }
+    interface KtbColAttributes {
+        "span": number;
+        "sm": number;
+        "md": number;
+        "lg": number;
+        "xl": number;
+    }
+    interface KtbRadioAttributes {
+        "value": string;
+        "name": string;
+        "label": string;
+        "direction": RadioDirection;
+        "disabled": boolean;
+        "required": boolean;
+    }
+    interface KtbRowAttributes {
+        "gap": number;
+    }
 
     interface IntrinsicElements {
         "ktb-alert": Omit<KtbAlert, keyof KtbAlertAttributes> & { [K in keyof KtbAlert & keyof KtbAlertAttributes]?: KtbAlert[K] } & { [K in keyof KtbAlert & keyof KtbAlertAttributes as `attr:${K}`]?: KtbAlertAttributes[K] } & { [K in keyof KtbAlert & keyof KtbAlertAttributes as `prop:${K}`]?: KtbAlert[K] };
+        "ktb-badge": Omit<KtbBadge, keyof KtbBadgeAttributes> & { [K in keyof KtbBadge & keyof KtbBadgeAttributes]?: KtbBadge[K] } & { [K in keyof KtbBadge & keyof KtbBadgeAttributes as `attr:${K}`]?: KtbBadgeAttributes[K] } & { [K in keyof KtbBadge & keyof KtbBadgeAttributes as `prop:${K}`]?: KtbBadge[K] };
+        "ktb-banner": Omit<KtbBanner, keyof KtbBannerAttributes> & { [K in keyof KtbBanner & keyof KtbBannerAttributes]?: KtbBanner[K] } & { [K in keyof KtbBanner & keyof KtbBannerAttributes as `attr:${K}`]?: KtbBannerAttributes[K] } & { [K in keyof KtbBanner & keyof KtbBannerAttributes as `prop:${K}`]?: KtbBanner[K] };
         "ktb-button": Omit<KtbButton, keyof KtbButtonAttributes> & { [K in keyof KtbButton & keyof KtbButtonAttributes]?: KtbButton[K] } & { [K in keyof KtbButton & keyof KtbButtonAttributes as `attr:${K}`]?: KtbButtonAttributes[K] } & { [K in keyof KtbButton & keyof KtbButtonAttributes as `prop:${K}`]?: KtbButton[K] };
+        "ktb-checkbox": Omit<KtbCheckbox, keyof KtbCheckboxAttributes> & { [K in keyof KtbCheckbox & keyof KtbCheckboxAttributes]?: KtbCheckbox[K] } & { [K in keyof KtbCheckbox & keyof KtbCheckboxAttributes as `attr:${K}`]?: KtbCheckboxAttributes[K] } & { [K in keyof KtbCheckbox & keyof KtbCheckboxAttributes as `prop:${K}`]?: KtbCheckbox[K] };
+        "ktb-chip": Omit<KtbChip, keyof KtbChipAttributes> & { [K in keyof KtbChip & keyof KtbChipAttributes]?: KtbChip[K] } & { [K in keyof KtbChip & keyof KtbChipAttributes as `attr:${K}`]?: KtbChipAttributes[K] } & { [K in keyof KtbChip & keyof KtbChipAttributes as `prop:${K}`]?: KtbChip[K] };
+        "ktb-col": Omit<KtbCol, keyof KtbColAttributes> & { [K in keyof KtbCol & keyof KtbColAttributes]?: KtbCol[K] } & { [K in keyof KtbCol & keyof KtbColAttributes as `attr:${K}`]?: KtbColAttributes[K] } & { [K in keyof KtbCol & keyof KtbColAttributes as `prop:${K}`]?: KtbCol[K] };
+        "ktb-radio": Omit<KtbRadio, keyof KtbRadioAttributes> & { [K in keyof KtbRadio & keyof KtbRadioAttributes]?: KtbRadio[K] } & { [K in keyof KtbRadio & keyof KtbRadioAttributes as `attr:${K}`]?: KtbRadioAttributes[K] } & { [K in keyof KtbRadio & keyof KtbRadioAttributes as `prop:${K}`]?: KtbRadio[K] };
+        "ktb-row": Omit<KtbRow, keyof KtbRowAttributes> & { [K in keyof KtbRow & keyof KtbRowAttributes]?: KtbRow[K] } & { [K in keyof KtbRow & keyof KtbRowAttributes as `attr:${K}`]?: KtbRowAttributes[K] } & { [K in keyof KtbRow & keyof KtbRowAttributes as `prop:${K}`]?: KtbRow[K] };
     }
 }
 export { LocalJSX as JSX };
@@ -186,7 +573,14 @@ declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
             "ktb-alert": LocalJSX.IntrinsicElements["ktb-alert"] & JSXBase.HTMLAttributes<HTMLKtbAlertElement>;
+            "ktb-badge": LocalJSX.IntrinsicElements["ktb-badge"] & JSXBase.HTMLAttributes<HTMLKtbBadgeElement>;
+            "ktb-banner": LocalJSX.IntrinsicElements["ktb-banner"] & JSXBase.HTMLAttributes<HTMLKtbBannerElement>;
             "ktb-button": LocalJSX.IntrinsicElements["ktb-button"] & JSXBase.HTMLAttributes<HTMLKtbButtonElement>;
+            "ktb-checkbox": LocalJSX.IntrinsicElements["ktb-checkbox"] & JSXBase.HTMLAttributes<HTMLKtbCheckboxElement>;
+            "ktb-chip": LocalJSX.IntrinsicElements["ktb-chip"] & JSXBase.HTMLAttributes<HTMLKtbChipElement>;
+            "ktb-col": LocalJSX.IntrinsicElements["ktb-col"] & JSXBase.HTMLAttributes<HTMLKtbColElement>;
+            "ktb-radio": LocalJSX.IntrinsicElements["ktb-radio"] & JSXBase.HTMLAttributes<HTMLKtbRadioElement>;
+            "ktb-row": LocalJSX.IntrinsicElements["ktb-row"] & JSXBase.HTMLAttributes<HTMLKtbRowElement>;
         }
     }
 }

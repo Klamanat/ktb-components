@@ -1,34 +1,40 @@
-/* ── CSS Custom Properties ── */
+/* ── Component Tokens (override via ktb-button { --btn-* }) ── */
 :host {
   --btn-font-family:    inherit;
-  --btn-transition:     background-color 150ms ease-in-out, opacity 150ms ease-in-out;
+  --btn-transition:     background-color var(--transition-fast),
+                        opacity var(--transition-fast);
 
-  /* solid colors */
-  --btn-primary-bg:     #60a5fa;
-  --btn-primary-hover:  #3b82f6;
-  --btn-primary-active: #2563eb;
+  /* solid — primary */
+  --btn-primary-bg:     var(--color-primary);
+  --btn-primary-hover:  var(--color-primary-hover);
+  --btn-primary-active: var(--color-primary-active);
 
-  --btn-info-bg:        #22d3ee;
-  --btn-info-hover:     #06b6d4;
-  --btn-info-active:    #0891b2;
+  /* solid — info */
+  --btn-info-bg:        var(--color-info);
+  --btn-info-hover:     var(--color-info-hover);
+  --btn-info-active:    var(--color-info-active);
 
-  --btn-warning-bg:     #fb923c;
-  --btn-warning-hover:  #f97316;
-  --btn-warning-active: #ea580c;
+  /* solid — warning */
+  --btn-warning-bg:     var(--color-warning);
+  --btn-warning-hover:  var(--color-warning-hover);
+  --btn-warning-active: var(--color-warning-active);
 
-  --btn-danger-bg:      #ef4444;
-  --btn-danger-hover:   #dc2626;
-  --btn-danger-active:  #b91c1c;
+  /* solid — danger */
+  --btn-danger-bg:      var(--color-danger);
+  --btn-danger-hover:   var(--color-danger-hover);
+  --btn-danger-active:  var(--color-danger-active);
 
-  --btn-success-bg:     #22c55e;
-  --btn-success-hover:  #16a34a;
-  --btn-success-active: #15803d;
+  /* solid — success */
+  --btn-success-bg:     var(--color-success);
+  --btn-success-hover:  var(--color-success-hover);
+  --btn-success-active: var(--color-success-active);
 
-  --btn-default-bg:     #ffffff;
-  --btn-default-hover:  #f3f4f6;
-  --btn-default-active: #e5e7eb;
-  --btn-default-border: #d1d5db;
-  --btn-default-color:  #374151;
+  /* solid — default */
+  --btn-default-bg:     var(--color-surface);
+  --btn-default-hover:  var(--color-surface-muted);
+  --btn-default-active: var(--color-surface-active);
+  --btn-default-border: var(--color-border);
+  --btn-default-color:  var(--color-text);
 }
 
 /* ── Base ── */
@@ -36,12 +42,12 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.25rem;
+  gap: var(--space-1);
   cursor: pointer;
   user-select: none;
   font-family: var(--btn-font-family);
-  font-weight: 500;
-  line-height: 1;
+  font-weight: var(--font-medium);
+  line-height: var(--leading-none);
   border: none;
   outline: none;
   transition: var(--btn-transition);
@@ -49,29 +55,29 @@
 .btn:focus-visible { outline: none; }
 
 /* ── Sizes ── */
-.btn--sm       { padding: .5rem;          font-size: .875rem; }
-.btn--md       { padding: .5rem 1rem;     font-size: .875rem; height: 2.5rem; }
-.btn--lg       { padding: .75rem 1.5rem;  font-size: 1.125rem; }
-.btn--in-table { font-size: .875rem;      height: 1.75rem; width: 1.75rem; padding: 0; }
+.btn--sm       { padding: var(--space-2);                    font-size: var(--text-sm); }
+.btn--md       { padding: var(--space-2) var(--space-4);     font-size: var(--text-sm); height: 2.5rem; }
+.btn--lg       { padding: var(--space-3) var(--space-6);     font-size: var(--text-lg); }
+.btn--in-table { font-size: var(--text-sm); height: 1.75rem; width: 1.75rem; padding: 0; }
 
 /* ── Solid colors ── */
-.btn-solid--primary { background: var(--btn-primary-bg); color: #fff; }
+.btn-solid--primary { background: var(--btn-primary-bg); color: var(--color-text-on-color); }
 .btn-solid--primary:hover:not(:disabled)  { background: var(--btn-primary-hover); }
 .btn-solid--primary:active:not(:disabled) { background: var(--btn-primary-active); }
 
-.btn-solid--info { background: var(--btn-info-bg); color: #fff; }
+.btn-solid--info { background: var(--btn-info-bg); color: var(--color-text-on-color); }
 .btn-solid--info:hover:not(:disabled)  { background: var(--btn-info-hover); }
 .btn-solid--info:active:not(:disabled) { background: var(--btn-info-active); }
 
-.btn-solid--warning { background: var(--btn-warning-bg); color: #fff; }
+.btn-solid--warning { background: var(--btn-warning-bg); color: var(--color-text-on-color); }
 .btn-solid--warning:hover:not(:disabled)  { background: var(--btn-warning-hover); }
 .btn-solid--warning:active:not(:disabled) { background: var(--btn-warning-active); }
 
-.btn-solid--danger { background: var(--btn-danger-bg); color: #fff; }
+.btn-solid--danger { background: var(--btn-danger-bg); color: var(--color-text-on-color); }
 .btn-solid--danger:hover:not(:disabled)  { background: var(--btn-danger-hover); }
 .btn-solid--danger:active:not(:disabled) { background: var(--btn-danger-active); }
 
-.btn-solid--success { background: var(--btn-success-bg); color: #fff; }
+.btn-solid--success { background: var(--btn-success-bg); color: var(--color-text-on-color); }
 .btn-solid--success:hover:not(:disabled)  { background: var(--btn-success-hover); }
 .btn-solid--success:active:not(:disabled) { background: var(--btn-success-active); }
 
@@ -89,14 +95,14 @@
 .btn-outline--warning { border: 1px solid var(--btn-warning-bg);  color: var(--btn-warning-hover); background: transparent; }
 .btn-outline--danger  { border: 1px solid var(--btn-danger-bg);   color: var(--btn-danger-bg);   background: transparent; }
 .btn-outline--success { border: 1px solid var(--btn-success-bg);  color: var(--btn-success-bg);  background: transparent; }
-.btn-outline--default { border: 1px solid #fff;                   color: #fff;                   background: transparent; }
+.btn-outline--default { border: 1px solid var(--color-border); color: var(--color-text); background: transparent; }
 
 /* ── Rounded ── */
-.btn--rounded-none { border-radius: 0; }
-.btn--rounded-sm   { border-radius: .125rem; }
-.btn--rounded-md   { border-radius: .375rem; }
-.btn--rounded-lg   { border-radius: .5rem; }
-.btn--rounded-full { border-radius: 9999px; }
+.btn--rounded-none { border-radius: var(--radius-none); }
+.btn--rounded-sm   { border-radius: var(--radius-sm); }
+.btn--rounded-md   { border-radius: var(--radius-md); }
+.btn--rounded-lg   { border-radius: var(--radius-lg); }
+.btn--rounded-full { border-radius: var(--radius-full); }
 
 /* ── States ── */
 .btn--full     { width: 100%; }
@@ -108,7 +114,7 @@
   display: inline-block;
   width: 18px;
   height: 18px;
-  border-radius: 50%;
+  border-radius: var(--radius-full);
   border: 2px solid;
   animation: spin 1s infinite linear;
   flex-shrink: 0;
@@ -121,8 +127,8 @@
 }
 
 .spinner--default, .spinner--outline {
-  border-color: #d1d5db;
-  border-right-color: #6b7280;
+  border-color: var(--color-border);
+  border-right-color: var(--color-text-subtle);
 }
 
 @keyframes spin {

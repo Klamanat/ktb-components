@@ -2,6 +2,7 @@ import { Config } from '@stencil/core';
 
 export const config: Config = {
   namespace: 'ktb-components',
+  globalStyle: 'src/global/tokens.css',
   outputTargets: [
     {
       type: 'dist',
